@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- 基本颜色-->
+    <color name="white">#ffffff</color>
+    <color name="black">#000000</color>
+    <color name="transparent">#00000000</color>
+
+
+    <color name="color_enable">#929292</color>
+
+    <color name="color_f1">#111111</color>
+    <color name="color_f2">#222222</color>
+    <color name="color_f3">#333333</color>
+    <color name="color_f4">#444444</color>
+    <color name="color_f5">#555555</color>
+    <color name="color_f6">#666666</color>
+    <color name="color_f7">#777777</color>
+    <color name="color_f8">#888888</color>
+    <color name="color_f9">#999999</color>
+
+
+</resources>

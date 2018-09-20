@@ -1,0 +1,16 @@
+<resources>
+
+    <string name="app_name">有点资讯</string>
+
+    <!--首页内容-->
+    <string name="main_index">首页</string>
+    <string name="main_article">最热</string>
+    <string name="main_vedio">视频</string>
+    <string name="main_persion">我的</string>
+
+
+    <!--首页标题-->
+    <string name="search_hint">搜你感兴趣的内容</string>
+
+
+</resources>

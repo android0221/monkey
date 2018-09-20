@@ -1,0 +1,77 @@
+apply plugin: 'com.android.library'
+
+//kotlin的支持
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    defaultConfig {
+        minSdkVersion rootProject.ext.minSdkVersion //最小能支持的系统版本号
+        targetSdkVersion rootProject.ext.targetSdkVersion //最佳支持的系统版本号
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled rootProject.ext.minifyEnabled
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+dependencies {
+    api fileTree(dir: 'libs', include: ['*.jar'])
+
+    //测试
+    testImplementation 'junit:junit:4.12'
+    //noinspection GradleCompatible
+    androidTestImplementation 'com.android.support.test:runner:1.0.1'
+    testImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+
+    /**
+     * kotlin中调用java
+     */
+    api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+    /**
+     * Android相关的库调用
+     */
+    api 'com.android.support:appcompat-v7:' + rootProject.ext.appcompatVersion
+    api 'com.android.support:design:' + rootProject.ext.designVersion
+    api 'com.android.support.constraint:constraint-layout:' + rootProject.ext.constraintLayoutVersion
+
+    //网络请求
+    api 'com.squareup.retrofit2:retrofit:' + rootProject.ext.retrofitVersion
+    api 'com.squareup.okhttp3:logging-interceptor:' + rootProject.ext.loggingInterceptorVersion
+    api 'com.squareup.retrofit2:converter-gson:' + rootProject.ext.converterGsonVersion
+    api 'com.squareup.retrofit2:converter-scalars:' + rootProject.ext.converterScalarsVersion
+    api 'com.squareup.retrofit2:adapter-rxjava2:' + rootProject.ext.adapterRxjavaVersion
+
+    //rxjava相关的数据
+    api 'io.reactivex.rxjava2:rxjava:' + rootProject.ext.rxjavaVersion
+    api 'io.reactivex.rxjava2:rxandroid:' + rootProject.ext.rxandroidVersion
+
+    //图片加载
+    api 'com.github.bumptech.glide:glide:' + rootProject.ext.glideVersion
+    // 注意 要在APP的build.gradle中加入配置maven { url "https://jitpack.io" }
+    api 'com.github.CymChad:BaseRecyclerViewAdapterHelper:' + rootProject.ext.BaseRecyclerViewAdapterHelperVersion
+    //lottie 动画
+    api 'com.airbnb.android:lottie:' + rootProject.ext.lottieVersion
+
+    //图片查看器
+    api 'com.github.chrisbanes:PhotoView:'+rootProject.ext.photoViewVersion
+
+    //生成二维码的库文件
+    api 'com.google.zxing:core:' + rootProject.ext.zxingVersion
+
+    //版本更新下载
+    api 'zlc.season:rxdownload2:' + rootProject.ext.rxdownloadVersion
+
+
+
+
+
+}

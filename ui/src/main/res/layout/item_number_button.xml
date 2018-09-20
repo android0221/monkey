@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Button xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/btn_money"
+    android:layout_width="wrap_content"
+    android:layout_margin="10dp"
+    android:gravity="center"
+    android:layout_gravity="center"
+    android:layout_height="wrap_content"
+    android:background="@drawable/selector_money"
+    android:text="1元"
+    android:textColor="@color/money_bottom_color"
+    android:textSize="16sp"
+    >
+
+</Button>

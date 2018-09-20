@@ -1,0 +1,192 @@
+package com.run.ui.fragment
+
+import android.text.TextUtils
+import android.view.View
+import android.widget.ImageView
+import android.widget.TextView
+import com.run.common.base.BaseFragment
+import com.run.common.dialog.DialogHelper
+import com.run.common.utils.UAnim
+import com.run.common.utils.UGlide
+import com.run.common.utils.USharePreference
+import com.run.common.utils.UStatusBar
+import com.run.config.AppIntentAction
+import com.run.presenter.LoginHelper
+import com.run.presenter.contract.PersionContract
+import com.run.presenter.modle.UserJsonModle
+import com.run.ui.R
+import com.run.ui.activity.*
+
+class PersionFragment : BaseFragment<PersionContract.PersionPresenter>(), PersionContract.PersionView {
+
+    companion object {
+        fun newInstance(): PersionFragment {
+            return PersionFragment()
+        }
+    }
+
+    override fun initContentView(): Int {
+        return R.layout.fragment_persion
+    }
+
+    private lateinit var rl_mm: View
+    private lateinit var iv_invite: ImageView
+    private lateinit var iv_usericon: ImageView
+    private lateinit var tv_userid: TextView
+    private lateinit var tv_profit_balance: TextView
+    private lateinit var tv_total: TextView
+    private lateinit var tv_today_money: TextView
+    private lateinit var tv_sign: TextView
+    private lateinit var redPackageView: ImageView
+    override fun initView(view: View) {
+        rl_mm = view.findViewById(R.id.rl_mm)
+        iv_invite = view.findViewById(R.id.iv_invite)
+        iv_usericon = view.findViewById(R.id.iv_usericon)
+        tv_userid = view.findViewById(R.id.tv_userid)
+        tv_profit_balance = view.findViewById(R.id.tv_profit_balance)
+        tv_total = view.findViewById(R.id.tv_total)
+        tv_today_money = view.findViewById(R.id.tv_today_money)
+        tv_sign = view.findViewById(R.id.tv_sign)
+        redPackageView = view.findViewById(R.id.iv_hongbao)
+
+        view.findViewById<View>(R.id.iv_set).setOnClickListener(this)
+        view.findViewById<View>(R.id.ll_kf).setOnClickListener(this)
+        view.findViewById<View>(R.id.ll_sign).setOnClickListener(this)
+        view.findViewById<View>(R.id.ll_wt).setOnClickListener(this)
+        view.findViewById<View>(R.id.ll_yi).setOnClickListener(this)
+        view.findViewById<View>(R.id.ll_ph).setOnClickListener(this)
+        view.findViewById<View>(R.id.ll_symx).setOnClickListener(this)
+        view.findViewById<View>(R.id.ll_card).setOnClickListener(this)
+        view.findViewById<View>(R.id.ll_withdraw).setOnClickListener(this)
+        view.findViewById<View>(R.id.ll_invite).setOnClickListener(this)
+        iv_usericon!!.setOnClickListener(this)
+        iv_invite.setOnClickListener(this)
+    }
+
+    //=============================================数据请求==================================================
+    override fun initPresenter(): PersionContract.PersionPresenter? {
+        return PersionContract.PersionPresenter(this)
+    }
+
+    override fun initData() {
+
+    }
+
+    /**
+     * fragment页面可见时调用；
+     */
+    override fun visiable() {
+        UStatusBar.setDarkMode(this!!.activity!!)
+        UAnim.startShakeByPropertyAnim(redPackageView, 0.6f, 1.0f, 10f, 1000, 30)
+        requestData()
+    }
+
+    private var qqKey: String? = null
+    private var activity_Type: String? = null //收徒大赛
+    private fun requestData() {
+        if (LoginHelper.instance.isLogin(this!!.activity!!)) {
+            if (mPresenter == null) initData()
+            mPresenter!!.getUserInfo()
+            if (TextUtils.isEmpty(qqKey)) {
+                mPresenter!!.getQQKey()
+            }
+            if (TextUtils.isEmpty(activity_Type)) {
+                mPresenter!!.megagameType()
+            }
+        }
+    }
+
+    override fun onClick(v: View) {
+        when (v.id) {
+            R.id.iv_set -> SettingActivity.newInstance(activity!!)
+            R.id.ll_kf -> AppIntentAction.joinQQGroup(qqKey, activity!!)
+            R.id.ll_sign -> doSign()
+            R.id.ll_wt -> ProblemActivity.newInstance(activity!!, 1)
+            R.id.ll_yi -> FeedBackActivity.newInstance(activity!!)
+            R.id.ll_ph -> SeniorityActivity.newInstance(activity!!, nick, avatar, total)
+            R.id.ll_symx -> RevenueDetailActivity.newInstance(activity!!)
+            R.id.iv_usericon -> UserInfoActivity.newInstance(activity!!)
+            R.id.ll_card -> MyCardActivity.newInstance(activity!!)
+            R.id.ll_withdraw -> WithDrawActivity.newInstance(activity!!)
+            R.id.iv_invite -> ContestActivity.newInstance(activity!!)
+            R.id.ll_invite -> InviteActivity.newInstance(activity!!)
+        }
+    }
+
+    private fun doSign() {
+        if (signtype == 1) {
+            showMsg("今日已签到")
+            return
+        }
+        mPresenter!!.sign()
+    }
+
+    //=======================数据回调======================================================================
+    private var avatar: String? = ""
+    private var nick: String? = ""
+    private var total: String? = "0.0"
+    private var signtype: Int = 0//是否签到
+    override fun callBackUserData(modle: UserJsonModle) {
+        if (modle == null) return
+        signtype = modle.signtype
+        if (signtype == 1) {
+            tv_sign.text = "已签到"
+        }
+        tv_today_money.text = if (TextUtils.isEmpty(modle.count_income)) "0.0" else modle.count_income + ""//今日收益
+        val bean = modle.data
+        if (bean != null) {
+            avatar = bean!!.head_avatar
+            nick = if (TextUtils.isEmpty(bean!!.wechat_nick_name)) "" + bean!!.user_id.toString() else bean!!.wechat_nick_name
+            total = if (TextUtils.isEmpty(bean!!.profit_total)) "0.0" else bean!!.profit_total
+            //加载头像
+            UGlide.loadCircleImage(activity, avatar, iv_usericon)
+            tv_userid.text = nick
+            tv_profit_balance.text = if (TextUtils.isEmpty(bean!!.profit_balance)) "0.0" else bean!!.profit_balance + ""
+            tv_total.text = total + ""
+        }
+        showCardDialog()
+    }
+
+    override fun callBackQQKey(key: String) {
+        if (TextUtils.isEmpty(key)) return
+        qqKey = key
+    }
+
+    override fun callBackSign(key: String) {
+        showMsg(key)
+        signtype = 1
+    }
+
+    override fun callBackMegagame(invite_top_img: String, type: String) {
+        try {
+            activity_Type = type
+            if (activity_Type == "0") {
+                iv_invite.visibility = View.GONE
+            } else {//开启收徒大赛
+                iv_invite.visibility = View.VISIBLE
+            }
+            if (TextUtils.isEmpty(invite_top_img)) return
+            UGlide.loadImage(activity, invite_top_img, iv_invite)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
+
+    //==========================================优惠券对话框========================================
+    private var isShowCard = false
+
+    protected fun showCardDialog() {
+        isShowCard = USharePreference.get(activity!!, "isShowCard", false) as Boolean
+        if (!isShowCard) {
+            val contentView = View.inflate(activity, R.layout.dialog_qrcode_layout, null)
+            contentView.setOnClickListener {
+                CardCenterActivity.newInstance(activity!!)
+                DialogHelper.closeDialog()
+            }
+            DialogHelper.showDialog(activity!!, contentView)
+            USharePreference.put(activity!!, "isShowCard", true)
+        }
+    }
+
+}

@@ -1,0 +1,15 @@
+<resources>
+
+
+    <!-- 权限请求dialog()-->
+    <string name="positive">确定</string>
+    <string name="cancle">取消</string>
+    <string name="request_permisson_hint">还有必要的权限没有开启,是否从新获取</string>
+
+
+    <string name="clear_cacher">是否确定清除缓存</string>
+
+
+
+
+</resources>

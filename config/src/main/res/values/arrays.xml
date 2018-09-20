@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="tab_incarnate_Title">
+        <item>全部记录</item>
+        <item>正在处理</item>
+        <item>提现成功</item>
+        <item>提现失败</item>
+    </string-array>
+
+    <string-array name="tab_incomerrecord_Title">
+        <item>全部</item>
+        <item>收徒</item>
+        <item>浏览</item>
+        <item>活动</item>
+        <item>其它</item>
+    </string-array>
+
+    <string-array name="tab_seniority_Title">
+        <item>收益榜</item>
+        <item>收徒榜</item>
+    </string-array>
+
+    <string-array name="tab_invite_Title">
+        <item>收徒方式</item>
+        <item>我的徒弟</item>
+        <item>收徒攻略</item>
+    </string-array>
+
+    <string-array name="tab_seniorty_Title">
+        <item>日榜</item>
+        <item>周榜</item>
+        <item>月榜</item>
+    </string-array>
+
+    <string-array name="tab_card_Title">
+        <item>未使用</item>
+        <item>已使用</item>
+        <item>已失效</item>
+    </string-array>
+
+    <string-array name="tab_messgae_Title">
+        <item>通知</item>
+        <item>公告</item>
+    </string-array>
+
+</resources>

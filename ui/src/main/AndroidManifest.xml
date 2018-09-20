@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.run.ui">
+
+    <application>
+        <activity android:name=".webview.WebViewActivity" />
+        <activity android:name=".activity.ArticleDetailActivity" />
+        <activity android:name=".activity.PhotoViewActivity" />
+        <activity android:name=".activity.PhotoDetailActivity" />
+        <activity
+            android:name=".activity.MainActivity"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".activity.VedioDetailActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:screenOrientation="portrait"
+            android:theme="@style/BlackTheme" />
+        <activity android:name=".login.LoginActivity">
+            <intent-filter>
+                <action android:name="com.run.ui.login.LoginActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".login.RegisterActivity" />
+        <activity android:name=".activity.SearchActivity" />
+        <activity android:name=".activity.SettingActivity" />
+        <activity android:name=".activity.ProblemActivity" />
+        <activity android:name=".activity.ContentDetailActivity">
+            <intent-filter>
+                <action android:name="com.action.monkey.ContentDetailActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="com.action.category" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".activity.FeedBackActivity" />
+        <activity android:name=".activity.UserInfoActivity" />
+        <activity android:name=".activity.TeacherActivity" />
+        <activity android:name=".activity.RevenueDetailActivity" />
+        <activity
+            android:name=".activity.SeniorityActivity"
+            android:theme="@style/AppTheme" />
+        <activity android:name=".activity.InviteActivity" />
+        <activity android:name=".activity.FaceInviteActivity" />
+        <activity android:name=".activity.ApprenticeListActivity" />
+        <activity android:name=".activity.ContestActivity" />
+        <activity
+            android:name=".activity.MyCardActivity"
+            android:theme="@style/AppTheme" />
+        <activity android:name=".activity.WithDrawActivity" />
+        <activity android:name=".activity.CardCenterActivity" />
+        <activity android:name=".activity.BindWCActivity" />
+        <activity android:name=".activity.SelectCardActivity" />
+        <activity android:name=".activity.WithDrawBillActivity"></activity>
+    </application>
+
+</manifest>
