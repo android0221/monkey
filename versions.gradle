@@ -13,7 +13,7 @@ ext.versionCode = 1
 ext.versionName = "1.0"
 
 //打包混淆
-ext.minifyEnabled = true
+ext.minifyEnabled = false
 
 //Android相关引用库的使用
 ext.appcompatVersion = "26.+"
@@ -23,6 +23,7 @@ ext.constraintLayoutVersion = "1.0.2"
 //第三方使用库
 ext.lottieVersion = "2.6.1"
 
+//图片加载库
 ext.glideVersion = "4.7.1"
 
 ext.BaseRecyclerViewAdapterHelperVersion = "2.9.42"

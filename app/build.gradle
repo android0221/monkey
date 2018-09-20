@@ -21,26 +21,17 @@ android {
             storeFile file('C:/Users/Administrator/Desktop/keystore/wjz.keystore')
         }
     }
+
     buildTypes {
         debug {
             minifyEnabled rootProject.ext.minifyEnabled
             //Zipalign优化
-            zipAlignEnabled true
+            zipAlignEnabled rootProject.ext.minifyEnabled
             // 移除无用的resource文件
-            shrinkResources true
-            debuggable false
+            shrinkResources rootProject.ext.minifyEnabled
+            debuggable rootProject.ext.minifyEnabled
             signingConfig signingConfigs.debug
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
-        release {
-            minifyEnabled false
-            //Zipalign优化
-            zipAlignEnabled false
-            // 移除无用的resource文件
-            shrinkResources false
-            signingConfig signingConfigs.debug
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            debuggable true
         }
     }
 }

@@ -91,8 +91,6 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.MainView {
         vedioView.isSelected = false
         persionView.isSelected = false
     }
-
-
     // =========================================初始化数据=================================================
     /**
      * 首页的fragment集合
@@ -121,7 +119,6 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.MainView {
         override fun getItem(position: Int): Fragment {
             return fragmentList[position]
         }
-
         override fun getCount(): Int {
             return fragmentList.size
         }

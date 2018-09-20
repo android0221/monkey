@@ -30,7 +30,6 @@ object UTabLayout {
                         mTextView.measure(0, 0)
                         width = mTextView.measuredWidth
                     }
-
                     //设置tab左右间距为10dp  注意这里不能使用Padding 因为源码中线的宽度是根据 tabView的宽度来设置的
                     val params = tabView.layoutParams as LinearLayout.LayoutParams
                     params.width = width
