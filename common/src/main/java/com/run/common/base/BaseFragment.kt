@@ -59,7 +59,7 @@ abstract class BaseFragment<T : BaseMvpPresenter> : Fragment(), BaseMvpView, Vie
 
     override fun showMsg(msg: String?) {
         if (TextUtils.isEmpty(msg)) return
-        Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
+        Toast.makeText(activity, msg, Toast.LENGTH_SHORT).show()
     }
 
     override fun onClick(v: View) {}

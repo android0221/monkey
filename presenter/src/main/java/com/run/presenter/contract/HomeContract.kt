@@ -17,20 +17,20 @@ interface HomeContract {
         fun showData(lists: List<ArticleTypeModle.DataBean>?)
     }
 
-    class HomePresenter(private val v: HomeView) : BaseMvpPresenter() {
+    class HomePresenter(private val v: HomeView) : BaseMvpPresenter(v) {
         fun requestData() {
-            ApiManager.article()
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(object : BaseObserver<ArticleTypeModle>() {
-                        override fun onSuccess(o: ArticleTypeModle) {
-                            v.showData(o.data)
-                        }
+            addDisposable(ApiManager.article(), object : BaseObserver<ArticleTypeModle>() {
+                override fun onSuccess(o: ArticleTypeModle) {
+                    if (isViewAttached()) v.showData(o.data)
+                }
 
-                        override fun onError(errorType: Int, msg: String?) {
-                            v.showErr(errorType, msg!!)
-                        }
-                    })
+                override fun onError(errorType: Int, msg: String?) {
+                    if (isViewAttached()) v.showErr(errorType, msg!!)
+                }
+
+            })
+
+
         }
     }
 }

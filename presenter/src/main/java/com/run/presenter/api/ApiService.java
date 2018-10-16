@@ -13,6 +13,7 @@ import com.run.presenter.modle.IncomeRecordModle;
 import com.run.presenter.modle.IncomeResultModle;
 import com.run.presenter.modle.InviteModle;
 import com.run.presenter.modle.MegagameModle;
+import com.run.presenter.modle.ProgressArtiveModle;
 import com.run.presenter.modle.SeniorityModle;
 import com.run.presenter.modle.UserJsonModle;
 import com.run.presenter.modle.WithDrawModle;
@@ -182,6 +183,7 @@ public interface ApiService {
 
     /**
      * 用户激活记录
+     *
      * @param token
      * @param content
      * @return
@@ -189,7 +191,16 @@ public interface ApiService {
     @GET("web/config/first")
     Observable<BaseModle> first(@Header("xytoken") String token, @Query("content") String content);
 
+
+    /**
+     * 本周活动奖
+     */
+    @GET("web/user/progress")
+    Observable<ProgressArtiveModle> progress(@Header("xytoken") String token, @Query("content") String content);
+
+
     //===============================================用户信息========================================
+
     /**
      * 用户信息
      *

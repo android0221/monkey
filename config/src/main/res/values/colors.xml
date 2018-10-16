@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#FFA200</color>
-    <color name="colorPrimaryDark">#FFA200</color>
-    <color name="colorAccent">#E53836</color>
+    <color name="colorPrimary">#CC060B</color>
+    <color name="colorPrimaryDark">#CC060B</color>
+    <color name="colorAccent">#CC060B</color>
 
     <!-- 需要配置的主题颜色-->
     <color name="colorLine">#E8E8E8</color>
     <color name="colorMain">#505050</color>
 
-    <color name="colorMainPress">#FFA200</color>
-    <color name="colorSwipe">#FFA200</color>
-    <color name="colorSwipePress">#66FFA200</color>
+    <color name="colorMainPress">#CC060B</color>
+    <color name="colorSwipe">#CC060B</color>
+    <color name="colorSwipePress">#66CC060B</color>
 
     <color name="colorBackLine">#E6E6E6</color>
     <color name="colorBackSearch">#F4F4F4</color>

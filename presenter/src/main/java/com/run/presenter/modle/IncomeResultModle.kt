@@ -10,4 +10,5 @@ import com.run.config.modle.BaseModle
 class IncomeResultModle : BaseModle() {
 
     var url: String? = null
+    var content:String? = null
 }

@@ -18,23 +18,25 @@ interface ArticleDetailContract {
         fun callBackData(modle: ArticleDetailModle)
     }
 
-    class ArticlePresenter(private val v: ArticleDetailContract.ArticleView) : BaseMvpPresenter() {
+    class ArticlePresenter(private val v: ArticleDetailContract.ArticleView) : BaseMvpPresenter(v) {
 
         fun requestData(category_id: Int) {
-            v.showLoading()
-            ApiManager.articledetail(category_id)
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(object : BaseObserver<ArticleDetailModle>() {
-                        override fun onSuccess(o: ArticleDetailModle) {
-                            v.callBackData(o)
-                            v.hideLoading()
-                        }
+            if (isViewAttached()) v.showLoading()
 
-                        override fun onError(errorType: Int, msg: String?) {
-                            v.showErr(errorType, msg!!)
-                        }
-                    })
+            addDisposable(ApiManager.articledetail(category_id), object : BaseObserver<ArticleDetailModle>() {
+                override fun onSuccess(o: ArticleDetailModle) {
+                    if (isViewAttached()) {
+                        v.callBackData(o)
+                        v.hideLoading()
+                    }
+                }
+                override fun onError(errorType: Int, msg: String?) {
+                    if (isViewAttached()) v.showErr(errorType, msg!!)
+                }
+
+            })
+
+
         }
 
 

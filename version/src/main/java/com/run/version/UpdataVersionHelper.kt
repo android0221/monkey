@@ -90,7 +90,7 @@ class UpdataVersionHelper private constructor() {
 
 
     /**
-     * 显示公告对话框 ,12个小时内只能显示一次
+     * 显示公告对话框 ,12个小时内只能显示一次 
      */
     private fun showHintDialog(title: String?, msg: String?) {
         var time = System.currentTimeMillis()
@@ -98,12 +98,14 @@ class UpdataVersionHelper private constructor() {
         ULog.e(TAG, "当前时间：" + time + ",上次时间：" + lastTime + "时间差：" + (time - lastTime))
         if (time - lastTime < 12 * 60 * 60 * 1000) return
         USharePreference.put(mContext!!, "TIME", time)
+
+
         if (TextUtils.isEmpty(msg) || mContext == null) return
         try {
             val contentView = View.inflate(mContext, R.layout.dialog_msg_hint_layout, null)
             val wb_msg: WebView = contentView.findViewById(R.id.wb_msg)
             wb_msg.setBackgroundColor(0) // 设置背景色
-            wb_msg.getBackground().setAlpha(0) // 设置填充透明度 范围：0-255
+            wb_msg.background.alpha = 0 // 设置填充透明度 范围：0-255
             // msg = msg.replace("#227700", "#ffffff");
             wb_msg.loadDataWithBaseURL(null, UWebView.getContent(msg!!), "text/html", "utf-8", null)
             DialogHelper.showDialog(mContext!!, contentView)
@@ -229,7 +231,7 @@ class UpdataVersionHelper private constructor() {
         intent.action = Intent.ACTION_VIEW
         val uri: Uri
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            uri = VersionFileProvider.getUriForFile(context!!, "com.yun.updata.monkey2.versionProvider", file)
+            uri = VersionFileProvider.getUriForFile(context!!, "com.yun.updata.pepper.versionProvider", file)
             intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
         } else {
             uri = Uri.fromFile(file)

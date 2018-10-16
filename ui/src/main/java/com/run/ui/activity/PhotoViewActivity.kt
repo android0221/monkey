@@ -1,5 +1,6 @@
 package com.run.ui.activity
 
+import android.annotation.SuppressLint
 import android.annotation.TargetApi
 import android.app.Activity
 import android.content.Intent
@@ -18,11 +19,12 @@ import com.run.common.utils.UStatusBar
 import com.run.common.view.PageIndicator
 import com.run.share.ShareHelper
 import com.run.ui.R
+import kotlinx.android.synthetic.main.activity_photo_view.*
 
 class PhotoViewActivity : BaseActivity<Nothing>() {
     companion object {
         @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-        fun newInstance(context: Activity, list: ArrayList<String>, position: Int, title: String,articled: Int,money: String) {
+        fun newInstance(context: Activity, list: ArrayList<String>, position: Int, title: String, articled: Int, money: String) {
             val intent = Intent(context, PhotoViewActivity::class.java)
             intent.putStringArrayListExtra("PATH", list)
             intent.putExtra("POSITION", position)
@@ -64,15 +66,20 @@ class PhotoViewActivity : BaseActivity<Nothing>() {
         findViewById<View>(R.id.returnView).setOnClickListener { finish() }
         findViewById<View>(R.id.iv_share).setOnClickListener { ShareHelper.instance.doShare(this, articleid!!, money) }
     }
+
     var articleid: Int? = null
     override fun initData() {
         articleid = intent.getIntExtra("ARTICLEID", 0)
+
+        if (articleid == 0) {
+            iv_share.visibility = View.GONE
+            titleView.visibility = View.GONE
+        }
     }
 
     override fun initPresenter(): Nothing? {
         return null
     }
-
 
     //==========================================初始化viewpager============================================================================
     /**
@@ -81,10 +88,15 @@ class PhotoViewActivity : BaseActivity<Nothing>() {
     private fun initViewPager() {
         viewpager = findViewById(R.id.viewpager)
         viewpager.adapter = object : PagerAdapter() {
-            override fun isViewFromObject(p0: View, p1: Any): Boolean { return p0 == p1 }
-            override fun getCount(): Int {
-                return if (paths == null) 0 else paths.size
+            override fun isViewFromObject(p0: View, p1: Any): Boolean {
+                return p0 == p1
             }
+
+            override fun getCount(): Int {
+                return paths.size
+            }
+
+            @SuppressLint("InflateParams")
             override fun instantiateItem(container: ViewGroup, position: Int): Any {
                 val adView = LayoutInflater.from(this@PhotoViewActivity).inflate(R.layout.layout_photoview, null)
                 val icon = adView.findViewById(R.id.photoview) as PhotoView
@@ -94,11 +106,12 @@ class PhotoViewActivity : BaseActivity<Nothing>() {
                 container.addView(adView)
                 return adView
             }
+
             override fun destroyItem(container: ViewGroup, position: Int, `object`: Any) {
                 container.removeView(`object` as View)
             }
         }
-        viewpager.addOnPageChangeListener(PageIndicator(this@PhotoViewActivity, dot_horizontal, if (paths == null) 0 else paths.size))
+        viewpager.addOnPageChangeListener(PageIndicator(this@PhotoViewActivity, dot_horizontal, paths.size))
     }
 
 

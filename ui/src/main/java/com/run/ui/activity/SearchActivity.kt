@@ -23,18 +23,16 @@ class SearchActivity : BaseActivity<Nothing>() {
     override fun initContentView(): Int {
         return R.layout.activity_search
     }
+
     private lateinit var et_search: EditText
     override fun initViews() {
         et_search = findViewById(R.id.et_search)
         et_search.setOnKeyListener { v, keyCode, event ->
-            if (keyCode == KeyEvent.KEYCODE_ENTER) {
-                doSearch()
-            }
+            if (keyCode == KeyEvent.KEYCODE_ENTER) { doSearch() }
             false
         }
         findViewById<View>(R.id.iv_back).setOnClickListener { finish() }
     }
-
     private var mWord: String? = null
     private fun doSearch() {
         (getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager)
@@ -42,11 +40,8 @@ class SearchActivity : BaseActivity<Nothing>() {
                         .windowToken, InputMethodManager.HIDE_NOT_ALWAYS)
         mWord = et_search.text.toString().trim { it <= ' ' }
         if (TextUtils.isEmpty(mWord)) return
-        if (fragment != null) {
-            fragment.searchData(mWord)
-        }
+        fragment.searchData(mWord)
     }
-
     private lateinit var fragment: SearchFragment
     override fun initData() {
         val fragmentTransaction = supportFragmentManager.beginTransaction()
@@ -54,7 +49,6 @@ class SearchActivity : BaseActivity<Nothing>() {
         fragmentTransaction.add(R.id.framelayout, fragment)
         fragmentTransaction.commit()
     }
-
     override fun initPresenter(): Nothing? {
         return null
     }

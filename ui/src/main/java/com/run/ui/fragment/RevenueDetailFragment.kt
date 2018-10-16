@@ -9,8 +9,7 @@ class RevenueDetailFragment : BaseListFragment<RevenueContract.RevenuePresenter,
 
     companion object {
         fun newInstance(): RevenueDetailFragment {
-            var fragment = RevenueDetailFragment()
-            return fragment
+            return RevenueDetailFragment()
         }
     }
 

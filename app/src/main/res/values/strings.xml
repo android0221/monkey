@@ -1,5 +1,5 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
-    <string name="app_name">有点资讯</string>
+    <string name="app_name" tools:ignore="MissingTranslation">小辣椒</string>
 
 </resources>

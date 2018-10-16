@@ -23,5 +23,8 @@ class IncomeBean {
     var withdraw_type: Int = 0
     var fail_reason: String? = null
     var create_time: String? = null
+
+    //提现成功显示
     var update_time: String? = null
+
 }

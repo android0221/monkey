@@ -74,9 +74,7 @@ class ShareHelper private constructor() {
                         }
                     })
         }
-
     }
-
     /**
      * {"status":200,
      * "share_data":
@@ -92,10 +90,7 @@ class ShareHelper private constructor() {
      * 执行分享操作
      */
     private fun exShare(shareBean: ShareModle.ShareDataBean?, type: Int) {
-
-        if (mContext == null) {
-            mContext = BaseApplication.context
-        }
+        if (mContext == null) { mContext = BaseApplication.context }
         if (shareBean == null) return
         var platform = "wechat_friend"
         var url = shareBean.url
@@ -107,7 +102,7 @@ class ShareHelper private constructor() {
             return
         } else if (type == 2 || type == 4) {
             platform = "wechat_moments"
-            url = shareBean!!.url
+            url = shareBean.friend_url
         }
         if (type == 4) {
             UShare.doShare(mContext!!, platform, shareBean!!.title, shareBean!!.content_describe, url!!, shareBean!!.share_picture, shareBean!!.sort, 0, 2)

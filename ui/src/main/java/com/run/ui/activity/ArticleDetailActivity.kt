@@ -1,5 +1,6 @@
 package com.run.ui.activity
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.support.v7.widget.LinearLayoutManager
@@ -38,7 +39,6 @@ class ArticleDetailActivity : BaseActivity<ArticleDetailContract.ArticlePresente
             intent.putExtra("MONEY", money)
             context.startActivity(intent)
         }
-
         const val TAG = "ArticleDetailActivity"
     }
 
@@ -52,6 +52,7 @@ class ArticleDetailActivity : BaseActivity<ArticleDetailContract.ArticlePresente
     private lateinit var titleView: TextView
     private lateinit var contentWebView: WebView
     private lateinit var moreLayout: View
+    @SuppressLint("AddJavascriptInterface")
     override fun initViews() {
         shareMoneyView = findViewById(R.id.tv_sharemsg)
         hintView = findViewById(R.id.hintView)
@@ -61,17 +62,18 @@ class ArticleDetailActivity : BaseActivity<ArticleDetailContract.ArticlePresente
         //初始化webview
         contentWebView = findViewById(R.id.contentWebView)
         UWebView.initWebView(contentWebView)
+
         UWebView.initImageClick(contentWebView)
-        contentWebView!!.addJavascriptInterface(object : JsCallJavaObj {
+        contentWebView.addJavascriptInterface(object : JsCallJavaObj {
             @JavascriptInterface
             override fun showBigImg(url: String) {
                 ULog.d(TAG, "showBigImg :$url")
                 openToImageActivity(url)
-
             }
         }, "jsCallJavaObj")
-        moreLayout = findViewById(R.id.moreLayout)
 
+
+        moreLayout = findViewById(R.id.moreLayout)
         findViewById<ImageView>(R.id.iv_return).setOnClickListener(this)
         findViewById<View>(R.id.iv_share).setOnClickListener(this)
         findViewById<View>(R.id.ll_share_wc).setOnClickListener(this)
@@ -87,20 +89,22 @@ class ArticleDetailActivity : BaseActivity<ArticleDetailContract.ArticlePresente
         fun showBigImg(url: String)
     }
 
+
+
     private lateinit var recyclerview: RecyclerView
     private lateinit var adapter: ArticleMoreAdapter
     private fun initRecyclerView() {
         recyclerview = findViewById(R.id.recyclerview)
-        recyclerview!!.setHasFixedSize(true)
-        recyclerview!!.layoutManager = LinearLayoutManager(BaseApplication.context)
+        recyclerview.setHasFixedSize(true)
+        recyclerview.layoutManager = LinearLayoutManager(BaseApplication.context)
         adapter = ArticleMoreAdapter()
-        recyclerview!!.adapter = adapter
-
+        recyclerview.adapter = adapter
     }
 
     /**
      * 查看图片
      */
+    @SuppressLint("CheckResult")
     private fun openToImageActivity(url: String) {
         if (imgageList == null || imgageList!!.isEmpty()) return
         val position = imgageList!!.indexOf(url)
@@ -110,7 +114,6 @@ class ArticleDetailActivity : BaseActivity<ArticleDetailContract.ArticlePresente
             }
         }
     }
-
 
     override fun onClick(v: View) {
         when (v.id) {
@@ -124,17 +127,18 @@ class ArticleDetailActivity : BaseActivity<ArticleDetailContract.ArticlePresente
 
     //=====================================数据操作==========================================
     override fun initPresenter(): ArticleDetailContract.ArticlePresenter? {
-        return ArticleDetailContract.ArticlePresenter(this)
+                   return ArticleDetailContract.ArticlePresenter(this)
     }
+
     var articleid: Int? = null
     private lateinit var money: String
     override fun initData() {
         articleid = intent.getIntExtra("ARTICLEID", 0)
         money = intent.getStringExtra("MONEY")
-        shareMoneyView!!.text = "+" + money + "元/位→"
+        shareMoneyView.text = "+" + money + "元/位→"
         mPresenter!!.requestData(articleid!!)
-
     }
+
 
     private var imgageList: List<String>? = null
     private lateinit var title: String
@@ -143,18 +147,19 @@ class ArticleDetailActivity : BaseActivity<ArticleDetailContract.ArticlePresente
         title = data.title!!
         titleView.text = SpanStringUtils.getEmotionContent(EmotionUtils.EMOTION_CLASSIC_TYPE, this, titleView, title)
         when (data.content_type) {
+
             1 -> {
                 imgageList = UWebView.getImagePath(data.content!!)
-                contentWebView!!.loadDataWithBaseURL(null, UWebView.getNewContent(data.content!!), "text/html", "utf-8", null)
+                contentWebView.loadDataWithBaseURL(null, UWebView.getNewContent(data.content!!), "text/html", "utf-8", null)
             }
+
             3, 4 -> {
-                contentWebView!!.loadUrl(data.frame_url)
-                contentWebView!!.webViewClient = object : WebViewClient() {
+                contentWebView.loadUrl(data.frame_url)
+                contentWebView.webViewClient = object : WebViewClient() {
                     override fun shouldOverrideUrlLoading(view: WebView, url: String): Boolean {
                         view.loadUrl(url)// 使用当前WebView处理跳转
                         return false//true表示此事件在此处被处理，不需要再广播
                     }
-
                     override//转向错误时的处理
                     fun onReceivedError(view: WebView, errorCode: Int, description: String, failingUrl: String) {
                         ULog.e(TAG, "文章的url加载错误： errorCode:$errorCode,description $description,failingUrl:$failingUrl")
@@ -162,7 +167,6 @@ class ArticleDetailActivity : BaseActivity<ArticleDetailContract.ArticlePresente
                 }
             }
         }
-
         /**
          * 延迟显示
          */
@@ -175,10 +179,8 @@ class ArticleDetailActivity : BaseActivity<ArticleDetailContract.ArticlePresente
         showShareHint()
     }
 
-
-    //================================================显示分享内容==============================================================
+    //================================================显示分享内容===============================================
     private var hasHint: Boolean = false
-
     private fun showShareHint() {
         Observable.timer(5, TimeUnit.SECONDS).observeOn(AndroidSchedulers.mainThread()).subscribe {
             if (!hasHint) {

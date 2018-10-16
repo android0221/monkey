@@ -19,22 +19,19 @@ interface ApprenticeContract {
         fun showData(list: List<ApprenticeBean>)
     }
 
-    class ApprenticePresenter(private val v: ApprenticeView) : BaseMvpPresenter() {
+    class ApprenticePresenter(private val v: ApprenticeView) : BaseMvpPresenter(v) {
         fun invite_list(mPage: Int) {
-            ApiManager.invite_list(mPage)
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(object : BaseObserver<ApprenticeModle>() {
-                        override fun onSuccess(o: ApprenticeModle) {
-                            v.showData(o.data!!)
 
-                        }
+            addDisposable(ApiManager.invite_list(mPage), object : BaseObserver<ApprenticeModle>() {
+                override fun onSuccess(o: ApprenticeModle) {
+                    if (isViewAttached()) v.showData(o.data!!)
+                }
 
-                        override fun onError(errorType: Int, msg: String?) {
-                            v.showErr(errorType, msg!!)
+                override fun onError(errorType: Int, msg: String?) {
+                    if (isViewAttached()) v.showErr(errorType, msg!!)
+                }
+            })
 
-                        }
-                    })
         }
 
 

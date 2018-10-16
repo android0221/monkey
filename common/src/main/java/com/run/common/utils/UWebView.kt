@@ -38,6 +38,15 @@ object UWebView {
         return "<html>$head<body>$htmltext</body></html>"
     }
 
+    fun getNewContentSetting(htmltext: String): String {
+        val head = "<head>" +
+                "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, user-scalable=no\"> " +
+                "<style>*{}img{max-width: 100%; width:100%; height:auto; margin:1px; text-align:center}</style>" +
+                "</head>"
+        return "<html>$head<body>$htmltext</body></html>"
+    }
+
+
 
     fun getNewContent2(htmltext: String): String {
         val head = "<head>" +
@@ -46,7 +55,6 @@ object UWebView {
                 "</head>"
         return "<html>$head<body>$htmltext</body></html>"
     }
-
 
 
     fun getVedioUrl(url: String): String {
@@ -72,11 +80,9 @@ object UWebView {
             if (src != null) {
                 imagePaht.add(src)
             }
-
         }
         return imagePaht
     }
-
 
     /**
      * 设置样式

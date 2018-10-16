@@ -14,10 +14,26 @@
         android:adjustViewBounds="true"
         android:src="@mipmap/tc" />
 
+
+    <TextView
+        android:id="@+id/msgView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp_5"
+        android:layout_marginRight="@dimen/dp_5"
+        android:layout_marginBottom="@dimen/dp_20"
+        android:gravity="center"
+        android:padding="@dimen/dp_10"
+        android:text="提现申请成功，请等待审核"
+        android:textColor="@color/colorPrimary"
+        android:textSize="@dimen/sp_14" />
+
+
     <View
         android:layout_width="match_parent"
         android:layout_height="0.8dp"
-        android:background="@color/colorLine" />
+        android:background="@color/white" />
+
 
     <TextView
         android:id="@+id/tv_cancle"
@@ -25,9 +41,9 @@
         android:layout_height="wrap_content"
         android:background="@drawable/bg_ripple"
         android:gravity="center"
-        android:padding="@dimen/dp_15"
-        android:text="回到主页"
-        android:textColor="@color/colorPrimary"
-        android:textSize="@dimen/sp_16" />
+        android:padding="@dimen/dp_12"
+        android:text="返回主页"
+        android:textColor="#008AFF"
+        android:textSize="@dimen/sp_14" />
 
 </LinearLayout>

@@ -22,6 +22,7 @@ class SplashActivity : AppCompatActivity() {
         val TAG: String = SplashActivity.javaClass.name
     }
 
+    //工作
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
@@ -50,22 +51,18 @@ class SplashActivity : AppCompatActivity() {
 //                ULog.d(TAG, "开启动画")
 //            }
 //        })
-
-
     }
-
     override fun onStart() {
         super.onStart()
         //如果权限对话框打开，则不检查权限
         if (dialogShow) return
         checkPermission()
     }
-    //==========================================权限检查==================================================================================
+    //==========================================权限检查===============================================================================
     /**
      * 需要初始化的权限
      */
     private val permissions = arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_PHONE_STATE)
-
     /**
      * 检查权限
      */
@@ -100,11 +97,10 @@ class SplashActivity : AppCompatActivity() {
         ULog.d(TAG, "权限没通过，请求用户再次确认")
         PermissionDialog.newInstance(this@SplashActivity).show(this@SplashActivity, callBack = object : DialogCallBack {
             override fun onNext() {
-                ULog.d(TAG, "重新请求权限")
-                checkPermission()
-                dialogShow = false
+                 ULog.d(TAG, "重新请求权限")
+                 checkPermission()
+                 dialogShow = false
             }
-
             override fun cancle() {
                 finish()
                 dialogShow = false
@@ -113,14 +109,13 @@ class SplashActivity : AppCompatActivity() {
         })
         dialogShow = true
     }
-
     /**
      * 获取权限成功
      */
     private fun permissionSuccess() {
         ULog.d(TAG, "权限请求通过")
         //点击播放
-//        mSplashAnimationView.playAnimation()
+        //mSplashAnimationView.playAnimation()
         Observable.timer(1, TimeUnit.SECONDS).subscribe {
             if (SharedPreferenceHelper.checkHasOpenGuide(this@SplashActivity)) {
                 MainActivity.newInstance(this@SplashActivity)
@@ -129,4 +124,5 @@ class SplashActivity : AppCompatActivity() {
             }
         }
     }
+
 }

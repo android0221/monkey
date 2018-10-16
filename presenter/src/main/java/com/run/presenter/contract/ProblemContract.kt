@@ -19,22 +19,21 @@ interface ProblemContract {
         fun showData(list: List<UserItemBean>)
     }
 
-    class ProblemPresenter(private val v: ProblemView) : BaseMvpPresenter() {
+    class ProblemPresenter(private val v: ProblemView) : BaseMvpPresenter(v) {
         fun dynamics(type: Int) {
-            LoginManager.dynamics(type)
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(object : BaseObserver<DynamicsModle>() {
-                        override fun onError(errorType: Int, msg: String?) {
-                            v.showErr(errorType, msg!!)
-                        }
+            addDisposable(LoginManager.dynamics(type),object:BaseObserver<DynamicsModle>(){
+                override fun onSuccess(o: DynamicsModle) {
+                    if(isViewAttached()) v.showData(o.data!!)
+                }
 
-                        override fun onSuccess(o: DynamicsModle) {
-                            v.showData(o.data!!)
-                        }
+                override fun onError(errorType: Int, msg: String?) {
+                    if(isViewAttached())v.showErr(errorType,msg!!)
+                }
+
+            })
 
 
-                    })
+
         }
 
 

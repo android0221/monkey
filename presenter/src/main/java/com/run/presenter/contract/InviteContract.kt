@@ -19,37 +19,37 @@ interface InviteContract {
         fun showData(modle: SeniorityModle)
     }
 
-    class InvitePresenter(private val v: InviteView) : BaseMvpPresenter() {
+    class InvitePresenter(private val v: InviteView) : BaseMvpPresenter(v) {
         /**
          * 收徒信息
          */
         fun invite() {
-            ApiManager.invite().subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(object : BaseObserver<InviteModle>() {
-                        override fun onSuccess(o: InviteModle) {
-                            v.showInvite(o)
-                        }
+            addDisposable(ApiManager.invite(), object : BaseObserver<InviteModle>() {
+                override fun onSuccess(o: InviteModle) {
+                    if (isViewAttached()) v.showInvite(o)
 
-                        override fun onError(errorType: Int, msg: String?) {
-                            v.showErr(errorType, msg!!)
-                        }
-                    })
+                }
+
+                override fun onError(errorType: Int, msg: String?) {
+                    if (isViewAttached()) v.showErr(errorType, msg!!)
+                }
+            })
+
+
         }
 
         fun seniority(type: String) {
-            ApiManager.seniority(type)
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(object : BaseObserver<SeniorityModle>() {
-                        override fun onSuccess(o: SeniorityModle) {
-                            v.showData(o)
-                        }
+            addDisposable(ApiManager.seniority(type), object : BaseObserver<SeniorityModle>() {
+                override fun onSuccess(o: SeniorityModle) {
+                    if (isViewAttached()) v.showData(o)
+                }
 
-                        override fun onError(errorType: Int, msg: String?) {
-                            v.showErr(errorType, msg!!)
-                        }
-                    })
+                override fun onError(errorType: Int, msg: String?) {
+                    if (isViewAttached()) v.showErr(errorType, msg!!)
+                }
+
+            })
+
         }
 
 

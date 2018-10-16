@@ -26,6 +26,7 @@ import java.text.DecimalFormat
 
 class WithDrawActivity : BaseActivity<WithDrawContract.WithDrawPresenter>(), WithDrawContract.WithDrawView {
 
+
     companion object {
         fun newInstance(act: Context) {
             newInstance(act, 0, "")
@@ -74,7 +75,6 @@ class WithDrawActivity : BaseActivity<WithDrawContract.WithDrawPresenter>(), Wit
         findViewById<View>(R.id.ll_card).setOnClickListener(this)
         findViewById<View>(R.id.iv_back).setOnClickListener(this)
 
-
         //更多工具
         recyclerView = findViewById(R.id.recyclerview)
         mAdapter = MoneyAdapter()
@@ -97,7 +97,6 @@ class WithDrawActivity : BaseActivity<WithDrawContract.WithDrawPresenter>(), Wit
         }
     }
 
-
     override fun onClick(v: View) {
         when (v.id) {
             R.id.iv_back -> finish()
@@ -115,7 +114,6 @@ class WithDrawActivity : BaseActivity<WithDrawContract.WithDrawPresenter>(), Wit
             }
             R.id.ll_card -> SelectCardActivity.newInstance(this, my_voucherid, 1)
             R.id.tv_income_list -> WithDrawBillActivity.newInstance(this@WithDrawActivity)
-
         }
     }
 
@@ -147,7 +145,6 @@ class WithDrawActivity : BaseActivity<WithDrawContract.WithDrawPresenter>(), Wit
             type = bean.value
             tv_incarnate_type!!.text = bean.title
         }
-
         if (mLists != null) {
             adapter.setNewData(mLists)
         }
@@ -171,6 +168,7 @@ class WithDrawActivity : BaseActivity<WithDrawContract.WithDrawPresenter>(), Wit
 
     private var mMoneyList: List<Int>? = null
     private var profit_money = 0.00
+
     @SuppressLint("SetTextI18n")
     override fun showData(bean: IncomeModle) {
         mLists = bean.list
@@ -183,16 +181,15 @@ class WithDrawActivity : BaseActivity<WithDrawContract.WithDrawPresenter>(), Wit
             money = mMoneyList!![0]
             ULog.e("money =$money")
             tv_incarnate_money!!.text = money.toString() + ""
-
         }
         if (mAdapter != null) {
             mAdapter!!.money = money
             mAdapter!!.setNewData(mMoneyList)
         }
-        wb_msg!!.loadDataWithBaseURL(null, bean.msg, "text/html", "utf-8", null)
+        wb_msg!!.loadDataWithBaseURL(null, bean.msg, "text/html", "utf-8",
+                null)
         profitBalance = bean.profit_balance
         tv_profit_balance!!.text = profitBalance.toString() + ""
-
 
         if (profitBalance < money) { //余额不足
             btn_income!!.text = "余额不足"
@@ -201,16 +198,25 @@ class WithDrawActivity : BaseActivity<WithDrawContract.WithDrawPresenter>(), Wit
             btn_income!!.text = "立即提现"
             btn_income!!.isEnabled = true
         }
+
         profit_money = bean.all_money
         profit_had!!.text = doubleToString(profit_money) + ""
         tv_profit_total!!.text = bean.profit_total.toString()
+
+
+        if (bean.wechat_subscribe == 0) { //绑定微信
+            mPresenter!!.money(money, type, my_voucherid)
+        }
     }
 
-    override fun gotoBindWC(msg: String, url: String) {
+    /**
+     *绑定微信
+     */
+    override fun gotoBindWC(msg: String, url: String, content: String) {
         val builder = AlertDialog.Builder(this)
         builder.setMessage(msg)
         builder.setPositiveButton("确定") { dialog, _ ->
-            BindWCActivity.newInstance(this@WithDrawActivity, url)
+            BindWCActivity.newInstance(this@WithDrawActivity, url, content)
             dialog.cancel()
         }
         builder.setNegativeButton("取消") { dialog, _ -> dialog.cancel() }
@@ -219,7 +225,10 @@ class WithDrawActivity : BaseActivity<WithDrawContract.WithDrawPresenter>(), Wit
     }
 
     override fun moneyFinish(msg: String) {
-        val contentView = View.inflate(this, R.layout.dialog_withdraw_success_layout, null)
+        val contentView = View.inflate(this, R.layout.dialog_withdraw_success_layout,
+                null)
+        val msgView: TextView = contentView.findViewById(R.id.msgView)
+        msgView.text = msg
         contentView.findViewById<View>(R.id.tv_cancle).setOnClickListener {
             DialogHelper.closeDialog()
             startActivity(Intent(this@WithDrawActivity, MainActivity::class.java))
@@ -230,16 +239,17 @@ class WithDrawActivity : BaseActivity<WithDrawContract.WithDrawPresenter>(), Wit
 
     override fun showMoneyError(msg: String) {
         if (TextUtils.isEmpty(msg)) return
-        val contentView = View.inflate(this, R.layout.dialog_withdraw_fail_layout, null)
+        val contentView = View.inflate(this, R.layout.dialog_withdraw_fail_layout,
+                null)
         contentView.findViewById<View>(R.id.tv_cancle).setOnClickListener {
             DialogHelper.closeDialog()
         }
         val tv_msg: TextView = contentView.findViewById(R.id.tv_msg)
         tv_msg.text = msg
-        DialogHelper.showDialog(this, contentView)
+        DialogHelper.showDialog(this@WithDrawActivity, contentView)
     }
 
-    //===============================工具类==================================================
+    //===============================工具类==========================================================
     private fun doubleToString(num: Double): String {
         //使用0.00不足位补0，#.##仅保留有效位
         return DecimalFormat("0.00").format(num)

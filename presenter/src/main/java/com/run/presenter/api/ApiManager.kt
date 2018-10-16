@@ -15,7 +15,7 @@ import org.json.JSONObject
 object ApiManager {
 
     private var apiService: ApiService? = null
-     private val instance: ApiService
+    private val instance: ApiService
         get() {
             if (apiService == null) {
                 synchronized(ApiManager::class.java) {
@@ -166,6 +166,21 @@ object ApiManager {
         }
 
         return ApiManager.instance.megagame(LoginHelper.instance.getmToken(), UEncrypt.encrypt_AES(jsonObject.toString(), AppConstants.DES_KEY))
+
+    }
+
+
+    /**
+     * 本周活动奖
+     */
+    fun progress(): Observable<ProgressArtiveModle> {
+        val jsonObject = JSONObject()
+        try {
+            jsonObject.put("channel", AppConstants.CHANNEL_KEY)
+        } catch (e: JSONException) {
+            e.printStackTrace()
+        }
+        return ApiManager.instance.progress(LoginHelper.instance.getmToken(), UEncrypt.encrypt_AES(jsonObject.toString(), AppConstants.DES_KEY))
 
     }
 
@@ -354,12 +369,9 @@ object ApiManager {
      */
     fun first(imei: String): Observable<BaseModle> {
         val jsonObject = JSONObject()
-        try {
-            jsonObject.put("imei", imei)
-            jsonObject.put("channel", AppConstants.CHANNEL_KEY)
-        } catch (e: JSONException) {
-            e.printStackTrace()
-        }
+
+        jsonObject.put("imei", imei)
+        jsonObject.put("channel", AppConstants.CHANNEL_KEY)
 
         return ApiManager.instance.first(LoginHelper.instance.getmToken(), UEncrypt.encrypt_AES(jsonObject.toString(), AppConstants.DES_KEY))
     }

@@ -17,7 +17,7 @@ import com.run.presenter.modle.UserJsonModle
 import com.run.ui.R
 import com.run.ui.activity.*
 
-class PersionFragment : BaseFragment<PersionContract.PersionPresenter>(), PersionContract.PersionView {
+open class PersionFragment : BaseFragment<PersionContract.PersionPresenter>(), PersionContract.PersionView {
 
     companion object {
         fun newInstance(): PersionFragment {
@@ -30,7 +30,6 @@ class PersionFragment : BaseFragment<PersionContract.PersionPresenter>(), Persio
     }
 
     private lateinit var rl_mm: View
-    private lateinit var iv_invite: ImageView
     private lateinit var iv_usericon: ImageView
     private lateinit var tv_userid: TextView
     private lateinit var tv_profit_balance: TextView
@@ -38,9 +37,13 @@ class PersionFragment : BaseFragment<PersionContract.PersionPresenter>(), Persio
     private lateinit var tv_today_money: TextView
     private lateinit var tv_sign: TextView
     private lateinit var redPackageView: ImageView
+    private lateinit var invitegameLayout: View
+    private lateinit var firstView: TextView
+    private lateinit var progressAwardLayout: View
+
     override fun initView(view: View) {
         rl_mm = view.findViewById(R.id.rl_mm)
-        iv_invite = view.findViewById(R.id.iv_invite)
+        invitegameLayout = view.findViewById(R.id.invitegameLayout)
         iv_usericon = view.findViewById(R.id.iv_usericon)
         tv_userid = view.findViewById(R.id.tv_userid)
         tv_profit_balance = view.findViewById(R.id.tv_profit_balance)
@@ -48,6 +51,8 @@ class PersionFragment : BaseFragment<PersionContract.PersionPresenter>(), Persio
         tv_today_money = view.findViewById(R.id.tv_today_money)
         tv_sign = view.findViewById(R.id.tv_sign)
         redPackageView = view.findViewById(R.id.iv_hongbao)
+        firstView = view.findViewById(R.id.firstView)
+        progressAwardLayout = view.findViewById(R.id.progressAwardLayout)
 
         view.findViewById<View>(R.id.iv_set).setOnClickListener(this)
         view.findViewById<View>(R.id.ll_kf).setOnClickListener(this)
@@ -59,8 +64,9 @@ class PersionFragment : BaseFragment<PersionContract.PersionPresenter>(), Persio
         view.findViewById<View>(R.id.ll_card).setOnClickListener(this)
         view.findViewById<View>(R.id.ll_withdraw).setOnClickListener(this)
         view.findViewById<View>(R.id.ll_invite).setOnClickListener(this)
-        iv_usericon!!.setOnClickListener(this)
-        iv_invite.setOnClickListener(this)
+        iv_usericon.setOnClickListener(this)
+        invitegameLayout.setOnClickListener(this)
+        progressAwardLayout.setOnClickListener(this)
     }
 
     //=============================================数据请求==================================================
@@ -68,9 +74,7 @@ class PersionFragment : BaseFragment<PersionContract.PersionPresenter>(), Persio
         return PersionContract.PersionPresenter(this)
     }
 
-    override fun initData() {
-
-    }
+    override fun initData() {}
 
     /**
      * fragment页面可见时调用；
@@ -90,9 +94,10 @@ class PersionFragment : BaseFragment<PersionContract.PersionPresenter>(), Persio
             if (TextUtils.isEmpty(qqKey)) {
                 mPresenter!!.getQQKey()
             }
-            if (TextUtils.isEmpty(activity_Type)) {
-                mPresenter!!.megagameType()
-            }
+            //TODO 将收徒大赛接口放到了个人页面
+//            if (TextUtils.isEmpty(activity_Type)) {
+//                mPresenter!!.megagameType()
+//            }
         }
     }
 
@@ -106,10 +111,11 @@ class PersionFragment : BaseFragment<PersionContract.PersionPresenter>(), Persio
             R.id.ll_ph -> SeniorityActivity.newInstance(activity!!, nick, avatar, total)
             R.id.ll_symx -> RevenueDetailActivity.newInstance(activity!!)
             R.id.iv_usericon -> UserInfoActivity.newInstance(activity!!)
-            R.id.ll_card -> MyCardActivity.newInstance(activity!!)
+            R.id.ll_card -> SeniorityActivity.newInstance(activity!!, nick, avatar, total)
             R.id.ll_withdraw -> WithDrawActivity.newInstance(activity!!)
-            R.id.iv_invite -> ContestActivity.newInstance(activity!!)
+            R.id.invitegameLayout -> ContestActivity.newInstance(activity!!)
             R.id.ll_invite -> InviteActivity.newInstance(activity!!)
+            R.id.progressAwardLayout -> ProgressActiveActivity.newInstance(activity!!, userid)
         }
     }
 
@@ -121,32 +127,62 @@ class PersionFragment : BaseFragment<PersionContract.PersionPresenter>(), Persio
         mPresenter!!.sign()
     }
 
-    //=======================数据回调======================================================================
+    //=======================数据回调================================================================
     private var avatar: String? = ""
     private var nick: String? = ""
     private var total: String? = "0.0"
     private var signtype: Int = 0//是否签到
+    private var userid: Int = 0
     override fun callBackUserData(modle: UserJsonModle) {
         if (modle == null) return
         signtype = modle.signtype
         if (signtype == 1) {
             tv_sign.text = "已签到"
         }
+
         tv_today_money.text = if (TextUtils.isEmpty(modle.count_income)) "0.0" else modle.count_income + ""//今日收益
         val bean = modle.data
         if (bean != null) {
             avatar = bean!!.head_avatar
+            userid = bean.user_id
             nick = if (TextUtils.isEmpty(bean!!.wechat_nick_name)) "" + bean!!.user_id.toString() else bean!!.wechat_nick_name
             total = if (TextUtils.isEmpty(bean!!.profit_total)) "0.0" else bean!!.profit_total
             //加载头像
             UGlide.loadCircleImage(activity, avatar, iv_usericon)
             tv_userid.text = nick
-            tv_profit_balance.text = if (TextUtils.isEmpty(bean!!.profit_balance)) "0.0" else bean!!.profit_balance + ""
+            tv_profit_balance.text = if (TextUtils.isEmpty(bean!!.profit_balance)) "0.0" else bean.profit_balance + ""
             tv_total.text = total + ""
         }
-        showCardDialog()
+
+        if (modle.first_user_id <= 0) {
+            firstView.visibility = View.GONE
+        } else {
+            firstView.text = "师傅ID(" + modle.first_user_id + ")"
+            firstView.visibility = View.VISIBLE
+        }
+
+        // TODO()  是否开启现金券
+        //  showCardDialog()
+
+        //收徒大赛
+        activity_Type = modle.activity_type
+        if (activity_Type == "0") {
+            invitegameLayout.visibility = View.GONE
+        } else {//开启收徒大赛
+            invitegameLayout.visibility = View.VISIBLE
+        }
+
+        //本周进步奖活动
+        progress_type = modle.progress_type!!
+        if (progress_type == "1") { //没有开启
+            progressAwardLayout.visibility = View.VISIBLE
+        } else { //有开启
+            progressAwardLayout.visibility = View.GONE
+        }
+
     }
 
+    private lateinit var progress_type: String
     override fun callBackQQKey(key: String) {
         if (TextUtils.isEmpty(key)) return
         qqKey = key
@@ -161,23 +197,20 @@ class PersionFragment : BaseFragment<PersionContract.PersionPresenter>(), Persio
         try {
             activity_Type = type
             if (activity_Type == "0") {
-                iv_invite.visibility = View.GONE
+                invitegameLayout.visibility = View.GONE
             } else {//开启收徒大赛
-                iv_invite.visibility = View.VISIBLE
+                invitegameLayout.visibility = View.VISIBLE
             }
-            if (TextUtils.isEmpty(invite_top_img)) return
-            UGlide.loadImage(activity, invite_top_img, iv_invite)
         } catch (e: Exception) {
             e.printStackTrace()
         }
     }
 
-
     //==========================================优惠券对话框========================================
     private var isShowCard = false
 
-    protected fun showCardDialog() {
-        isShowCard = USharePreference.get(activity!!, "isShowCard", false) as Boolean
+    private fun showCardDialog() {
+        isShowCard = USharePreference[activity!!, "isShowCard", false] as Boolean
         if (!isShowCard) {
             val contentView = View.inflate(activity, R.layout.dialog_qrcode_layout, null)
             contentView.setOnClickListener {

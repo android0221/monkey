@@ -24,7 +24,6 @@ class RevenueDetailActivity : BaseActivity<Nothing>() {
     override fun initViews() {
         iv_back.setOnClickListener { finish() }
     }
-
     override fun initData() {
         val fragmentTransaction = supportFragmentManager.beginTransaction()
         fragmentTransaction.add(R.id.framelayout, RevenueDetailFragment())

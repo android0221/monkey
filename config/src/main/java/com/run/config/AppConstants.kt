@@ -12,7 +12,7 @@ public object AppConstants {
     /**
      * 网络请求地址
      */
-    var BASE_URL = "http://ydzx.szhuanww.com/"
+    var BASE_URL = "http://xlj.szhuanww.com/"
     /**
      * des加密的key
      */

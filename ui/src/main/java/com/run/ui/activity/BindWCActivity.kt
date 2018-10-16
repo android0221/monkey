@@ -5,17 +5,16 @@ import android.content.ClipboardManager
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
+import android.graphics.Canvas
 import android.net.Uri
-import android.support.v7.app.AppCompatActivity
-import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
 import android.view.View
 import android.widget.ImageView
+import android.widget.TextView
 import com.run.common.base.BaseActivity
+import com.run.common.utils.UGlide
 import com.run.common.view.MyBottomSheetDialog
-import com.run.share.utils.QRCodeUtil
 import com.run.ui.R
 import java.io.*
 
@@ -23,9 +22,10 @@ class BindWCActivity : BaseActivity<Nothing>(), View.OnLongClickListener {
 
 
     companion object {
-        fun newInstance(activity: Activity, url: String) {
+        fun newInstance(activity: Activity, url: String, content: String) {
             val intent = Intent(activity, BindWCActivity::class.java)
             intent.putExtra("URL", url)
+            intent.putExtra("content", content)
             activity.startActivity(intent)
         }
     }
@@ -34,21 +34,30 @@ class BindWCActivity : BaseActivity<Nothing>(), View.OnLongClickListener {
     override fun initContentView(): Int {
         return R.layout.activity_bind_wc
     }
+
     private var iv_code: ImageView? = null
     private var mBitmap: Bitmap? = null
     private var url: String? = null
+    private var content: String? = null
+    private lateinit var showMsg: TextView
     override fun initViews() {
         iv_code = findViewById(R.id.iv_code)
         iv_code!!.setOnLongClickListener(this)
+        showMsg = findViewById(R.id.showMsg)
         findViewById<View>(R.id.tv_back).setOnClickListener({ finish() })
     }
 
     override fun initData() {
         url = intent.getStringExtra("URL")
-        mBitmap = QRCodeUtil.createQRCodeBitmap(url!!, 480, 480)
-        mBitmap = QRCodeUtil.addLogo(QRCodeUtil.createQRCodeBitmap(url!!, 480, 480)!!, BitmapFactory.decodeResource(resources, R.mipmap.ic_logo))
-        if (mBitmap == null) return
-        iv_code!!.setImageBitmap(mBitmap)
+        content = intent.getStringExtra("content").replace("\\n", "\n")
+
+        showMsg.text = content
+//        mBitmap = QRCodeUtil.createQRCodeBitmap(url!!, 480, 480)
+//        mBitmap = QRCodeUtil.addLogo(QRCodeUtil.createQRCodeBitmap(url!!, 480, 480)!!, BitmapFactory.decodeResource(resources, R.mipmap.ic_logo))
+//        if (mBitmap == null) return
+//        iv_code!!.setImageBitmap(mBitmap)
+
+        UGlide.loadImage(this, url!!, iv_code!!)
     }
 
     override fun onLongClick(v: View?): Boolean {
@@ -63,20 +72,30 @@ class BindWCActivity : BaseActivity<Nothing>(), View.OnLongClickListener {
         view.findViewById<View>(R.id.ll_save).setOnClickListener(View.OnClickListener {
             //保存
             dialog.cancel()
+            mBitmap = saveBitmapFromView(iv_code!!)
             if (mBitmap == null) return@OnClickListener
-            saveImageToGallery(this@BindWCActivity, mBitmap!!)
+            this.saveImageToGallery(context = this@BindWCActivity, bmp = mBitmap!!)
         })
-        view.findViewById<View>(R.id.ll_copy).setOnClickListener(View.OnClickListener {
+        view.findViewById<View>(R.id.ll_copy).setOnClickListener {
             //复制链接
             dialog.cancel()
             val cm = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
             cm.text = url
             showMsg("链接复制成功!")
-        })
-        view.findViewById<View>(R.id.tv_cancle).setOnClickListener(View.OnClickListener { dialog.cancel() })
+        }
+        view.findViewById<View>(R.id.tv_cancle).setOnClickListener { dialog.cancel() }
         dialog.show()
     }
 
+    /**
+     * 将view 转换为bitmap
+     */
+    private fun saveBitmapFromView(view: View): Bitmap {
+        val bmp: Bitmap = Bitmap.createBitmap(view.width, view.height, Bitmap.Config.ARGB_8888)
+        val c = Canvas(bmp)
+        view.draw(c)
+        return bmp
+    }
 
     /**
      * 保存图片到图库
@@ -84,7 +103,7 @@ class BindWCActivity : BaseActivity<Nothing>(), View.OnLongClickListener {
      * @param context
      * @param bmp
      */
-    fun saveImageToGallery(context: Context, bmp: Bitmap) {
+    private fun saveImageToGallery(context: Context, bmp: Bitmap) {
         // 首先保存图片
         val appDir = File(Environment.getExternalStorageDirectory(), "image")
         if (!appDir.exists()) {
@@ -123,7 +142,6 @@ class BindWCActivity : BaseActivity<Nothing>(), View.OnLongClickListener {
         // 最后通知图库更新
         context.sendBroadcast(Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.parse("file://" + file.absolutePath)))
     }
-
 
 
     override fun initPresenter(): Nothing? {

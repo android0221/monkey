@@ -10,23 +10,21 @@ import com.umeng.socialize.PlatformConfig
 import com.umeng.socialize.UMShareAPI
 
 class MainApplication : BaseApplication() {
-
     override fun onCreate() {
         super.onCreate()
         initShare()
         ULog.init(true)
         initCrashReport()
     }
-
     private fun initCrashReport() {
-        //有点资讯 71dab7cbc5
-
-        CrashReport.initCrashReport(applicationContext, "71dab7cbc5", false)
+        //小辣椒 5c9348eb09
+        CrashReport.initCrashReport(applicationContext, "5c9348eb09", false)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             val builder = StrictMode.VmPolicy.Builder()
             StrictMode.setVmPolicy(builder.build())
         }
     }
+
     /**
      * 初始化分享插件
      */

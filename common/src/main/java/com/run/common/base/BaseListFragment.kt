@@ -42,7 +42,6 @@ abstract class BaseListFragment<T : BaseMvpPresenter, N> : BaseFragment<T>(), Sw
      * 初始化adapter
      */
     private var mAdapter: BaseQuickAdapter<N, *>? = null
-
     protected fun initAdapter(adapter: BaseQuickAdapter<N, *>) {
         mAdapter = adapter
         mRecyclerView!!.setHasFixedSize(true)
@@ -57,7 +56,7 @@ abstract class BaseListFragment<T : BaseMvpPresenter, N> : BaseFragment<T>(), Sw
     /**
      * 设置加载的Layout
      */
-    protected fun setLoadingLayout(rid: Int) {
+    private fun setLoadingLayout(rid: Int) {
         if (rid <= 0) {
             val layout = LayoutInflater.from(activity).inflate(R.layout.layout_loading_view, mRecyclerView!!.parent as ViewGroup, false)
             loadingview = layout.findViewById(R.id.loadingview)
@@ -84,9 +83,7 @@ abstract class BaseListFragment<T : BaseMvpPresenter, N> : BaseFragment<T>(), Sw
     //请求的页数
     protected var mPage = 1
 
-    protected fun setData(list: List<N>?) {
-        if (list != null) setData(list, true)
-    }
+    protected fun setData(list: List<N>?) { if (list != null) setData(list, true) }
 
     protected fun setData(list: List<N>?, isLoad: Boolean) {
         finishLoading()
@@ -114,7 +111,7 @@ abstract class BaseListFragment<T : BaseMvpPresenter, N> : BaseFragment<T>(), Sw
     /**
      * 结束加载数据
      */
-    protected fun finishLoading() {
+    private fun finishLoading() {
         loadingViewDrawable?.stop()
         if (mSwipeLayout != null) {
             mSwipeLayout!!.isRefreshing = false
@@ -131,7 +128,6 @@ abstract class BaseListFragment<T : BaseMvpPresenter, N> : BaseFragment<T>(), Sw
         mPage = 1
         requestData()
     }
-
     /**
      * 加载更多
      */
@@ -139,17 +135,14 @@ abstract class BaseListFragment<T : BaseMvpPresenter, N> : BaseFragment<T>(), Sw
         mPage++
         requestData()
     }
-
     /**
      * 数据请求
      */
-    public open fun requestData() {
-
-    }
-
+    public open fun requestData() {}
     /**
      * 错误异常处理
      */
+
     override fun showErr(errorType: Int, msg: String) {
         finishLoading()
         val layout = LayoutInflater.from(activity).inflate(R.layout.layout_error_view, mRecyclerView!!.parent as ViewGroup, false)

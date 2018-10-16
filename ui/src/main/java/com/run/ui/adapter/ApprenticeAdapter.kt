@@ -7,7 +7,6 @@ import com.run.common.utils.UGlide
 import com.run.presenter.modle.ApprenticeBean
 import com.run.ui.R
 
-
 class ApprenticeAdapter : BaseQuickAdapter<ApprenticeBean, BaseViewHolder>(R.layout.item_apprentice_layout, null) {
 
     override fun convert(helper: BaseViewHolder, bean: ApprenticeBean) {

@@ -32,7 +32,7 @@ class ProblemFragment : BaseListFragment<ProblemContract.ProblemPresenter, UserI
         mType = arguments!!.getInt("TYPE")
         adapter = UserItemAdapter()
         initAdapter(adapter!!)
-        adapter!!.setOnItemClickListener(this)
+        adapter!!.onItemClickListener = this
 
         requestData()
     }

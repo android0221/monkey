@@ -2,170 +2,264 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/white"
+    android:background="@color/colorBackGround"
     android:orientation="vertical">
 
 
+    <!-- 活动-->
     <LinearLayout
-        android:id="@+id/ll_ph"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/bg_ripple"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:paddingBottom="@dimen/dp_15"
-        android:paddingLeft="@dimen/dp_15"
-        android:paddingRight="@dimen/dp_6"
-        android:paddingTop="@dimen/dp_15">
+        android:background="@color/white"
+        android:orientation="vertical">
 
-        <ImageView
-            android:layout_width="@dimen/dp_25"
-            android:layout_height="@dimen/dp_25"
-            android:layout_marginRight="@dimen/dp_10"
-            android:src="@mipmap/ph" />
-
-        <TextView
-            android:layout_width="0dp"
+        <LinearLayout
+            android:id="@+id/invitegameLayout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="收益榜单"
-            android:textColor="@color/color_f3"
-            android:textSize="@dimen/sp_16" />
+            android:background="@drawable/bg_ripple_rless"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="@dimen/dp_10">
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
 
-        <ImageView
-            android:layout_width="15dp"
-            android:layout_height="15dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="5dp"
-            android:adjustViewBounds="true"
-            android:src="@mipmap/e" />
+                android:drawablePadding="@dimen/dp_5"
+                android:text="收徒大赛"
+                android:textColor="@color/color_f3"
+                android:textSize="@dimen/sp_16" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/dp_5"
+                android:text="火热进行中"
+                android:textColor="@color/colorRed"
+                android:textSize="@dimen/sp_12" />
+
+            <ImageView
+                android:layout_width="@dimen/dp_15"
+                android:layout_height="@dimen/dp_15"
+                android:adjustViewBounds="true"
+                android:src="@mipmap/e" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_0_5"
+            android:layout_marginLeft="@dimen/dp_15"
+            android:background="@color/colorLine" />
+
+        <LinearLayout
+            android:id="@+id/progressAwardLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_ripple_rless"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="@dimen/dp_10">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:drawablePadding="@dimen/dp_5"
+                android:text="本周进步奖"
+                android:textColor="@color/color_f3"
+                android:textSize="@dimen/sp_16" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/dp_5"
+                android:text="火热进行中"
+                android:textColor="@color/colorRed"
+                android:textSize="@dimen/sp_12" />
+
+            <ImageView
+                android:layout_width="@dimen/dp_15"
+                android:layout_height="@dimen/dp_15"
+                android:adjustViewBounds="true"
+                android:src="@mipmap/e" />
+
+        </LinearLayout>
+
 
     </LinearLayout>
 
+
     <View
         android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="@color/colorLine" />
+        android:layout_height="@dimen/dp_10"
+        android:background="@color/colorBackGround" />
+
 
     <LinearLayout
-        android:id="@+id/ll_yi"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?android:attr/selectableItemBackground"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:paddingBottom="@dimen/dp_15"
-        android:paddingLeft="@dimen/dp_15"
-        android:paddingRight="@dimen/dp_6"
-        android:paddingTop="@dimen/dp_15">
+        android:background="@color/white"
+        android:orientation="vertical">
 
-        <ImageView
-            android:layout_width="@dimen/dp_25"
-            android:layout_height="@dimen/dp_25"
-            android:layout_marginRight="@dimen/dp_10"
-            android:src="@mipmap/yi" />
 
-        <TextView
-            android:layout_width="0dp"
+        <LinearLayout
+            android:visibility="gone"
+            android:id="@+id/ll_ph"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="反馈意见"
-            android:textColor="@color/color_f3"
-            android:textSize="@dimen/sp_16" />
+            android:background="@drawable/bg_ripple_rless"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="@dimen/dp_10">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_5"
+                android:layout_weight="1"
+                android:text="收益榜"
+                android:textColor="@color/color_f3"
+                android:textSize="@dimen/sp_16" />
+
+            <ImageView
+                android:layout_width="@dimen/dp_15"
+                android:layout_height="@dimen/dp_15"
+                android:adjustViewBounds="true"
+                android:src="@mipmap/e" />
+
+        </LinearLayout>
 
 
-        <ImageView
-            android:layout_width="15dp"
-            android:layout_height="15dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="5dp"
-            android:adjustViewBounds="true"
-            android:src="@mipmap/e" />
+        <!--<View-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="@dimen/dp_0_5"-->
+            <!--android:layout_marginLeft="@dimen/dp_15"-->
+            <!--android:background="@color/colorLine" />-->
+
+        <LinearLayout
+            android:id="@+id/ll_wt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_ripple_rless"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="@dimen/dp_10">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_5"
+                android:layout_weight="1"
+                android:text="新手指导"
+                android:textColor="@color/color_f3"
+                android:textSize="@dimen/sp_16" />
+
+            <ImageView
+                android:layout_width="@dimen/dp_15"
+                android:layout_height="@dimen/dp_15"
+                android:adjustViewBounds="true"
+                android:src="@mipmap/e" />
+
+        </LinearLayout>
+
 
     </LinearLayout>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="@color/colorLine" />
-
-    <LinearLayout
-        android:id="@+id/ll_wt"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/bg_ripple"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:paddingBottom="@dimen/dp_15"
-        android:paddingLeft="@dimen/dp_15"
-        android:paddingRight="@dimen/dp_6"
-        android:paddingTop="@dimen/dp_15">
-
-        <ImageView
-            android:layout_width="@dimen/dp_25"
-            android:layout_height="@dimen/dp_25"
-            android:layout_marginRight="@dimen/dp_10"
-            android:src="@mipmap/wt" />
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="新手指导"
-            android:textColor="@color/color_f3"
-            android:textSize="@dimen/sp_16" />
-
-
-        <ImageView
-            android:layout_width="15dp"
-            android:layout_height="15dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="5dp"
-            android:adjustViewBounds="true"
-            android:src="@mipmap/e" />
-
-    </LinearLayout>
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="@color/colorLine" />
+        android:layout_height="@dimen/dp_10"
+        android:background="@color/colorBackGround" />
 
+
+    <!-- 客服意见-->
     <LinearLayout
-        android:id="@+id/ll_kf"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/bg_ripple"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:paddingBottom="@dimen/dp_15"
-        android:paddingLeft="@dimen/dp_15"
-        android:paddingRight="@dimen/dp_6"
-        android:paddingTop="@dimen/dp_15">
+        android:background="@color/white"
+        android:orientation="vertical">
 
-        <ImageView
-            android:layout_width="@dimen/dp_25"
-            android:layout_height="@dimen/dp_25"
-            android:layout_marginRight="@dimen/dp_10"
-            android:src="@mipmap/kf" />
 
-        <TextView
-            android:layout_width="0dp"
+        <LinearLayout
+            android:id="@+id/ll_yi"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="联系客服"
-            android:textColor="@color/color_f3"
-            android:textSize="@dimen/sp_16" />
+            android:background="@drawable/bg_ripple_rless"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="@dimen/dp_10">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_5"
+                android:layout_weight="1"
+                android:text="意见反馈"
+                android:textColor="@color/color_f3"
+                android:textSize="@dimen/sp_16" />
+
+            <ImageView
+                android:layout_width="@dimen/dp_15"
+                android:layout_height="@dimen/dp_15"
+                android:adjustViewBounds="true"
+                android:src="@mipmap/e" />
 
 
-        <ImageView
-            android:layout_width="15dp"
-            android:layout_height="15dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="5dp"
-            android:adjustViewBounds="true"
-            android:src="@mipmap/e" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_0_5"
+            android:layout_marginLeft="@dimen/dp_15"
+            android:background="@color/colorLine" />
+
+
+        <LinearLayout
+            android:id="@+id/ll_kf"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_ripple_rless"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="@dimen/dp_10">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_5"
+                android:layout_weight="1"
+                android:text="联系客服"
+                android:textColor="@color/color_f3"
+                android:textSize="@dimen/sp_16" />
+
+            <ImageView
+                android:layout_width="@dimen/dp_15"
+                android:layout_height="@dimen/dp_15"
+                android:adjustViewBounds="true"
+                android:src="@mipmap/e" />
+
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_0_5"
+            android:layout_marginLeft="@dimen/dp_15"
+            android:background="@color/colorLine" />
 
     </LinearLayout>
 

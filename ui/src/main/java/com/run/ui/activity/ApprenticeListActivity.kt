@@ -22,13 +22,11 @@ class ApprenticeListActivity : BaseActivity<Nothing>() {
     override fun initViews() {
         findViewById<View>(R.id.iv_back).setOnClickListener { finish() }
     }
-
     override fun initData() {
         val fragmentTransaction = supportFragmentManager.beginTransaction()
         fragmentTransaction.add(R.id.framelayout, ApprenticeFragment.newInstance())
         fragmentTransaction.commit()
     }
-
     override fun initPresenter(): Nothing? {
         return null
     }

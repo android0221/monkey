@@ -58,8 +58,6 @@ abstract class BaseActivity<T : BaseMvpPresenter> : AppCompatActivity(), View.On
     }
 
     //==============================回调方法====================================
-
-
     /**
      * 页面数据加载
      */
@@ -67,7 +65,6 @@ abstract class BaseActivity<T : BaseMvpPresenter> : AppCompatActivity(), View.On
         ULog.d(TAG, "showLoading()")
         mDialog.show()
     }
-
     /**
      * 取消页面加载
      */
@@ -77,11 +74,9 @@ abstract class BaseActivity<T : BaseMvpPresenter> : AppCompatActivity(), View.On
             mDialog.hide()
         }
     }
-
     override fun showErr(errorType: Int, msg: String) {
         showMsg(msg)
     }
-
     override fun showMsg(msg: String?) {
         if (TextUtils.isEmpty(msg)) return
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()

@@ -17,6 +17,7 @@ import com.run.common.utils.UGlide
 import com.run.common.utils.UStatusBar
 import com.run.common.utils.UWebView
 import com.run.presenter.contract.ArticleDetailContract
+import com.run.presenter.modle.ArticleBean
 import com.run.presenter.modle.ArticleDetailModle
 import com.run.share.ShareHelper
 import com.run.ui.R
@@ -38,7 +39,6 @@ class VedioDetailActivity : BaseActivity<ArticleDetailContract.ArticlePresenter>
         }
     }
 
-
     override fun initContentView(): Int {
         return R.layout.activity_vedio_detail
     }
@@ -54,11 +54,12 @@ class VedioDetailActivity : BaseActivity<ArticleDetailContract.ArticlePresenter>
         UWebView.initWebView(webView)
         titleView = findViewById(R.id.titleView)
         initRecycler()
-
+        /**
+         * 什么事需求，需求是功能，用户要的功能
+         */
         findViewById<ImageView>(R.id.iv_return).setOnClickListener(this)
         findViewById<ImageView>(R.id.iv_share).setOnClickListener(this)
     }
-
 
     override fun onClick(v: View) {
         when (v.id) {
@@ -69,7 +70,6 @@ class VedioDetailActivity : BaseActivity<ArticleDetailContract.ArticlePresenter>
         }
     }
 
-
     var articleid: Int? = null
     private var imageUrl: String? = null
     private lateinit var money: String
@@ -77,11 +77,8 @@ class VedioDetailActivity : BaseActivity<ArticleDetailContract.ArticlePresenter>
         imageUrl = intent.getStringExtra("IMAGEURL")
         articleid = intent.getIntExtra("ARTICLEID", 0)
         money = intent.getStringExtra("MONEY")
-
         mPresenter!!.requestData(articleid!!)
-
     }
-
 
     override fun onBackPressed() {
         if (JZVideoPlayerStandard.backPress()) {
@@ -100,7 +97,6 @@ class VedioDetailActivity : BaseActivity<ArticleDetailContract.ArticlePresenter>
             JZVideoPlayerStandard.releaseAllVideos()
         }
     }
-
 
     override fun initPresenter(): ArticleDetailContract.ArticlePresenter? {
         return ArticleDetailContract.ArticlePresenter(this)
@@ -130,10 +126,11 @@ class VedioDetailActivity : BaseActivity<ArticleDetailContract.ArticlePresenter>
             ll_artice_more!!.visibility = View.VISIBLE
             adapter!!.setNewData(modle.list)
         } else {
-            ll_artice_more!!.visibility = View.GONE
+            var datas: List<ArticleBean> = arrayListOf(ArticleBean())
+            adapter!!.setNewData(datas)
+//            ll_artice_more!!.visibility = View.GONE
         }
     }
-
     //====================================热门推荐=============================================================================
     var recyclerView: RecyclerView? = null
     var adapter: ArticleMoreAdapter? = null

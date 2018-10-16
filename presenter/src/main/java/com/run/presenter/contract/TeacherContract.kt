@@ -19,22 +19,19 @@ interface TeacherContract {
         fun showSuccess(msg: String)
     }
 
-    class TeacherPresenter(private val v: TeacherView) : BaseMvpPresenter() {
+    class TeacherPresenter(private val v: TeacherView) : BaseMvpPresenter(v) {
         fun user_info(id: String) {
-            LoginManager.boundTeacher(id)
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(object : BaseObserver<BaseModle>() {
-                        override fun onError(errorType: Int, msg: String?) {
-                            v.showErr(errorType, msg!!)
-                        }
+            addDisposable(LoginManager.boundTeacher(id), object : BaseObserver<BaseModle>() {
+                override fun onSuccess(o: BaseModle) {
+                    if (isViewAttached()) v.showSuccess(o.msg!!)
+                }
 
-                        override fun onSuccess(o: BaseModle) {
-                            v.showSuccess(o.msg!!)
-                        }
+                override fun onError(errorType: Int, msg: String?) {
+                    if (isViewAttached()) v.showErr(errorType, msg!!)
+                }
 
+            })
 
-                    })
         }
 
 

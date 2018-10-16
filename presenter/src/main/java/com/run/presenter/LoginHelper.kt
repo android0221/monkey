@@ -76,7 +76,7 @@ class LoginHelper private constructor() {
         this.mContext = context
 
         val intent = Intent()
-        intent.action = "com.run.ui.login.LoginActivity"
+        intent.action = "com.run.pepper.login.LoginActivity"
         context.startActivity(intent)
     }
 

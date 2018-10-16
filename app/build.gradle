@@ -29,7 +29,7 @@ android {
             zipAlignEnabled rootProject.ext.minifyEnabled
             // 移除无用的resource文件
             shrinkResources rootProject.ext.minifyEnabled
-            debuggable rootProject.ext.minifyEnabled
+            debuggable true
             signingConfig signingConfigs.debug
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
@@ -42,7 +42,6 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     testImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
     implementation project(':ui')
-
     /**
      * Bugly异常统计
      */

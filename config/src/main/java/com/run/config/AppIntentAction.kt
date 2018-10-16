@@ -19,13 +19,12 @@ object AppIntentAction {
 
     fun jumpToShareDetailActivity(act: Context) {
         val intent = Intent()
-        intent.action = "com.action.monkey.ContentDetailActivity"
+        intent.action = "com.action.pepper.ContentDetailActivity"
         intent.addCategory("com.action.category")
         intent.putExtra("TITLE", "计费规则说明")
         intent.putExtra("id", 5)
         act.startActivity(intent)
     }
-
     //=============================加入qq群========================================
     /**
      * 加入QQ群

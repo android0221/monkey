@@ -20,6 +20,7 @@ object UShare {
         intent.putExtra("type", type)
         intent.putExtra("friend_type", friend_type)
         intent.addCategory(Intent.CATEGORY_LAUNCHER)
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         context.startActivity(intent)
     }
 

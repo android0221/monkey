@@ -48,7 +48,6 @@
             android:adjustViewBounds="true"
             android:padding="@dimen/dp_5"
             android:src="@mipmap/bt" />
-
     </RelativeLayout>
 
     <TextView

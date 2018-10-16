@@ -119,11 +119,11 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.MainView {
         override fun getItem(position: Int): Fragment {
             return fragmentList[position]
         }
+
         override fun getCount(): Int {
             return fragmentList.size
         }
     }
-
 
     //======================================= 退出应用 ==============================================
     private var mIsExit: Boolean = false

@@ -79,7 +79,6 @@ class HomeFragment : BaseFragment<HomeContract.HomePresenter>(), HomeContract.Ho
     override fun showErr(errorType: Int, msg: String) {
         showData(null)
     }
-
     //========================================adapter =========================================
     private var mList: List<ArticleTypeModle.DataBean>? = null
 

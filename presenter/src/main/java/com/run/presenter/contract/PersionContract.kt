@@ -23,23 +23,22 @@ interface PersionContract {
         fun callBackMegagame(invite_top_img: String, type: String)
     }
 
-    class PersionPresenter(private val v: PersionView) : BaseMvpPresenter() {
+    class PersionPresenter(private val v: PersionView) : BaseMvpPresenter(v) {
         /**
          * 获取用户信息
          */
         fun getUserInfo() {
-            ApiManager.index().subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(object : BaseObserver<UserJsonModle>() {
-                        override fun onSuccess(o: UserJsonModle) {
-                            v.callBackUserData(o)
-                        }
+            addDisposable(ApiManager.index(), object : BaseObserver<UserJsonModle>() {
+                override fun onSuccess(o: UserJsonModle) {
+                    if (isViewAttached()) v.callBackUserData(o)
+                }
 
-                        override fun onError(errorType: Int, msg: String?) {
-                            v.showErr(errorType, msg!!)
-                        }
+                override fun onError(errorType: Int, msg: String?) {
+                    if (isViewAttached()) v.showErr(errorType, msg!!)
+                }
+            })
 
-                    })
+
         }
 
 
@@ -47,53 +46,52 @@ interface PersionContract {
          *获取到QQ群的key
          */
         fun getQQKey() {
-            LoginManager.getQQKey().subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(object : BaseObserver<QQModle>() {
-                        override fun onError(errorType: Int, msg: String?) {
-                            v.showErr(errorType, msg!!)
-                        }
+            addDisposable(LoginManager.getQQKey(), object : BaseObserver<QQModle>() {
+                override fun onSuccess(o: QQModle) {
+                    if (isViewAttached()) v.callBackQQKey(o.key!!)
+                }
 
-                        override fun onSuccess(o: QQModle) {
-                            v.callBackQQKey(o.key!!)
-                        }
+                override fun onError(errorType: Int, msg: String?) {
+                    if (isViewAttached()) v.showErr(errorType, msg!!)
+                }
 
-                    })
+            })
+
+
         }
 
         /**
          * 签到
          */
         fun sign() {
-            LoginManager.sign().subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(object : BaseObserver<BaseModle>() {
-                        override fun onError(errorType: Int, msg: String?) {
-                            v.showErr(errorType, msg!!)
-                        }
+            addDisposable(LoginManager.sign(), object : BaseObserver<BaseModle>() {
+                override fun onSuccess(o: BaseModle) {
+                    if (isViewAttached()) v.callBackSign(o.msg!!)
+                }
 
-                        override fun onSuccess(o: BaseModle) {
-                            v.callBackSign(o.msg!!)
-                        }
+                override fun onError(errorType: Int, msg: String?) {
+                    if (isViewAttached()) v.showErr(errorType, msg!!)
+                }
 
-                    })
+            })
+
+
         }
 
         /**
          * 是否显示收徒大赛信息
          */
         fun megagameType() {
-            ApiManager.megagameType().subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(object : BaseObserver<MegagameModle>() {
-                        override fun onSuccess(o: MegagameModle) {
-                            v.callBackMegagame(o.invite_top_img!!, o.activity_type!!)
-                        }
+            addDisposable(ApiManager.megagameType(), object : BaseObserver<MegagameModle>() {
+                override fun onSuccess(o: MegagameModle) {
+                    if (isViewAttached()) v.callBackMegagame(o.invite_top_img!!, o.activity_type!!)
+                }
 
-                        override fun onError(errorType: Int, msg: String?) {
-                            v.showErr(errorType, msg!!)
-                        }
-                    })
+                override fun onError(errorType: Int, msg: String?) {
+                    if (isViewAttached()) v.showErr(errorType, msg!!)
+                }
+            })
+
         }
 
     }

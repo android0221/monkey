@@ -20,56 +20,59 @@ interface WithDrawContract {
     interface WithDrawView : BaseMvpView {
         fun showData(modle: IncomeModle)
 
-        fun gotoBindWC(msg: String, url: String)
+        fun gotoBindWC(msg: String, url: String,content:String)
 
         fun moneyFinish(msg: String)
 
         fun showMoneyError(msg: String)
     }
 
-    class WithDrawPresenter(private val v: WithDrawView) : BaseMvpPresenter() {
+    class WithDrawPresenter(private val v: WithDrawView) : BaseMvpPresenter(v) {
         fun money_view() {
-            v.showLoading()
-            ApiManager.money_view()
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(object : BaseObserver<IncomeModle>() {
-                        override fun onError(errorType: Int, msg: String?) {
-                            v.showErr(errorType, msg!!)
-                            v.hideLoading()
-                        }
+            if (isViewAttached()) v.showLoading()
+            addDisposable(ApiManager.money_view(), object : BaseObserver<IncomeModle>() {
+                override fun onSuccess(o: IncomeModle) {
+                    if (isViewAttached()) {
+                        v.showData(o)
+                        v.hideLoading()
+                    }
+                }
 
-                        override fun onSuccess(o: IncomeModle) {
-                            v.showData(o)
-                            v.hideLoading()
-                        }
-                    })
+                override fun onError(errorType: Int, msg: String?) {
+                    if (isViewAttached()) {
+                        v.showErr(errorType, msg!!)
+                        v.hideLoading()
+                    }
+                }
+
+            })
+
         }
 
         fun money(money: Int, type: Int, my_voucherid: Int) {
-            v.showLoading()
+            if (isViewAttached()) v.showLoading()
+
             ApiManager.money(money, type, my_voucherid).subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(object : Observer<IncomeResultModle> {
                         override fun onSubscribe(d: Disposable) {}
                         override fun onNext(bean: IncomeResultModle) {
-                            v.showLoading()
+                            v.hideLoading()
                             if (bean == null) return
                             if (bean.status == -100) {
                                 when (bean.code) {
-                                    10045 -> v.gotoBindWC(bean!!.msg!!, bean.url!!)
-                                    else -> v.showMoneyError(bean!!.msg!!)
+                                    10045 -> if (isViewAttached()) v.gotoBindWC(bean!!.msg!!, bean.url!!,bean.content!!)
+                                    else -> if (isViewAttached()) v.showMoneyError(bean!!.msg!!)
                                 }
                                 return
                             }
                             if (bean.status == 200) {
-                                v.moneyFinish(bean!!.msg!!)
+                                if (isViewAttached()) v.moneyFinish(bean!!.msg!!)
                             }
                         }
                         override fun onError(e: Throwable) {
-                            v.showMsg("提现失败")
+                            if (isViewAttached()) v.showMsg("提现失败")
                         }
-
                         override fun onComplete() {
                         }
                     })

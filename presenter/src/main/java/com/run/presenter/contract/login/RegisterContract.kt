@@ -18,7 +18,7 @@ interface RegisterContract {
         fun callBackCode()
     }
 
-    class RegisterPresenter(private val v: RegisterContract.RegisterView) :BaseMvpPresenter() {
+    class RegisterPresenter(private val v: RegisterContract.RegisterView) : BaseMvpPresenter(v) {
 
         /**
          * 注册
@@ -32,38 +32,29 @@ interface RegisterContract {
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(object : BaseObserver<BaseModle>() {
                         override fun onSuccess(o: BaseModle) {
-                            v.callBackfinish(o.msg!!)
+                            if (isViewAttached()) v.callBackfinish(o.msg!!)
                         }
 
                         override fun onError(errorType: Int, msg: String?) {
-                            v.showErr(errorType, msg!!)
+                            if (isViewAttached()) v.showErr(errorType, msg!!)
                         }
                     })
-
-
         }
-
         fun resetPassword(mobile: String, code: String, password: String) {
             LoginManager.retrievePassword(mobile, code, password)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(object : BaseObserver<BaseModle>() {
                         override fun onSuccess(o: BaseModle) {
-                            v.callBackfinish(o.msg!!)
+                            if (isViewAttached()) v.callBackfinish(o.msg!!)
                         }
-
                         override fun onError(errorType: Int, msg: String?) {
-                            v.showErr(errorType, msg!!)
+                            if (isViewAttached()) v.showErr(errorType, msg!!)
                         }
                     })
-
-
         }
-
-
         /**
          * 获取验证码
-         *
          * @param mobile
          * @param type
          */
@@ -75,7 +66,6 @@ interface RegisterContract {
                         override fun onSuccess(o: BaseModle) {
                             v.callBackCode()
                         }
-
                         override fun onError(errorType: Int, msg: String?) {
                             v.showErr(errorType, msg!!)
                         }

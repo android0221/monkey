@@ -7,7 +7,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="44dp"
+        android:layout_height="@dimen/dp_40"
         android:background="@color/white"
         android:gravity="center_vertical"
         android:orientation="horizontal">
@@ -38,7 +38,7 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_0_5"
+        android:layout_height="@dimen/dp_5"
         android:background="@color/colorLine" />
 
 

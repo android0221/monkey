@@ -32,7 +32,6 @@ class VedioFragment : BaseFragment<Nothing>() {
         redpackageView.setOnClickListener { InviteActivity.newInstance(activity!!) }
     }
 
-
     private lateinit var fragment: ArticleFragment
     override fun initData() {
         val fragmentTransaction = activity!!.supportFragmentManager.beginTransaction()
@@ -40,7 +39,7 @@ class VedioFragment : BaseFragment<Nothing>() {
         fragmentTransaction.add(R.id.framelayout, fragment)
         fragmentTransaction.commit()
     }
-
+    
     override fun visiable() {
         super.visiable()
         UStatusBar.setLightMode(this!!.activity!!)

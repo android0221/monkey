@@ -19,21 +19,19 @@ interface RevenueContract {
         fun showData(modle: List<IncomeRecordModle.DataBean>?)
     }
 
-    class RevenuePresenter(private val v: RevenueView) : BaseMvpPresenter() {
+    class RevenuePresenter(private val v: RevenueView) : BaseMvpPresenter(v) {
         fun requestData(type: String, mpage: Int) {
-            ApiManager.income_record(type, mpage)
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(object : BaseObserver<IncomeRecordModle>() {
-                        override fun onError(errorType: Int, msg: String?) {
-                            v.showErr(errorType, msg!!)
-                        }
-                        override fun onSuccess(o: IncomeRecordModle) {
-                            v.showData(o.data)
-                        }
+            addDisposable(ApiManager.income_record(type,mpage),object:BaseObserver<IncomeRecordModle>(){
+                override fun onSuccess(o: IncomeRecordModle) {
+                    if(isViewAttached()) v.showData(o.data)
+                }
+
+                override fun onError(errorType: Int, msg: String?) {
+                    if(isViewAttached())v.showErr(errorType,msg!!)
+                }
+            })
 
 
-                    })
         }
 
 

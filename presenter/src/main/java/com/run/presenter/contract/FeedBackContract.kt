@@ -19,22 +19,22 @@ interface FeedBackContract {
         fun submitSucdess(msg: String)
     }
 
-    class FeedBackPresenter(private val v: FeedBackView) : BaseMvpPresenter() {
+    class FeedBackPresenter(private val v: FeedBackView) : BaseMvpPresenter(v) {
+
+
         fun feedBack(title: String, content: String, phone: String) {
-            LoginManager.feedback(title, content, phone)
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(object : BaseObserver<BaseModle>() {
-                        override fun onError(errorType: Int, msg: String?) {
-                            v.showErr(errorType, msg!!)
-                        }
 
-                        override fun onSuccess(o: BaseModle) {
-                            v.submitSucdess(o.msg!!)
-                        }
+            addDisposable(LoginManager.feedback(title, content, phone), object : BaseObserver<BaseModle>() {
+                override fun onSuccess(o: BaseModle) {
+                    if (isViewAttached()) v.submitSucdess(o.msg!!)
+                }
+
+                override fun onError(errorType: Int, msg: String?) {
+                    if (isViewAttached()) v.showErr(errorType, msg!!)
+                }
+            })
 
 
-                    })
         }
 
 

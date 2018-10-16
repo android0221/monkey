@@ -15,23 +15,22 @@ interface LoginContract {
         fun callBackLogin()
     }
 
-    class LoginPresenter(private val v: LoginContract.LoginView) : BaseMvpPresenter() {
+    class LoginPresenter(private val v: LoginContract.LoginView) : BaseMvpPresenter(v) {
         fun login(mobile: String, password: String) {
-            LoginManager.verificationLogin(mobile, password)
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(object : BaseObserver<LoginModle>() {
-                        override fun onSuccess(o: LoginModle) {
-                            LoginHelper.instance.setmToken(o.token!!)
-                            v.showMsg("登录成功")
-                            v.callBackLogin()
-                        }
+            addDisposable(LoginManager.verificationLogin(mobile, password), object : BaseObserver<LoginModle>() {
+                override fun onSuccess(o: LoginModle) {
+                    LoginHelper.instance.setmToken(o.token!!)
+                    if (isViewAttached()) {
+                        v.showMsg("登录成功")
+                        v.callBackLogin()
+                    }
+                }
 
-                        override fun onError(errorType: Int, msg: String?) {
-                            v.showErr(errorType, msg!!)
-                        }
+                override fun onError(errorType: Int, msg: String?) {
+                    if (isViewAttached()) v.showErr(errorType, msg!!)
+                }
 
-                    })
+            })
 
 
         }

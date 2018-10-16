@@ -17,7 +17,7 @@
             android:theme="@style/BlackTheme" />
         <activity android:name=".login.LoginActivity">
             <intent-filter>
-                <action android:name="com.run.ui.login.LoginActivity" />
+                <action android:name="com.run.pepper.login.LoginActivity" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
@@ -28,7 +28,7 @@
         <activity android:name=".activity.ProblemActivity" />
         <activity android:name=".activity.ContentDetailActivity">
             <intent-filter>
-                <action android:name="com.action.monkey.ContentDetailActivity" />
+                <action android:name="com.action.pepper.ContentDetailActivity" />
 
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="com.action.category" />
@@ -52,7 +52,8 @@
         <activity android:name=".activity.CardCenterActivity" />
         <activity android:name=".activity.BindWCActivity" />
         <activity android:name=".activity.SelectCardActivity" />
-        <activity android:name=".activity.WithDrawBillActivity"></activity>
+        <activity android:name=".activity.WithDrawBillActivity" />
+        <activity android:name=".activity.ProgressActiveActivity"></activity>
     </application>
 
 </manifest>

@@ -19,20 +19,19 @@ interface SeniorityContract {
         fun showData(modle: SeniorityModle)
     }
 
-    class SeniorityPresenter(private val v: SeniorityView) : BaseMvpPresenter() {
+    class SeniorityPresenter(private val v: SeniorityView) : BaseMvpPresenter(v) {
         fun requestData(type: String) {
-            ApiManager.seniority(type)
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(object : BaseObserver<SeniorityModle>() {
-                        override fun onError(errorType: Int, msg: String?) {
-                            v.showErr(errorType, msg!!)
-                        }
+            addDisposable(ApiManager.seniority(type), object : BaseObserver<SeniorityModle>() {
+                override fun onSuccess(o: SeniorityModle) {
+                    if (isViewAttached()) v.showData(o)
+                }
 
-                        override fun onSuccess(o: SeniorityModle) {
-                            v.showData(o)
-                        }
-                    })
+                override fun onError(errorType: Int, msg: String?) {
+                    if (isViewAttached()) v.showErr(errorType, msg!!)
+                }
+
+            })
+
         }
 
 

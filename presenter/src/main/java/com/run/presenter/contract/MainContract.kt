@@ -11,30 +11,23 @@ import com.run.presenter.api.ApiManager
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
+
 interface MainContract {
-
-    interface MainView : BaseMvpView {
-
-    }
-
-    class MainPresenter(private val v: MainView) : BaseMvpPresenter() {
+    interface MainView : BaseMvpView {}
+    class MainPresenter(private val v: MainView) : BaseMvpPresenter(v) {
         /**
          * 记录激活页面
          */
         fun statisticsActive(context: Context) {
-            ApiManager.first(USystem.getIMEI(context))
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(object : BaseObserver<BaseModle>() {
-                        override fun onSuccess(o: BaseModle) {
-                            ULog.d("记录激活成功")
-                        }
-                        override fun onError(errorType: Int, msg: String?) {
-                            ULog.d(msg!!)
-                        }
-                    })
+            addDisposable(ApiManager.first(USystem.getIMEI(context)), object : BaseObserver<BaseModle>() {
+                override fun onSuccess(o: BaseModle) {
+                    ULog.d("记录激活成功")
+                }
+                override fun onError(errorType: Int, msg: String?) {
+                    ULog.d(msg!!)
+                }
+            })
         }
-
 
     }
 }

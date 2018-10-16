@@ -31,28 +31,19 @@ class GuideActivity : BaseActivity<Nothing>() {
         viewpager.adapter = GuidePagerAdapter()
     }
 
-
-    override fun initData() {
-
-    }
-
+    override fun initData() {}
     override fun initPresenter(): Nothing? {
         return null
     }
-
-
     //=========================================Adapter适配器=====================================
-    private val guideImageList = arrayOf(com.run.common.R.mipmap.gda, com.run.common.R.mipmap.gdf, com.run.common.R.mipmap.gdc, com.run.common.R.mipmap.gdg)
-
+    private val guideImageList = arrayOf(R.mipmap.gda, R.mipmap.gdf, R.mipmap.gdc, R.mipmap.gdg)
     inner class GuidePagerAdapter : PagerAdapter() {
         override fun isViewFromObject(p0: View, p1: Any): Boolean {
             return p0 == p1
         }
-
         override fun getCount(): Int {
             return guideImageList.size
         }
-
         override fun instantiateItem(container: ViewGroup, position: Int): Any {
             var imageView = ImageView(this@GuideActivity)
             imageView.setImageResource(guideImageList[position])
@@ -66,12 +57,9 @@ class GuideActivity : BaseActivity<Nothing>() {
                 }
             }
             return imageView
-
         }
         override fun destroyItem(container: ViewGroup, position: Int, `object`: Any) {
             container.removeView(`object` as View)
         }
     }
-
-
 }

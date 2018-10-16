@@ -19,6 +19,11 @@ class UserJsonModle : BaseModle() {
      * shield_msg : 暂无弹窗消息
      * count_income : null
      * count_invite : 0
+     * first_user_id :师傅id
+     *
+     * activity_type //是否开启收徒大赛
+     * invite_top_img
+     * progress_type //周活动奖
      */
 
     var data: DataBean? = null
@@ -28,6 +33,10 @@ class UserJsonModle : BaseModle() {
     var count_income: String? = null
     var count_invite: Int = 0
     var deposit: List<DepositBean>? = null
+    var first_user_id: Int = 0
+    var activity_type: String? = "0"
+    var invite_top_img: String? = null
+    var progress_type: String? = "0"
 
     class DataBean {
         /**

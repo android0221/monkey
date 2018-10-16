@@ -948,6 +948,7 @@ public abstract class JZVideoPlayer extends FrameLayout implements View.OnClickL
             vpdown.requestDisallowInterceptTouchEvent(true);
             vpdown = vpdown.getParent();
         }
+
     }
 
     @Override

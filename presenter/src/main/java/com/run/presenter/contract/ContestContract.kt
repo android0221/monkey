@@ -17,20 +17,19 @@ interface ContestContract {
     interface ContestView : BaseMvpView {
         fun showData(modle: ContestModle)
     }
-    class ContestPresenter(private val v: ContestView) : BaseMvpPresenter() {
-        fun megagame() {
-            ApiManager.megagame()
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(object : BaseObserver<ContestModle>() {
-                        override fun onSuccess(o: ContestModle) {
-                            v.showData(o)
-                        }
 
-                        override fun onError(errorType: Int, msg: String?) {
-                            v.showErr(errorType, msg!!)
-                        }
-                    })
+    class ContestPresenter(private val v: ContestView) : BaseMvpPresenter(v) {
+        fun megagame() {
+            addDisposable(ApiManager.megagame(), object : BaseObserver<ContestModle>() {
+                override fun onSuccess(o: ContestModle) {
+                    if (isViewAttached()) v.showData(o)
+                }
+                override fun onError(errorType: Int, msg: String?) {
+                    if (isViewAttached()) v.showErr(errorType, msg!!)
+                }
+
+            })
+
         }
 
 

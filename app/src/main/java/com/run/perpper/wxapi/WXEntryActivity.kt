@@ -1,4 +1,4 @@
-package com.run.monkey.wxapi
+package com.run.perpper.wxapi
 
 import com.umeng.weixin.callback.WXCallbackActivity
 
