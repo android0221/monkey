@@ -2,8 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
     android:orientation="vertical">
+
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -13,10 +13,11 @@
         android:orientation="horizontal">
 
         <ImageView
-            android:id="@+id/iv_back"
+            android:id="@+id/backView"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_centerVertical="true"
+            android:background="@drawable/bg_ripple_rless"
             android:gravity="center_vertical"
             android:paddingLeft="@dimen/dp_10"
             android:paddingRight="@dimen/dp_10"
@@ -28,24 +29,27 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:singleLine="true"
-            android:text=""
+            android:text="转发送现金红包"
             android:textColor="@color/color_f3"
             android:textSize="@dimen/sp_18" />
 
 
     </RelativeLayout>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_5"
+        android:background="@color/colorBackGround" />
 
 
-    <WebView
-        android:id="@+id/wb_content"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/dp_5"
+        android:layout_gravity="center"
         android:background="@color/white"
         android:overScrollMode="never"
-        android:scrollbars="none"></WebView>
+        android:padding="@dimen/dp_5"></android.support.v7.widget.RecyclerView>
 
 
 </LinearLayout>

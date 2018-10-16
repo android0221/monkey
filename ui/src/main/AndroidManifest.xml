@@ -53,7 +53,8 @@
         <activity android:name=".activity.BindWCActivity" />
         <activity android:name=".activity.SelectCardActivity" />
         <activity android:name=".activity.WithDrawBillActivity" />
-        <activity android:name=".activity.ProgressActiveActivity"></activity>
+        <activity android:name=".activity.ProgressActiveActivity" />
+        <activity android:name=".activity.TransmitActivity"></activity>
     </application>
 
 </manifest>

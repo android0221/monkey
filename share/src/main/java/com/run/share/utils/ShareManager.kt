@@ -30,7 +30,7 @@ class ShareManager(private val mContext: Context) {
                     val intent = Intent()
                     val comp: ComponentName
 
-                    if (flag == 0) {
+                    if (flag == 11) {
                         comp = ComponentName("com.tencent.mm", "com.tencent.mm.ui.tools.ShareImgUI")
                     } else {
                         comp = ComponentName("com.tencent.mm", "com.tencent.mm.ui.tools.ShareToTimeLineUI")

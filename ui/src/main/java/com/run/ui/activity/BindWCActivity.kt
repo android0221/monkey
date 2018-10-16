@@ -15,6 +15,7 @@ import android.widget.TextView
 import com.run.common.base.BaseActivity
 import com.run.common.utils.UGlide
 import com.run.common.view.MyBottomSheetDialog
+import com.run.share.UShare
 import com.run.ui.R
 import java.io.*
 
@@ -84,6 +85,15 @@ class BindWCActivity : BaseActivity<Nothing>(), View.OnLongClickListener {
             showMsg("链接复制成功!")
         }
         view.findViewById<View>(R.id.tv_cancle).setOnClickListener { dialog.cancel() }
+
+        /**
+         * 发送图片到微信
+         */
+        view.findViewById<View>(R.id.sendWCImage).setOnClickListener {
+            dialog.cancel()
+            UShare.doShare(this, "wechat_moments", "发送到微信", "发送图片到微信", url!!, "", 11)
+
+        }
         dialog.show()
     }
 
@@ -142,7 +152,6 @@ class BindWCActivity : BaseActivity<Nothing>(), View.OnLongClickListener {
         // 最后通知图库更新
         context.sendBroadcast(Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.parse("file://" + file.absolutePath)))
     }
-
 
     override fun initPresenter(): Nothing? {
         return null

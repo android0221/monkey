@@ -17,17 +17,23 @@ interface LoginContract {
 
     class LoginPresenter(private val v: LoginContract.LoginView) : BaseMvpPresenter(v) {
         fun login(mobile: String, password: String) {
+            if (isViewAttached()) v.showLoading()
             addDisposable(LoginManager.verificationLogin(mobile, password), object : BaseObserver<LoginModle>() {
                 override fun onSuccess(o: LoginModle) {
-                    LoginHelper.instance.setmToken(o.token!!)
+                    LoginHelper.instance.save(mobile, password, o.token!!)
                     if (isViewAttached()) {
+                        v.hideLoading()
                         v.showMsg("登录成功")
                         v.callBackLogin()
+
                     }
                 }
 
                 override fun onError(errorType: Int, msg: String?) {
-                    if (isViewAttached()) v.showErr(errorType, msg!!)
+                    if (isViewAttached()) {
+                        v.hideLoading()
+                        v.showErr(errorType, msg!!)
+                    }
                 }
 
             })

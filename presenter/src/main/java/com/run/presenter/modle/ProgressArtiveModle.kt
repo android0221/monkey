@@ -30,18 +30,10 @@ class ProgressArtiveModle : BaseModle() {
     var this_week_explain: String? = null
     var prize_type: Int = 0
     var prize_explain: String? = null
-    var this_week_list: List<WeekListBean>? = null
-    var last_week_list: List<WeekListBean>? = null
+    var this_week_list: List<ArtiveBean>? = null
+    var last_week_list: List<ArtiveBean>? = null
 
-    class WeekListBean {
-        /**
-         * money : 7.680
-         * create_time : 2018-10-15
-         */
 
-        var money: String? = null
-        var create_time: String? = null
-    }
 
 
 }

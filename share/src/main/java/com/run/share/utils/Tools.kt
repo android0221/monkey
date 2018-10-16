@@ -30,7 +30,7 @@ object Tools {
 
             var bitmap: Bitmap? = null
 
-            if (type == 0) {
+            if (type == 11) {
                 val url = URL(image)
                 var conn: HttpURLConnection? = null
                 conn = url.openConnection() as HttpURLConnection

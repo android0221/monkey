@@ -15,6 +15,7 @@ import com.run.presenter.modle.InviteModle;
 import com.run.presenter.modle.MegagameModle;
 import com.run.presenter.modle.ProgressArtiveModle;
 import com.run.presenter.modle.SeniorityModle;
+import com.run.presenter.modle.TransmitModle;
 import com.run.presenter.modle.UserJsonModle;
 import com.run.presenter.modle.WithDrawModle;
 
@@ -197,6 +198,13 @@ public interface ApiService {
      */
     @GET("web/user/progress")
     Observable<ProgressArtiveModle> progress(@Header("xytoken") String token, @Query("content") String content);
+
+
+    /**
+     * 转发送现金红包
+     */
+    @GET("web/user/transmit")
+    Observable<TransmitModle> transmit(@Header("xytoken") String token, @Query("content") String content);
 
 
     //===============================================用户信息========================================

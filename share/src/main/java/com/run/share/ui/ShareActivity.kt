@@ -97,13 +97,14 @@ class ShareActivity : Activity() {
         } else {
             finish()
         }
-        if (type == 1) {
+        if (type == 1 || type == 11) {
             val lists = ArrayList<String>()
             lists.add(this.url!!)
             val shareManager = ShareManager(this@ShareActivity)
-            shareManager.setShareImage(1, lists, this.title + "\n" + this.url, type)
+            shareManager.setShareImage(type, lists, this.title + "\n" + this.url, type)
             return
         }
+
 
         if (sharePlatform == "wechat_moments" && friend_type == 2) {
             val lists = ArrayList<String>()

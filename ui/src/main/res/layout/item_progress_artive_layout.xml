@@ -1,65 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/dp_5"
+    android:paddingRight="@dimen/dp_5">
+
 
     <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_25"
-            android:gravity="center"
-            android:orientation="horizontal">
-
-            <View
-                android:layout_width="@dimen/dp_0_5"
-                android:layout_height="match_parent"
-                android:background="@color/color_f3" />
-
-            <TextView
-                android:id="@+id/timeView"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="2018-10-15"
-                android:textColor="@color/color_f3"
-                android:textSize="@dimen/sp_10"
-                 />
-
-            <View
-                android:layout_width="@dimen/dp_0_5"
-                android:layout_height="match_parent"
-                android:background="@color/color_f3" />
-
-            <TextView
-                android:id="@+id/moneyView"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="0.22"
-                android:textColor="@color/color_f3"
-                android:textSize="@dimen/sp_10"
-                 />
-
-            <View
-                android:layout_width="@dimen/dp_0_5"
-                android:layout_height="match_parent"
-                android:background="@color/color_f3" />
-
-        </LinearLayout>
+        android:layout_height="@dimen/dp_25"
+        android:gravity="center"
+        android:orientation="horizontal">
 
         <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_0_5"
+            android:layout_width="@dimen/dp_0_5"
+            android:layout_height="match_parent"
             android:background="@color/color_f3" />
 
+        <TextView
+            android:id="@+id/timeView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="2018-10-15"
+            android:textColor="@color/color_f3"
+            android:textSize="@dimen/sp_10" />
 
+        <View
+            android:layout_width="@dimen/dp_0_5"
+            android:layout_height="match_parent"
+            android:background="@color/color_f3" />
+
+        <TextView
+            android:id="@+id/moneyView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="0.22"
+            android:textColor="@color/money_text_color"
+            android:textSize="@dimen/sp_10" />
+
+        <View
+            android:layout_width="@dimen/dp_0_5"
+            android:layout_height="match_parent"
+            android:background="@color/color_f3" />
 
     </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_0_5"
+        android:background="@color/color_f3" />
+
+
+</LinearLayout>
 

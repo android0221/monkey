@@ -33,12 +33,9 @@ class InviteActivity : BaseActivity<InviteContract.InvitePresenter>(), InviteCon
         }
     }
 
-
     override fun initContentView(): Int {
         return R.layout.activity_invite
     }
-
-
 
     private lateinit var tv_count_invite: TextView
     private lateinit var tv_list: TextView

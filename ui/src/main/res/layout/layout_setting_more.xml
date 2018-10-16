@@ -99,6 +99,52 @@
 
         </LinearLayout>
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_0_5"
+            android:layout_marginLeft="@dimen/dp_15"
+            android:background="@color/colorLine" />
+
+        <LinearLayout
+            android:id="@+id/transmitLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_ripple_rless"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="@dimen/dp_10">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:drawablePadding="@dimen/dp_5"
+                android:text="转发送现金红包"
+                android:textColor="@color/color_f3"
+                android:textSize="@dimen/sp_16" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/dp_5"
+                android:text="火热进行中"
+                android:textColor="@color/colorRed"
+                android:textSize="@dimen/sp_12" />
+
+            <ImageView
+                android:layout_width="@dimen/dp_15"
+                android:layout_height="@dimen/dp_15"
+                android:adjustViewBounds="true"
+                android:src="@mipmap/e" />
+
+        </LinearLayout>
+
 
     </LinearLayout>
 
@@ -117,14 +163,14 @@
 
 
         <LinearLayout
-            android:visibility="gone"
             android:id="@+id/ll_ph"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/bg_ripple_rless"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:padding="@dimen/dp_10">
+            android:padding="@dimen/dp_10"
+            android:visibility="gone">
 
             <TextView
                 android:layout_width="0dp"
@@ -145,10 +191,10 @@
 
 
         <!--<View-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="@dimen/dp_0_5"-->
-            <!--android:layout_marginLeft="@dimen/dp_15"-->
-            <!--android:background="@color/colorLine" />-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="@dimen/dp_0_5"-->
+        <!--android:layout_marginLeft="@dimen/dp_15"-->
+        <!--android:background="@color/colorLine" />-->
 
         <LinearLayout
             android:id="@+id/ll_wt"

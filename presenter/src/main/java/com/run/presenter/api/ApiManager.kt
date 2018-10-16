@@ -184,6 +184,20 @@ object ApiManager {
 
     }
 
+    /**
+     * 转发送现金红包
+     */
+    fun transmit(): Observable<TransmitModle> {
+        val jsonObject = JSONObject()
+        try {
+            jsonObject.put("channel", AppConstants.CHANNEL_KEY)
+        } catch (e: JSONException) {
+            e.printStackTrace()
+        }
+        return ApiManager.instance.transmit(LoginHelper.instance.getmToken(), UEncrypt.encrypt_AES(jsonObject.toString(), AppConstants.DES_KEY))
+
+    }
+
 
     /**
      * 排行榜

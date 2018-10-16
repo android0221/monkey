@@ -24,6 +24,7 @@ class UserJsonModle : BaseModle() {
      * activity_type //是否开启收徒大赛
      * invite_top_img
      * progress_type //周活动奖
+     * transmit_type  //转发现金红包
      */
 
     var data: DataBean? = null
@@ -37,6 +38,7 @@ class UserJsonModle : BaseModle() {
     var activity_type: String? = "0"
     var invite_top_img: String? = null
     var progress_type: String? = "0"
+    var transmit_type: String? = "0"
 
     class DataBean {
         /**

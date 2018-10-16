@@ -4,20 +4,21 @@ import com.run.common.base.BaseMvpPresenter
 import com.run.common.base.BaseMvpView
 import com.run.common.base.BaseObserver
 import com.run.presenter.api.ApiManager
-import com.run.presenter.modle.ProgressArtiveModle
+import com.run.presenter.modle.TransmitModle
 
-interface ProgressActiveContract {
-    interface ProgressView : BaseMvpView {
-        fun showData(modle: ProgressArtiveModle)
+interface TransmitContract {
+    interface TransmitView : BaseMvpView {
+
+        fun showData(modle:TransmitModle)
     }
 
-    class ProgeressActivityPresenter(private val v: ProgressView) : BaseMvpPresenter(v) {
+    class TransmitPresenter(private val v: TransmitView) : BaseMvpPresenter(v) {
 
         fun requestData() {
-            if (isViewAttached()) v.showLoading()
-            addDisposable(ApiManager.progress(), object : BaseObserver<ProgressArtiveModle>() {
-                override fun onSuccess(o: ProgressArtiveModle) {
-                    if (isViewAttached()) {
+            if(isViewAttached())v.showLoading()
+            addDisposable(ApiManager.transmit(), object : BaseObserver<TransmitModle>() {
+                override fun onSuccess(o: TransmitModle) {
+                    if(isViewAttached()){
                         v.showData(o)
                         v.hideLoading()
                     }

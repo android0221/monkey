@@ -40,6 +40,7 @@ open class PersionFragment : BaseFragment<PersionContract.PersionPresenter>(), P
     private lateinit var invitegameLayout: View
     private lateinit var firstView: TextView
     private lateinit var progressAwardLayout: View
+    private lateinit var transmitLayout: View
 
     override fun initView(view: View) {
         rl_mm = view.findViewById(R.id.rl_mm)
@@ -53,6 +54,7 @@ open class PersionFragment : BaseFragment<PersionContract.PersionPresenter>(), P
         redPackageView = view.findViewById(R.id.iv_hongbao)
         firstView = view.findViewById(R.id.firstView)
         progressAwardLayout = view.findViewById(R.id.progressAwardLayout)
+        transmitLayout = view.findViewById(R.id.transmitLayout)
 
         view.findViewById<View>(R.id.iv_set).setOnClickListener(this)
         view.findViewById<View>(R.id.ll_kf).setOnClickListener(this)
@@ -67,6 +69,7 @@ open class PersionFragment : BaseFragment<PersionContract.PersionPresenter>(), P
         iv_usericon.setOnClickListener(this)
         invitegameLayout.setOnClickListener(this)
         progressAwardLayout.setOnClickListener(this)
+        transmitLayout.setOnClickListener(this)
     }
 
     //=============================================数据请求==================================================
@@ -94,6 +97,7 @@ open class PersionFragment : BaseFragment<PersionContract.PersionPresenter>(), P
             if (TextUtils.isEmpty(qqKey)) {
                 mPresenter!!.getQQKey()
             }
+
             //TODO 将收徒大赛接口放到了个人页面
 //            if (TextUtils.isEmpty(activity_Type)) {
 //                mPresenter!!.megagameType()
@@ -116,6 +120,7 @@ open class PersionFragment : BaseFragment<PersionContract.PersionPresenter>(), P
             R.id.invitegameLayout -> ContestActivity.newInstance(activity!!)
             R.id.ll_invite -> InviteActivity.newInstance(activity!!)
             R.id.progressAwardLayout -> ProgressActiveActivity.newInstance(activity!!, userid)
+            R.id.transmitLayout -> TransmitActivity.newInstance(activity!!)
         }
     }
 
@@ -139,13 +144,12 @@ open class PersionFragment : BaseFragment<PersionContract.PersionPresenter>(), P
         if (signtype == 1) {
             tv_sign.text = "已签到"
         }
-
         tv_today_money.text = if (TextUtils.isEmpty(modle.count_income)) "0.0" else modle.count_income + ""//今日收益
         val bean = modle.data
         if (bean != null) {
             avatar = bean!!.head_avatar
             userid = bean.user_id
-            nick = if (TextUtils.isEmpty(bean!!.wechat_nick_name)) "" + bean!!.user_id.toString() else bean!!.wechat_nick_name
+            nick = if (TextUtils.isEmpty(bean!!.wechat_nick_name)) "" + bean.user_id.toString() else bean.wechat_nick_name + "(ID: " + bean.user_id + ")"
             total = if (TextUtils.isEmpty(bean!!.profit_total)) "0.0" else bean!!.profit_total
             //加载头像
             UGlide.loadCircleImage(activity, avatar, iv_usericon)
@@ -163,7 +167,6 @@ open class PersionFragment : BaseFragment<PersionContract.PersionPresenter>(), P
 
         // TODO()  是否开启现金券
         //  showCardDialog()
-
         //收徒大赛
         activity_Type = modle.activity_type
         if (activity_Type == "0") {
@@ -178,6 +181,13 @@ open class PersionFragment : BaseFragment<PersionContract.PersionPresenter>(), P
             progressAwardLayout.visibility = View.VISIBLE
         } else { //有开启
             progressAwardLayout.visibility = View.GONE
+        }
+
+        //转发送现金红包
+        if (modle.transmit_type == "1") {
+            transmitLayout.visibility = View.VISIBLE
+        } else {
+            transmitLayout.visibility = View.GONE
         }
 
     }

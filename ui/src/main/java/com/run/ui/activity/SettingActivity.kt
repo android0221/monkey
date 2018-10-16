@@ -14,6 +14,7 @@ import com.run.common.utils.UVersion
 import com.run.config.modle.BaseModle
 import com.run.login.api.LoginManager
 import com.run.presenter.LoginHelper
+import com.run.presenter.contract.SettingContract
 import com.run.ui.R
 import com.run.version.UpdataVersionHelper
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -23,7 +24,8 @@ import io.reactivex.schedulers.Schedulers
 /**
  * 设置页面
  */
-class SettingActivity : BaseActivity<Nothing>() {
+class SettingActivity : BaseActivity<SettingContract.SettingPresenter>(), SettingContract.SettingView {
+
 
     companion object {
         fun newInstance(context: Context) {
@@ -35,6 +37,7 @@ class SettingActivity : BaseActivity<Nothing>() {
         return R.layout.activity_setting
     }
 
+    
     private var tv_cache: TextView? = null
     private var tv_version: TextView? = null
     override fun initViews() {
@@ -58,8 +61,8 @@ class SettingActivity : BaseActivity<Nothing>() {
         tv_version!!.text = "v" + UVersion.getLocalVersionName(this)
     }
 
-    override fun initPresenter(): Nothing? {
-        return null
+    override fun initPresenter(): SettingContract.SettingPresenter? {
+        return SettingContract.SettingPresenter(this)
     }
 
 
@@ -68,7 +71,7 @@ class SettingActivity : BaseActivity<Nothing>() {
             R.id.backView -> finish()
             R.id.ll_cache -> showClearCacheDialog()
             R.id.ll_version -> UpdataVersionHelper.getInstance().checkUpadata(this, 0)
-            R.id.tv_logout -> logout()
+            R.id.tv_logout -> mPresenter!!.logout()
         }
     }
 
@@ -78,23 +81,18 @@ class SettingActivity : BaseActivity<Nothing>() {
                 UCache.clearAllCache(this@SettingActivity)
                 tv_cache!!.text = "0KB"
             }
+
             override fun cancle() {
             }
         })
     }
 
-    private fun logout() {
-        LoginManager.logout().subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(object : BaseObserver<BaseModle>() {
-                    override fun onError(errorType: Int, msg: String?) {
-                        showMsg(msg!!)
-                    }
-                    override fun onSuccess(o: BaseModle) {
-                        LoginHelper.instance.setmToken("")
-                        MainActivity.newInstance(this@SettingActivity)
-                    }
-                })
+    /**
+     * 退出登录返回
+     */
+    override fun callBackLogout(msg: String) {
+        showMsg(msg)
+        MainActivity.newInstance(this@SettingActivity)
     }
 
 }

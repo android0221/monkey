@@ -40,7 +40,7 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.MainView {
         setStatus(0)
     }
 
-    //===========================================布局================================================================
+    //===========================================布局================================================
     override fun initContentView(): Int {
         return R.layout.activity_main
     }
