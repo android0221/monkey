@@ -8,9 +8,8 @@ import android.support.v4.view.ViewPager
 import android.view.View
 import android.widget.ImageView
 import com.run.common.base.BaseFragment
-import com.run.common.utils.UAnim
-import com.run.common.utils.UStatusBar
-import com.run.common.utils.UTabLayout
+import com.run.common.utils.*
+import com.run.config.modle.BaseRxBean
 import com.run.ui.R
 import com.run.ui.activity.InviteActivity
 import com.run.ui.activity.SearchActivity
@@ -22,6 +21,7 @@ class SeniorityFragment : BaseFragment<Nothing>() {
             return SeniorityFragment()
         }
     }
+
     override fun initContentView(): Int {
         return R.layout.fragment_seniority
     }
@@ -36,6 +36,7 @@ class SeniorityFragment : BaseFragment<Nothing>() {
         view.findViewById<View>(R.id.iv_seach).setOnClickListener { SearchActivity.newInstance(context!!) }
         redImage.setOnClickListener { InviteActivity.newInstance(activity!!) }
     }
+
     override fun initPresenter(): Nothing? {
         return null
     }
@@ -45,7 +46,14 @@ class SeniorityFragment : BaseFragment<Nothing>() {
         viewPager.adapter = adapter
         tabLayout.setupWithViewPager(viewPager)
         UTabLayout.setTabLayoutLine(tabLayout)
+        viewPager.currentItem = 0
+        URxBus.get().toFlowable().map { o -> o as BaseRxBean<*> }.subscribe {
+            if (it.type == 1 && it.code == 1) {
+                viewPager.currentItem = 0
+            }
+        }
     }
+
     override fun visiable() {
         super.visiable()
         /**
@@ -69,9 +77,10 @@ class SeniorityFragment : BaseFragment<Nothing>() {
 
         override fun getItem(position: Int): Fragment? {
             fragment = when (position) {
-                0 -> ArticleFragment.newInstance("day")
-                1 -> ArticleFragment.newInstance("week")
-                2 -> ArticleFragment.newInstance("month")
+                0 -> ArticleFragment.newInstance(9)
+                1 -> ArticleFragment.newInstance("day")
+                2 -> ArticleFragment.newInstance("week")
+                3 -> ArticleFragment.newInstance("month")
                 else -> ArticleFragment.newInstance("day")
             }
             return fragment

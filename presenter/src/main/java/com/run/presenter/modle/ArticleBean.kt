@@ -15,6 +15,7 @@ class ArticleBean : MultiItemEntity {
      * money_view_user : 0.000
      * fake_view_max : 47916
      * title_end :
+     * fake_view_begin
      */
 
     var article_id: Int = 0
@@ -26,6 +27,7 @@ class ArticleBean : MultiItemEntity {
     var money_view_user: String? = null
     var fake_view_max: Int = 0
     var title_end: String? = null
+    var fake_view_begin: String? = null
 
 
     //====================================文章类型分类===================================================

@@ -81,8 +81,8 @@ class ProgressActiveActivity : BaseActivity<ProgressActiveContract.ProgeressActi
     @SuppressLint("SetTextI18n")
     override fun initData() {
         val userid = intent.getIntExtra("userID", 0)
-        dayView.text = "本周转发收入如下"
-        lastView.text = "上周转发收入如下"
+        dayView.text = "您(ID:$userid)本期转发收入如下"
+        lastView.text = "您(ID:$userid)上期转发收入如下"
         mPresenter!!.requestData()
     }
 

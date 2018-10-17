@@ -1,13 +1,18 @@
 package com.run.ui.fragment
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.text.TextUtils
 import com.run.common.base.BaseListFragment
 import com.run.common.utils.ULog
+import com.run.common.utils.URxBus
+import com.run.config.modle.BaseRxBean
 import com.run.presenter.contract.ArticleContract
 import com.run.presenter.modle.ArticleBean
 import com.run.presenter.modle.ArticleModle
 import com.run.ui.adapter.ArticleAdapter
+import java.text.SimpleDateFormat
+import java.util.*
 
 class ArticleFragment : BaseListFragment<ArticleContract.ArticlePresenter, ArticleBean>(), ArticleContract.ArticleView {
 
@@ -21,6 +26,7 @@ class ArticleFragment : BaseListFragment<ArticleContract.ArticlePresenter, Artic
             fragment.arguments = bundle
             return fragment
         }
+
         fun newInstance(type: String): ArticleFragment {
             var fragment = ArticleFragment()
             var bundle = Bundle()
@@ -68,16 +74,34 @@ class ArticleFragment : BaseListFragment<ArticleContract.ArticlePresenter, Artic
 
 
     override fun callBackData(modle: ArticleModle) {
+        if (categordy_id == 9) {//24小时精选
+            if (modle.data != null && !modle.data!!.isEmpty()) {
+                val fake_view_begin = modle.data!![0].fake_view_begin
+                val time = date2TimeStamp(fake_view_begin!!)
+                val currentTime = System.currentTimeMillis()
+                if (currentTime - time < 12 * 60 * 60 * 1000) return
+                //TODO 跳到第二行
+                URxBus.get().post(BaseRxBean<Nothing>(1, 1))
+            }
+        }
         ULog.d(TAG, "数据回调")
         adapter!!.setModleData(modle.money!!, modle.g_money!!, modle.g_title, modle.a_money!!, modle.a_title, modle.share_msg, modle.a_type, modle.g_type)
         var list = modle.data
         for (bean: ArticleBean in modle.data!!) {
-            when (bean!!.category_id) {
-                34 -> bean!!.itemType = ArticleBean.ARTICLE_IMAGE
-                47 -> bean!!.itemType = ArticleBean.ARTICLE_VEDIO
-                else -> bean!!.itemType = ArticleBean.ARTICLE_TEXT
+            when (bean.category_id) {
+//              34 -> bean!!.itemType = ArticleBean.ARTICLE_IMAGE
+                47 -> bean.itemType = ArticleBean.ARTICLE_VEDIO
+                else -> bean.itemType = ArticleBean.ARTICLE_TEXT
             }
         }
         setData(list)
     }
+
+    @SuppressLint("SimpleDateFormat")
+    fun date2TimeStamp(date: String): Long {
+        val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+        return sdf.parse(date).time / 1000
+    }
+
+
 }

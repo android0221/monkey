@@ -20,6 +20,7 @@ class ArticleModle : BaseModle() {
      * g_type : 0
      * g_title : 限时上涨到
      * g_money : 0.2元
+     * fake_view_begin = ""
      */
 
     var money: String? = null

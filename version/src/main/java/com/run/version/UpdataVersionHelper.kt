@@ -90,16 +90,14 @@ class UpdataVersionHelper private constructor() {
 
 
     /**
-     * 显示公告对话框 ,12个小时内只能显示一次 
+     * 显示公告对话框 ,12个小时内只能显示一次
      */
     private fun showHintDialog(title: String?, msg: String?) {
-        var time = System.currentTimeMillis()
-        var lastTime: Long = USharePreference.get(mContext!!, "TIME", 0.toLong()) as Long
-        ULog.e(TAG, "当前时间：" + time + ",上次时间：" + lastTime + "时间差：" + (time - lastTime))
-        if (time - lastTime < 12 * 60 * 60 * 1000) return
-        USharePreference.put(mContext!!, "TIME", time)
-
-
+//        var time = System.currentTimeMillis()
+//        var lastTime: Long = USharePreference.get(mContext!!, "TIME", 0.toLong()) as Long
+//        ULog.e(TAG, "当前时间：" + time + ",上次时间：" + lastTime + "时间差：" + (time - lastTime))
+//        if (time - lastTime < 12 * 60 * 60 * 1000) return
+//        USharePreference.put(mContext!!, "TIME", time)
         if (TextUtils.isEmpty(msg) || mContext == null) return
         try {
             val contentView = View.inflate(mContext, R.layout.dialog_msg_hint_layout, null)

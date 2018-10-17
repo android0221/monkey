@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/dp_50"
+    android:id="@+id/moneyLayout"
+    android:layout_margin="@dimen/dp_10"
+    android:background="@drawable/selector_withdraw">
+
+    <TextView
+        android:id="@+id/moneyView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="1元"
+        android:textStyle="bold"
+        android:textColor="@color/color_withdraw"
+        android:textSize="@dimen/sp_16" />
+
+    <ImageView
+        android:id="@+id/clickView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:src="@mipmap/xz" />
+
+
+</RelativeLayout>
+

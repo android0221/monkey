@@ -59,6 +59,7 @@ class WithDrawActivity : BaseActivity<WithDrawContract.WithDrawPresenter>(), Wit
     private var money: Int = 0
     private var profitBalance: Double = 0.toDouble()
 
+    @SuppressLint("SetTextI18n")
     override fun initViews() {
         tv_incarnate_type = findViewById(R.id.tv_incarnate_type)
         tv_incarnate_money = findViewById(R.id.tv_incarnate_money)
@@ -78,7 +79,7 @@ class WithDrawActivity : BaseActivity<WithDrawContract.WithDrawPresenter>(), Wit
         //更多工具
         recyclerView = findViewById(R.id.recyclerview)
         mAdapter = MoneyAdapter()
-        recyclerView!!.layoutManager = GridLayoutManager(this, 4)
+        recyclerView!!.layoutManager = GridLayoutManager(this, 3)
         recyclerView!!.adapter = mAdapter
 
         mAdapter!!.setOnItemClickListener { _, _, position ->
@@ -96,7 +97,6 @@ class WithDrawActivity : BaseActivity<WithDrawContract.WithDrawPresenter>(), Wit
             }
         }
     }
-
     override fun onClick(v: View) {
         when (v.id) {
             R.id.iv_back -> finish()

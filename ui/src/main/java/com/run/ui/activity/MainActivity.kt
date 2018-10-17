@@ -91,7 +91,7 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.MainView {
         vedioView.isSelected = false
         persionView.isSelected = false
     }
-    // =========================================初始化数据=================================================
+    // =========================================初始化数据===========================================
     /**
      * 首页的fragment集合
      */
@@ -125,6 +125,7 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.MainView {
         }
     }
 
+
     //======================================= 退出应用 ==============================================
     private var mIsExit: Boolean = false
 
@@ -141,5 +142,6 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.MainView {
         }
         return super.onKeyDown(keyCode, event)
     }
+
 
 }

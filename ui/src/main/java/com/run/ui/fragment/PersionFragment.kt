@@ -10,7 +10,6 @@ import com.run.common.utils.UAnim
 import com.run.common.utils.UGlide
 import com.run.common.utils.USharePreference
 import com.run.common.utils.UStatusBar
-import com.run.config.AppIntentAction
 import com.run.presenter.LoginHelper
 import com.run.presenter.contract.PersionContract
 import com.run.presenter.modle.UserJsonModle
@@ -108,7 +107,7 @@ open class PersionFragment : BaseFragment<PersionContract.PersionPresenter>(), P
     override fun onClick(v: View) {
         when (v.id) {
             R.id.iv_set -> SettingActivity.newInstance(activity!!)
-            R.id.ll_kf -> AppIntentAction.joinQQGroup(qqKey, activity!!)
+            R.id.ll_kf -> CustomerActivity.newInstance(activity!!) //AppIntentAction.joinQQGroup(qqKey, activity!!)
             R.id.ll_sign -> doSign()
             R.id.ll_wt -> ProblemActivity.newInstance(activity!!, 1)
             R.id.ll_yi -> FeedBackActivity.newInstance(activity!!)
@@ -120,7 +119,7 @@ open class PersionFragment : BaseFragment<PersionContract.PersionPresenter>(), P
             R.id.invitegameLayout -> ContestActivity.newInstance(activity!!)
             R.id.ll_invite -> InviteActivity.newInstance(activity!!)
             R.id.progressAwardLayout -> ProgressActiveActivity.newInstance(activity!!, userid)
-            R.id.transmitLayout -> TransmitActivity.newInstance(activity!!)
+            R.id.transmitLayout -> TransmitActivity.newInstance(activity!!,userid)
         }
     }
 

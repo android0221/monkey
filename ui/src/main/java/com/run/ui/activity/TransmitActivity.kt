@@ -5,6 +5,7 @@ import android.content.Intent
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import android.webkit.WebView
+import android.widget.TextView
 import com.run.common.base.BaseActivity
 import com.run.presenter.contract.TransmitContract
 import com.run.presenter.modle.TransmitModle
@@ -16,8 +17,10 @@ class TransmitActivity : BaseActivity<TransmitContract.TransmitPresenter>(), Tra
 
 
     companion object {
-        fun newInstance(context: Context) {
-            context.startActivity(Intent(context, TransmitActivity::class.java))
+        fun newInstance(context: Context, userID: Int) {
+            val intent = Intent(context, TransmitActivity::class.java)
+            intent.putExtra("userID", userID)
+            context.startActivity(intent)
         }
     }
 
@@ -29,7 +32,7 @@ class TransmitActivity : BaseActivity<TransmitContract.TransmitPresenter>(), Tra
     private lateinit var mAdapter: ArtiveAdapter
     private lateinit var headView: View
     private lateinit var footView: View
-
+    private lateinit var dayView: TextView
     private lateinit var explainWebView: WebView
     private lateinit var prizeexplainWebView: WebView
     override fun initViews() {
@@ -42,6 +45,7 @@ class TransmitActivity : BaseActivity<TransmitContract.TransmitPresenter>(), Tra
 
         headView = View.inflate(this, R.layout.layout_transmit_header, null)
         footView = View.inflate(this, R.layout.layout_active_foot, null)
+        dayView = headView.findViewById(R.id.dayView)
 
         mAdapter.addHeaderView(headView)
         mAdapter.addFooterView(footView)
@@ -54,6 +58,8 @@ class TransmitActivity : BaseActivity<TransmitContract.TransmitPresenter>(), Tra
 
     override fun initData() {
         mPresenter!!.requestData()
+        val userid = intent.getIntExtra("userID", 0)
+        dayView.text = "您(ID:$userid)本期转发收入如下"
     }
 
     override fun initPresenter(): TransmitContract.TransmitPresenter? {

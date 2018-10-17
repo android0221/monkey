@@ -237,7 +237,7 @@
                             android:layout_weight="1"
                             android:gravity="center_vertical"
                             android:singleLine="true"
-                            android:text="收徒奖励5元+徒弟徒孙两级共15%永久提成"
+                            android:text="收徒奖励6元+徒弟徒孙两级共15%永久提成"
                             android:textColor="@color/colorAccent"
                             android:textSize="@dimen/sp_12" />
 

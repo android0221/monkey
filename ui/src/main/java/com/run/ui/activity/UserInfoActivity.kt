@@ -50,6 +50,8 @@ class UserInfoActivity : BaseActivity<UserContract.UserPresenter>(), UserContrac
             R.id.ll_apprentice -> {
                 if (tv_apprentice!!.text.length < 4) {
                     TeacherActivity.newInstance(this, 11)
+                } else {
+                    showMsg("您的账号已有师傅ID,不能重复拜师")
                 }
             }
         }

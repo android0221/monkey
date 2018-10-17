@@ -54,7 +54,8 @@
         <activity android:name=".activity.SelectCardActivity" />
         <activity android:name=".activity.WithDrawBillActivity" />
         <activity android:name=".activity.ProgressActiveActivity" />
-        <activity android:name=".activity.TransmitActivity"></activity>
+        <activity android:name=".activity.TransmitActivity" />
+        <activity android:name=".activity.CustomerActivity"></activity>
     </application>
 
 </manifest>
