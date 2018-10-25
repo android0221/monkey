@@ -65,9 +65,8 @@ class FaceInviteActivity : BaseActivity<Nothing>(), View.OnLongClickListener {
         picture = intent.getStringExtra("picture")
         mBitmap = QRCodeUtil.addLogo(QRCodeUtil.createQRCodeBitmap(this.url!!, 480, 480)!!, BitmapFactory.decodeResource(resources, R.mipmap.ic_logo))
         if (mBitmap == null) return
-        iv_card!!.setImageBitmap(mBitmap)
+        iv_card.setImageBitmap(mBitmap)
     }
-
 
 
     override fun onLongClick(v: View?): Boolean {
@@ -81,7 +80,7 @@ class FaceInviteActivity : BaseActivity<Nothing>(), View.OnLongClickListener {
         dialog.setContentView(view)
         view.findViewById<View>(R.id.tv_cancle).setOnClickListener { dialog.cancel() }
         view.findViewById<View>(R.id.ll_save).setOnClickListener {
-            val bitmap = getScreenShot(this!!.rl_root!!)
+            val bitmap = getScreenShot(this.rl_root!!)
             saveImageToGallery(this@FaceInviteActivity, bitmap)
             dialog.cancel()
         }

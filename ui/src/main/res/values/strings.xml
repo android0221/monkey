@@ -1,1 +1,5 @@
-<resources></resources>
+<resources>
+    <string name="offset" />
+    <string name="isUp" />
+
+</resources>

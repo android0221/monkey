@@ -16,6 +16,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter
 import com.run.common.base.BaseActivity
 import com.run.common.dialog.DialogHelper
 import com.run.common.utils.ULog
+import com.run.common.utils.UType.doubleToString
 import com.run.common.view.MyBottomSheetDialog
 import com.run.presenter.contract.WithDrawContract
 import com.run.presenter.modle.IncomeModle
@@ -249,10 +250,5 @@ class WithDrawActivity : BaseActivity<WithDrawContract.WithDrawPresenter>(), Wit
         DialogHelper.showDialog(this@WithDrawActivity, contentView)
     }
 
-    //===============================工具类==========================================================
-    private fun doubleToString(num: Double): String {
-        //使用0.00不足位补0，#.##仅保留有效位
-        return DecimalFormat("0.00").format(num)
-    }
 
 }

@@ -79,12 +79,22 @@ class InviteActivity : BaseActivity<InviteContract.InvitePresenter>(), InviteCon
     override fun onClick(v: View) {
         when (v.id) {
             R.id.tv_back -> finish()
-            R.id.ll_share_wc -> UShare.doShare(this, "wechat_friend", shareBean.title!!, shareBean.content_describe!!, url!!, shareBean.share_picture!!, 0)
-            R.id.ll_share_wcfriend -> UShare.doShare(this, "wechat_moments", shareBean!!.title!!, shareBean!!.content_describe!!, url!!, shareBean.share_picture!!, 1)
+            R.id.ll_share_wc -> {
+                if (shareBean == null) return
+                UShare.doShare(this, "wechat_friend", shareBean!!.title!!, shareBean!!.content_describe!!, url!!, shareBean!!.share_picture!!, 0)
+            }
+            R.id.ll_share_wcfriend -> {
+                if (shareBean == null) return
+                UShare.doShare(this, "wechat_moments", shareBean!!.title!!, shareBean!!.content_describe!!, url!!, shareBean!!.share_picture!!, 1)
+            }
             R.id.ll_share_copy -> doCopy()
             R.id.iv_invite_top -> ContestActivity.newInstance(this)
             R.id.iv_sm -> ProblemActivity.newInstance(this, 2)
-            R.id.ll_share_face -> FaceInviteActivity.newInstance(this, url!!, shareBean.title!!, shareBean.content_describe!!, shareBean.share_picture!!)
+            R.id.ll_share_face -> {
+                if (shareBean == null) return
+                FaceInviteActivity.newInstance(this, url!!, shareBean!!.title!!, shareBean!!.content_describe!!, shareBean!!.share_picture!!)
+            }
+
             R.id.tv_st -> ApprenticeListActivity.newInstance(this)
         }
     }
@@ -106,18 +116,19 @@ class InviteActivity : BaseActivity<InviteContract.InvitePresenter>(), InviteCon
      * 复制链接
      */
     private fun doCopy() {
+        if (shareBean == null) return
         val cm = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
         cm.text = shareBean!!.title + ";" + url
         showMsg("链接复制成功")
     }
 
-    private lateinit var shareBean: InviteModle.ShareBean
+    private var shareBean: InviteModle.ShareBean? = null
     private var url: String? = null
     private var friendUrl: String? = null
     override fun showInvite(modle: InviteModle) {
         url = modle.url
         friendUrl = modle.friend_url
-        shareBean = modle.share!!
+        shareBean = modle.share
 
         tv_count_invite.text = modle.count_invite.toString()
         tv_list.text = modle.list.toString()

@@ -9,7 +9,7 @@
         <!-- Android7.0打开相机 -->
         <provider
             android:name="android.support.v4.content.FileProvider"
-            android:authorities="pepper"
+            android:authorities="lychee"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
@@ -18,7 +18,7 @@
         </provider>
         <provider
             android:name=".VersionFileProvider"
-            android:authorities="com.yun.updata.pepper.versionProvider"
+            android:authorities="com.yun.updata.lychee.versionProvider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data

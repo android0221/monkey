@@ -17,7 +17,7 @@
             android:theme="@style/BlackTheme" />
         <activity android:name=".login.LoginActivity">
             <intent-filter>
-                <action android:name="com.run.pepper.login.LoginActivity" />
+                <action android:name="com.run.lychee.login.LoginActivity" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
@@ -28,7 +28,7 @@
         <activity android:name=".activity.ProblemActivity" />
         <activity android:name=".activity.ContentDetailActivity">
             <intent-filter>
-                <action android:name="com.action.pepper.ContentDetailActivity" />
+                <action android:name="com.action.lychee.ContentDetailActivity" />
 
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="com.action.category" />
@@ -55,7 +55,10 @@
         <activity android:name=".activity.WithDrawBillActivity" />
         <activity android:name=".activity.ProgressActiveActivity" />
         <activity android:name=".activity.TransmitActivity" />
-        <activity android:name=".activity.CustomerActivity"></activity>
+        <activity android:name=".activity.CustomerActivity" />
+        <activity android:name=".activity.LuckTurnTableActivity" />
+        <activity android:name=".activity.RiceTreeActivity" />
+        <activity android:name=".activity.SignActivity"></activity>
     </application>
 
 </manifest>

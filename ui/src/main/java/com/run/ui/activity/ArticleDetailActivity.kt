@@ -39,6 +39,7 @@ class ArticleDetailActivity : BaseActivity<ArticleDetailContract.ArticlePresente
             intent.putExtra("MONEY", money)
             context.startActivity(intent)
         }
+
         const val TAG = "ArticleDetailActivity"
     }
 
@@ -90,7 +91,6 @@ class ArticleDetailActivity : BaseActivity<ArticleDetailContract.ArticlePresente
     }
 
 
-
     private lateinit var recyclerview: RecyclerView
     private lateinit var adapter: ArticleMoreAdapter
     private fun initRecyclerView() {
@@ -127,7 +127,7 @@ class ArticleDetailActivity : BaseActivity<ArticleDetailContract.ArticlePresente
 
     //=====================================数据操作==========================================
     override fun initPresenter(): ArticleDetailContract.ArticlePresenter? {
-                   return ArticleDetailContract.ArticlePresenter(this)
+        return ArticleDetailContract.ArticlePresenter(this)
     }
 
     var articleid: Int? = null
@@ -160,6 +160,7 @@ class ArticleDetailActivity : BaseActivity<ArticleDetailContract.ArticlePresente
                         view.loadUrl(url)// 使用当前WebView处理跳转
                         return false//true表示此事件在此处被处理，不需要再广播
                     }
+
                     override//转向错误时的处理
                     fun onReceivedError(view: WebView, errorCode: Int, description: String, failingUrl: String) {
                         ULog.e(TAG, "文章的url加载错误： errorCode:$errorCode,description $description,failingUrl:$failingUrl")
@@ -182,15 +183,18 @@ class ArticleDetailActivity : BaseActivity<ArticleDetailContract.ArticlePresente
     //================================================显示分享内容===============================================
     private var hasHint: Boolean = false
     private fun showShareHint() {
-        Observable.timer(5, TimeUnit.SECONDS).observeOn(AndroidSchedulers.mainThread()).subscribe {
-            if (!hasHint) {
-                hasHint = true
-                hintView.visibility = View.VISIBLE
-                Observable.timer(5, TimeUnit.SECONDS).observeOn(AndroidSchedulers.mainThread()).subscribe {
-                    hintView.visibility = View.GONE
+        if (money.toDouble() == 0.2) {
+            Observable.timer(5, TimeUnit.SECONDS).observeOn(AndroidSchedulers.mainThread()).subscribe {
+                if (!hasHint) {
+                    hasHint = true
+                    hintView.visibility = View.VISIBLE
+                    Observable.timer(5, TimeUnit.SECONDS).observeOn(AndroidSchedulers.mainThread()).subscribe {
+                        hintView.visibility = View.GONE
+                    }
                 }
             }
         }
+
     }
 
 }

@@ -54,17 +54,15 @@ class LoginHelper private constructor() {
     fun save(mobile: String, password: String, token: String) {
         USharePreference.put(BaseApplication.context!!, "MOBILE", mobile)
         USharePreference.put(BaseApplication.context!!, "PASSWORD", password)
-        if (TextUtils.isEmpty(token)) {
-            return
-        }
+        if (TextUtils.isEmpty(token)) { return }
         USharePreference.put(BaseApplication.context!!, "TOKEN", token)
     }
 
-    fun isLogin(context: Context): Boolean {
+
+
+     fun isLogin(context: Context): Boolean {
         val isLogin = !TextUtils.isEmpty(getmToken())
-        if (!isLogin) {
-            showLogin(context)
-        }
+        if (!isLogin) { showLogin(context) }
         return isLogin
     }
 
@@ -76,7 +74,7 @@ class LoginHelper private constructor() {
         this.mContext = context
 
         val intent = Intent()
-        intent.action = "com.run.pepper.login.LoginActivity"
+        intent.action = "com.run.lychee.login.LoginActivity"
         context.startActivity(intent)
     }
 

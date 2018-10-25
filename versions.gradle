@@ -1,5 +1,5 @@
 //包名 APPID
-ext.applicationId = "com.run.perpper"
+ext.applicationId = "com.run.lychee"
 
 //编译的版本号
 ext.compileSdkVersion = 28
@@ -18,7 +18,7 @@ ext.minifyEnabled = false
 //Android相关引用库的使用
 ext.appcompatVersion = "26.+"
 ext.designVersion = "27.+"
-ext.constraintLayoutVersion = "1.0.2"
+ext.constraintLayoutVersion = "1.1.0"
 
 //第三方使用库
 ext.lottieVersion = "2.6.1"

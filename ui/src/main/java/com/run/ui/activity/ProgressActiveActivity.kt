@@ -77,7 +77,6 @@ class ProgressActiveActivity : BaseActivity<ProgressActiveContract.ProgeressActi
         prizeexplainWebView = headView.findViewById(R.id.prizeexplainWebView)
 
     }
-
     @SuppressLint("SetTextI18n")
     override fun initData() {
         val userid = intent.getIntExtra("userID", 0)
@@ -90,11 +89,9 @@ class ProgressActiveActivity : BaseActivity<ProgressActiveContract.ProgeressActi
         return ProgressActiveContract.ProgeressActivityPresenter(this)
     }
 
-
     override fun showData(modle: ProgressArtiveModle) {
         weekexplainWebView.loadDataWithBaseURL(null, modle.this_week_explain, "text/html", "utf-8", null)
         explainWebView.loadDataWithBaseURL(null, modle.explain, "text/html", "utf-8", null)
-
         //活动结束
         if (modle.prize_type == 0) {
             prizeexplainWebView.visibility = View.VISIBLE
@@ -104,5 +101,6 @@ class ProgressActiveActivity : BaseActivity<ProgressActiveContract.ProgeressActi
         mAdapter.setNewData(modle.this_week_list)
         lastAdapter.setNewData(modle.last_week_list)
     }
+
 
 }

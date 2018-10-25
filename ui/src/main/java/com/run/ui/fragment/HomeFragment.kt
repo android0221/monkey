@@ -42,6 +42,7 @@ class HomeFragment : BaseFragment<HomeContract.HomePresenter>(), HomeContract.Ho
         redImage.setOnClickListener { InviteActivity.newInstance(activity!!) }
     }
 
+
     /**
      * 页面可见的时候
      */
@@ -54,9 +55,11 @@ class HomeFragment : BaseFragment<HomeContract.HomePresenter>(), HomeContract.Ho
         if (mList != null && mList!!.size > 3) return
         if (mPresenter != null) mPresenter!!.requestData()
     }
+
     override fun initData() {
 
     }
+
     //======================================================初始化数据===================================================
     override fun initPresenter(): HomeContract.HomePresenter? {
         return HomeContract.HomePresenter(this)
@@ -79,6 +82,7 @@ class HomeFragment : BaseFragment<HomeContract.HomePresenter>(), HomeContract.Ho
     override fun showErr(errorType: Int, msg: String) {
         showData(null)
     }
+
     //========================================adapter =========================================
     private var mList: List<ArticleTypeModle.DataBean>? = null
 

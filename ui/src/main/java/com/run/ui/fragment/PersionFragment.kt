@@ -35,11 +35,12 @@ open class PersionFragment : BaseFragment<PersionContract.PersionPresenter>(), P
     private lateinit var tv_total: TextView
     private lateinit var tv_today_money: TextView
     private lateinit var tv_sign: TextView
-    private lateinit var redPackageView: ImageView
     private lateinit var invitegameLayout: View
     private lateinit var firstView: TextView
     private lateinit var progressAwardLayout: View
     private lateinit var transmitLayout: View
+    private lateinit var truntableLayout: View
+    private lateinit var treeLayout: View
 
     override fun initView(view: View) {
         rl_mm = view.findViewById(R.id.rl_mm)
@@ -50,25 +51,26 @@ open class PersionFragment : BaseFragment<PersionContract.PersionPresenter>(), P
         tv_total = view.findViewById(R.id.tv_total)
         tv_today_money = view.findViewById(R.id.tv_today_money)
         tv_sign = view.findViewById(R.id.tv_sign)
-        redPackageView = view.findViewById(R.id.iv_hongbao)
         firstView = view.findViewById(R.id.firstView)
         progressAwardLayout = view.findViewById(R.id.progressAwardLayout)
         transmitLayout = view.findViewById(R.id.transmitLayout)
+        truntableLayout = view.findViewById(R.id.truntableLayout)
+        treeLayout = view.findViewById(R.id.treeLayout)
 
         view.findViewById<View>(R.id.iv_set).setOnClickListener(this)
         view.findViewById<View>(R.id.ll_kf).setOnClickListener(this)
         view.findViewById<View>(R.id.ll_sign).setOnClickListener(this)
         view.findViewById<View>(R.id.ll_wt).setOnClickListener(this)
         view.findViewById<View>(R.id.ll_yi).setOnClickListener(this)
-        view.findViewById<View>(R.id.ll_ph).setOnClickListener(this)
         view.findViewById<View>(R.id.ll_symx).setOnClickListener(this)
-        view.findViewById<View>(R.id.ll_card).setOnClickListener(this)
-        view.findViewById<View>(R.id.ll_withdraw).setOnClickListener(this)
         view.findViewById<View>(R.id.ll_invite).setOnClickListener(this)
+        view.findViewById<View>(R.id.ll_withdraw).setOnClickListener(this)
         iv_usericon.setOnClickListener(this)
         invitegameLayout.setOnClickListener(this)
         progressAwardLayout.setOnClickListener(this)
         transmitLayout.setOnClickListener(this)
+        truntableLayout.setOnClickListener(this)
+        treeLayout.setOnClickListener(this)
     }
 
     //=============================================数据请求==================================================
@@ -83,7 +85,6 @@ open class PersionFragment : BaseFragment<PersionContract.PersionPresenter>(), P
      */
     override fun visiable() {
         UStatusBar.setDarkMode(this!!.activity!!)
-        UAnim.startShakeByPropertyAnim(redPackageView, 0.6f, 1.0f, 10f, 1000, 30)
         requestData()
     }
 
@@ -97,10 +98,6 @@ open class PersionFragment : BaseFragment<PersionContract.PersionPresenter>(), P
                 mPresenter!!.getQQKey()
             }
 
-            //TODO 将收徒大赛接口放到了个人页面
-//            if (TextUtils.isEmpty(activity_Type)) {
-//                mPresenter!!.megagameType()
-//            }
         }
     }
 
@@ -108,18 +105,18 @@ open class PersionFragment : BaseFragment<PersionContract.PersionPresenter>(), P
         when (v.id) {
             R.id.iv_set -> SettingActivity.newInstance(activity!!)
             R.id.ll_kf -> CustomerActivity.newInstance(activity!!) //AppIntentAction.joinQQGroup(qqKey, activity!!)
-            R.id.ll_sign -> doSign()
+            R.id.ll_sign -> SignActivity.newInstance(activity!!)//doSign()
             R.id.ll_wt -> ProblemActivity.newInstance(activity!!, 1)
             R.id.ll_yi -> FeedBackActivity.newInstance(activity!!)
-            R.id.ll_ph -> SeniorityActivity.newInstance(activity!!, nick, avatar, total)
             R.id.ll_symx -> RevenueDetailActivity.newInstance(activity!!)
             R.id.iv_usericon -> UserInfoActivity.newInstance(activity!!)
-            R.id.ll_card -> SeniorityActivity.newInstance(activity!!, nick, avatar, total)
+            R.id.ll_invite -> InviteActivity.newInstance(activity!!)
             R.id.ll_withdraw -> WithDrawActivity.newInstance(activity!!)
             R.id.invitegameLayout -> ContestActivity.newInstance(activity!!)
-            R.id.ll_invite -> InviteActivity.newInstance(activity!!)
             R.id.progressAwardLayout -> ProgressActiveActivity.newInstance(activity!!, userid)
-            R.id.transmitLayout -> TransmitActivity.newInstance(activity!!,userid)
+            R.id.transmitLayout -> TransmitActivity.newInstance(activity!!, userid)
+            R.id.truntableLayout -> LuckTurnTableActivity.newInstance(activity!!)
+            R.id.treeLayout -> RiceTreeActivity.newInstance(activity!!)
         }
     }
 
@@ -138,7 +135,6 @@ open class PersionFragment : BaseFragment<PersionContract.PersionPresenter>(), P
     private var signtype: Int = 0//是否签到
     private var userid: Int = 0
     override fun callBackUserData(modle: UserJsonModle) {
-        if (modle == null) return
         signtype = modle.signtype
         if (signtype == 1) {
             tv_sign.text = "已签到"

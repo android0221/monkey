@@ -30,16 +30,13 @@ interface LoginService {
     @GET("web/register/code?")
     fun getCode(@Query("content") content: String): Observable<BaseModle>
 
-
     /**
      * 用户注册
-     *
      * @param content
      * @return
      */
     @GET("web/register/verifyRegister?")
     fun verifyRegister(@Query("content") content: String): Observable<BaseModle>
-
 
     /**
      * 重置密码
@@ -140,11 +137,8 @@ interface LoginService {
 
 
     //==========================================分享======================================
-
-
     /**
      * 获取分享内容
-     *
      * @param content
      * @return
      */

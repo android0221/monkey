@@ -229,7 +229,7 @@ class UpdataVersionHelper private constructor() {
         intent.action = Intent.ACTION_VIEW
         val uri: Uri
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            uri = VersionFileProvider.getUriForFile(context!!, "com.yun.updata.pepper.versionProvider", file)
+            uri = VersionFileProvider.getUriForFile(context!!, "com.yun.updata.lychee.versionProvider", file)
             intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
         } else {
             uri = Uri.fromFile(file)

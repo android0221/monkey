@@ -42,11 +42,12 @@ abstract class BaseListFragment<T : BaseMvpPresenter, N> : BaseFragment<T>(), Sw
      * 初始化adapter
      */
     private var mAdapter: BaseQuickAdapter<N, *>? = null
+
     protected fun initAdapter(adapter: BaseQuickAdapter<N, *>) {
         mAdapter = adapter
-        mRecyclerView!!.setHasFixedSize(true)
-        mRecyclerView!!.layoutManager = LinearLayoutManager(context)
-        mRecyclerView!!.adapter = mAdapter
+        mRecyclerView.setHasFixedSize(true)
+        mRecyclerView.layoutManager = LinearLayoutManager(context)
+        mRecyclerView.adapter = mAdapter
         setLoadingLayout(0)
     }
 
@@ -83,7 +84,9 @@ abstract class BaseListFragment<T : BaseMvpPresenter, N> : BaseFragment<T>(), Sw
     //请求的页数
     protected var mPage = 1
 
-    protected fun setData(list: List<N>?) { if (list != null) setData(list, true) }
+    protected fun setData(list: List<N>?) {
+        if (list != null) setData(list, true)
+    }
 
     protected fun setData(list: List<N>?, isLoad: Boolean) {
         finishLoading()
@@ -108,6 +111,7 @@ abstract class BaseListFragment<T : BaseMvpPresenter, N> : BaseFragment<T>(), Sw
         }
 
     }
+
     /**
      * 结束加载数据
      */
@@ -128,6 +132,7 @@ abstract class BaseListFragment<T : BaseMvpPresenter, N> : BaseFragment<T>(), Sw
         mPage = 1
         requestData()
     }
+
     /**
      * 加载更多
      */
@@ -135,17 +140,19 @@ abstract class BaseListFragment<T : BaseMvpPresenter, N> : BaseFragment<T>(), Sw
         mPage++
         requestData()
     }
+
     /**
      * 数据请求
      */
-    public open fun requestData() {}
+    open fun requestData() {}
+    
     /**
      * 错误异常处理
      */
-
     override fun showErr(errorType: Int, msg: String) {
         finishLoading()
-        val layout = LayoutInflater.from(activity).inflate(R.layout.layout_error_view, mRecyclerView!!.parent as ViewGroup, false)
+        if (activity == null) retainInstance
+        val layout = LayoutInflater.from(activity).inflate(R.layout.layout_error_view, mRecyclerView.parent as ViewGroup, false)
         val msgView: TextView = layout.findViewById(R.id.tv_msg)
         msgView.text = msg
         if (mAdapter != null) {
