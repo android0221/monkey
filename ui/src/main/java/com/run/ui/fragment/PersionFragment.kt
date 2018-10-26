@@ -15,8 +15,10 @@ import com.run.presenter.contract.PersionContract
 import com.run.presenter.modle.UserJsonModle
 import com.run.ui.R
 import com.run.ui.activity.*
+import kotlinx.android.synthetic.main.fragment_persion.*
 
 open class PersionFragment : BaseFragment<PersionContract.PersionPresenter>(), PersionContract.PersionView {
+
 
     companion object {
         fun newInstance(): PersionFragment {
@@ -65,6 +67,7 @@ open class PersionFragment : BaseFragment<PersionContract.PersionPresenter>(), P
         view.findViewById<View>(R.id.ll_symx).setOnClickListener(this)
         view.findViewById<View>(R.id.ll_invite).setOnClickListener(this)
         view.findViewById<View>(R.id.ll_withdraw).setOnClickListener(this)
+        view.findViewById<View>(R.id.totalMoneyLayout).setOnClickListener(this)
         iv_usericon.setOnClickListener(this)
         invitegameLayout.setOnClickListener(this)
         progressAwardLayout.setOnClickListener(this)
@@ -97,6 +100,7 @@ open class PersionFragment : BaseFragment<PersionContract.PersionPresenter>(), P
             if (TextUtils.isEmpty(qqKey)) {
                 mPresenter!!.getQQKey()
             }
+            mPresenter!!.inform()
 
         }
     }
@@ -105,10 +109,10 @@ open class PersionFragment : BaseFragment<PersionContract.PersionPresenter>(), P
         when (v.id) {
             R.id.iv_set -> SettingActivity.newInstance(activity!!)
             R.id.ll_kf -> CustomerActivity.newInstance(activity!!) //AppIntentAction.joinQQGroup(qqKey, activity!!)
-            R.id.ll_sign -> SignActivity.newInstance(activity!!)//doSign()
+            R.id.ll_sign -> SignActivity.newInstance(activity!!, signtype)//doSign()
             R.id.ll_wt -> ProblemActivity.newInstance(activity!!, 1)
             R.id.ll_yi -> FeedBackActivity.newInstance(activity!!)
-            R.id.ll_symx -> RevenueDetailActivity.newInstance(activity!!)
+            R.id.ll_symx, R.id.totalMoneyLayout -> MyWalletActivity.newInstance(activity!!)
             R.id.iv_usericon -> UserInfoActivity.newInstance(activity!!)
             R.id.ll_invite -> InviteActivity.newInstance(activity!!)
             R.id.ll_withdraw -> WithDrawActivity.newInstance(activity!!)
@@ -144,12 +148,12 @@ open class PersionFragment : BaseFragment<PersionContract.PersionPresenter>(), P
         if (bean != null) {
             avatar = bean!!.head_avatar
             userid = bean.user_id
-            nick = if (TextUtils.isEmpty(bean!!.wechat_nick_name)) "" + bean.user_id.toString() else bean.wechat_nick_name + "(ID: " + bean.user_id + ")"
-            total = if (TextUtils.isEmpty(bean!!.profit_total)) "0.0" else bean!!.profit_total
+            nick = if (TextUtils.isEmpty(bean.wechat_nick_name)) "" + bean.user_id.toString() else bean.wechat_nick_name + "(ID: " + bean.user_id + ")"
+            total = if (TextUtils.isEmpty(bean.profit_total)) "0.0" else bean.profit_total
             //加载头像
             UGlide.loadCircleImage(activity, avatar, iv_usericon)
             tv_userid.text = nick
-            tv_profit_balance.text = if (TextUtils.isEmpty(bean!!.profit_balance)) "0.0" else bean.profit_balance + ""
+            tv_profit_balance.text = if (TextUtils.isEmpty(bean.profit_balance)) "0.0" else bean.profit_balance + ""
             tv_total.text = total + ""
         }
 
@@ -211,6 +215,14 @@ open class PersionFragment : BaseFragment<PersionContract.PersionPresenter>(), P
         }
     }
 
+
+    //活动公告
+    override fun callBacInform(key: String) {
+        UGlide.loadGif(activity, "https://img.zcool.cn/community/012d2059accd89a8012028a9d9bf43.gif", lbImageView)
+        hintView.isSelected = true
+        hintView.text = key
+    }
+
     //==========================================优惠券对话框========================================
     private var isShowCard = false
 
@@ -226,5 +238,6 @@ open class PersionFragment : BaseFragment<PersionContract.PersionPresenter>(), P
             USharePreference.put(activity!!, "isShowCard", true)
         }
     }
+
 
 }

@@ -33,6 +33,13 @@
         <item>月榜</item>
     </string-array>
 
+    <string-array name="tab_wallet_Title">
+        <item>累计收益</item>
+        <item>转发收益</item>
+        <item>收徒收益</item>
+        <item>我的徒弟</item>
+    </string-array>
+
     <string-array name="tab_card_Title">
         <item>未使用</item>
         <item>已使用</item>

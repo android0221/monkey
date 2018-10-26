@@ -160,7 +160,6 @@ class ArticleDetailActivity : BaseActivity<ArticleDetailContract.ArticlePresente
                         view.loadUrl(url)// 使用当前WebView处理跳转
                         return false//true表示此事件在此处被处理，不需要再广播
                     }
-
                     override//转向错误时的处理
                     fun onReceivedError(view: WebView, errorCode: Int, description: String, failingUrl: String) {
                         ULog.e(TAG, "文章的url加载错误： errorCode:$errorCode,description $description,failingUrl:$failingUrl")

@@ -28,6 +28,7 @@ class CustomerActivity : BaseActivity<CustomerContract.CustomerPresenter>(), Cus
 
     override fun initViews() {
         backView.setOnClickListener { finish() }
+
         qqLayout.setOnClickListener { AppIntentAction.joinQQGroup(qqKey, this) }
         wcLayout.setOnClickListener {
             val cm = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager

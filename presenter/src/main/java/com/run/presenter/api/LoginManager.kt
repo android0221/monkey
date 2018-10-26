@@ -8,6 +8,8 @@ import com.run.config.AppConstants
 import com.run.config.modle.BaseModle
 import com.run.login.modle.VersionModle
 import com.run.presenter.LoginHelper
+import com.run.presenter.modle.InformModle
+import com.run.presenter.modle.SignModle
 import com.run.presenter.modle.login.*
 import io.reactivex.Observable
 import org.json.JSONException
@@ -85,6 +87,7 @@ object LoginManager {
         }
         return LoginManager.instance.verifyRegister(UEncrypt.encrypt_AES(jsonObject.toString(), AppConstants.DES_KEY))
     }
+
     /**
      * 重置密码
      * @param mobile
@@ -210,10 +213,21 @@ object LoginManager {
         } catch (e: JSONException) {
             e.printStackTrace()
         }
-
         return LoginManager.instance.sign(LoginHelper.instance.getmToken()!!, UEncrypt.encrypt_AES(jsonObject.toString(), AppConstants.DES_KEY))
     }
 
+    /**
+     * 签到信息
+     */
+    fun sign_info(): Observable<SignModle> {
+        val jsonObject = JSONObject()
+        try {
+            jsonObject.put("channel", AppConstants.CHANNEL_KEY)
+        } catch (e: JSONException) {
+            e.printStackTrace()
+        }
+        return LoginManager.instance.sign_info(LoginHelper.instance.getmToken()!!, UEncrypt.encrypt_AES(jsonObject.toString(), AppConstants.DES_KEY))
+    }
 
     /**
      * 首页弹窗
@@ -258,6 +272,19 @@ object LoginManager {
         }
 
         return LoginManager.instance.boundTeacher(LoginHelper.instance.getmToken()!!, UEncrypt.encrypt_AES(jsonObject.toString(), AppConstants.DES_KEY))
+    }
+
+    /**
+     * 首页弹窗
+     */
+    fun inform(): Observable<InformModle> {
+        val jsonObject = JSONObject()
+        try {
+            jsonObject.put("channel", AppConstants.CHANNEL_KEY)
+        } catch (e: JSONException) {
+            e.printStackTrace()
+        }
+        return LoginManager.instance.inform(LoginHelper.instance.getmToken()!!, UEncrypt.encrypt_AES(jsonObject.toString(), AppConstants.DES_KEY))
     }
 
     //=====================================================================分享=======================================================================

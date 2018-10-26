@@ -45,6 +45,7 @@ class InviteActivity : BaseActivity<InviteContract.InvitePresenter>(), InviteCon
     private lateinit var mRecyclerView: RecyclerView
     private lateinit var tabLayout: TabLayout
     private lateinit var mAdapter: SeniorityAdapter
+
     override fun initViews() {
         mRecyclerView = findViewById(R.id.recyclerview)
         mRecyclerView.setHasFixedSize(true)
@@ -58,7 +59,6 @@ class InviteActivity : BaseActivity<InviteContract.InvitePresenter>(), InviteCon
 
     private fun initHeardView() {
         val headView = View.inflate(this, R.layout.layout_invite_header, null)
-
         headView.findViewById<View>(R.id.ll_share_wc).setOnClickListener(this)
         headView.findViewById<View>(R.id.ll_share_wcfriend).setOnClickListener(this)
         headView.findViewById<View>(R.id.ll_share_face).setOnClickListener(this)
@@ -137,9 +137,7 @@ class InviteActivity : BaseActivity<InviteContract.InvitePresenter>(), InviteCon
 
         UGlide.loadImage(this, modle.invite_top_img!!, this!!.iv_invite_top!!)
         iv_invite_top.isEnabled = modle.activity_type !== 0
-
     }
-
     override fun showData(modle: SeniorityModle) {
         if (modle.code == 10003) {//账号被封异常
             showMsg(modle.msg)
@@ -153,8 +151,8 @@ class InviteActivity : BaseActivity<InviteContract.InvitePresenter>(), InviteCon
             mAdapter!!.setNewData(list)
             return
         }
-        mAdapter!!.requetType = requetType
-        mAdapter!!.setNewData(modle.list)
+        mAdapter.requetType = requetType
+        mAdapter.setNewData(modle.list)
 
     }
 

@@ -333,7 +333,6 @@
 
     </LinearLayout>
 
-
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_5"
@@ -369,6 +368,5 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_0_5"
         android:background="@color/colorLine" />
-
 
 </LinearLayout>

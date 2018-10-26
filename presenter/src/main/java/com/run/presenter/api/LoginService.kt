@@ -3,6 +3,8 @@ package com.run.login.api
 
 import com.run.config.modle.BaseModle
 import com.run.login.modle.VersionModle
+import com.run.presenter.modle.InformModle
+import com.run.presenter.modle.SignModle
 import com.run.presenter.modle.login.*
 import io.reactivex.Observable
 import retrofit2.http.GET
@@ -98,6 +100,17 @@ interface LoginService {
     @GET("web/user/d_content")
     fun problemContent(@Header("xytoken") token: String, @Query("content") content: String): Observable<DyContentModle>
 
+
+    /**
+     * 签到信息
+     *
+     * @param content
+     * @return
+     */
+    @GET("web/user/sign_info")
+    fun sign_info(@Header("xytoken") token: String, @Query("content") content: String): Observable<SignModle>
+
+
     /**
      * 个人中心 – 签到
      *
@@ -144,5 +157,13 @@ interface LoginService {
      */
     @GET("web/Article/share_record")
     fun shareRecord(@Header("xytoken") token: String, @Query("content") content: String): Observable<ShareModle>
+
+
+    /**
+     * 活动公告
+     */
+    @GET("web/config/inform")
+    fun inform(@Header("xytoken") token: String, @Query("content") content: String): Observable<InformModle>
+
 
 }

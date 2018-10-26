@@ -58,7 +58,10 @@
         <activity android:name=".activity.CustomerActivity" />
         <activity android:name=".activity.LuckTurnTableActivity" />
         <activity android:name=".activity.RiceTreeActivity" />
-        <activity android:name=".activity.SignActivity"></activity>
+        <activity android:name=".activity.SignActivity" />
+        <activity android:name=".activity.MyWalletActivity"
+            android:theme="@style/AppTheme"
+            ></activity>
     </application>
 
 </manifest>

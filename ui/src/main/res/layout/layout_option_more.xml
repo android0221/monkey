@@ -94,7 +94,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_5"
-            android:text="收益明细"
+            android:text="我的钱包"
             android:textColor="@color/color_f1"
             android:textSize="@dimen/sp_12" />
 

@@ -104,7 +104,7 @@ class PhotoDetailActivity : BaseActivity<ArticleDetailContract.ArticlePresenter>
                 container.removeView(`object` as View)
             }
         }
-        viewpager.addOnPageChangeListener(PageIndicator(this@PhotoDetailActivity, dot_horizontal, if (paths == null) 0 else paths.size))
+        viewpager.addOnPageChangeListener(PageIndicator(this@PhotoDetailActivity, dot_horizontal, paths.size))
     }
 
 }
