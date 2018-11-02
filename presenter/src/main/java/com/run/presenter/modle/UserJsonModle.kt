@@ -25,6 +25,8 @@ class UserJsonModle : BaseModle() {
      * invite_top_img
      * progress_type //周活动奖
      * transmit_type  //转发现金红包
+     *
+     * pachira_macrocarpa_type 发财树
      */
 
     var data: DataBean? = null
@@ -35,10 +37,22 @@ class UserJsonModle : BaseModle() {
     var count_invite: Int = 0
     var deposit: List<DepositBean>? = null
     var first_user_id: Int = 0
+
     var activity_type: String? = "0"
+    var activity_msg: String? = ""
     var invite_top_img: String? = null
+
+
     var progress_type: String? = "0"
+    var progress_msg: String? = ""
+
+
     var transmit_type: String? = "0"
+    var transmit_msg: String? = ""
+
+
+    var pachira_macrocarpa_type: String? = "0"
+    var pachira_msg: String? = ""
 
     class DataBean {
         /**

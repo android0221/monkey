@@ -13,6 +13,9 @@ import com.run.presenter.modle.IncomeRecordModle;
 import com.run.presenter.modle.IncomeResultModle;
 import com.run.presenter.modle.InviteModle;
 import com.run.presenter.modle.MegagameModle;
+import com.run.presenter.modle.PackageDetalModle;
+import com.run.presenter.modle.PacketModle;
+import com.run.presenter.modle.PacketResultModle;
 import com.run.presenter.modle.ProgressArtiveModle;
 import com.run.presenter.modle.SeniorityModle;
 import com.run.presenter.modle.TransmitModle;
@@ -206,6 +209,31 @@ public interface ApiService {
     @GET("web/user/transmit")
     Observable<TransmitModle> transmit(@Header("xytoken") String token, @Query("content") String content);
 
+
+    /**
+     * 发财树红包
+     */
+    @GET("web/user/my_packet")
+    Observable<PacketModle> my_packet(@Header("xytoken") String token, @Query("content") String content);
+
+    /**
+     * 领取红包
+     */
+    @GET("web/user/get_pack")
+    Observable<PacketResultModle> get_pack(@Header("xytoken") String token, @Query("content") String content);
+
+
+    /**
+     * 兑奖
+     */
+    @GET("web/user/receive_award")
+    Observable<BaseModle> receive_award(@Header("xytoken") String token, @Query("content") String content);
+
+    /**
+     * 红包明细
+     */
+    @GET("web/user/pack_list")
+    Observable<PackageDetalModle> pack_list(@Header("xytoken") String token, @Query("content") String content);
 
     //===============================================用户信息========================================
 

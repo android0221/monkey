@@ -14,18 +14,18 @@
         <View
             android:layout_width="@dimen/dp_0_5"
             android:layout_height="match_parent"
-            android:background="@color/colorLine" />
+            android:background="@color/color_f9" />
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
+            android:layout_weight="3"
             android:gravity="center">
 
             <ImageView
                 android:id="@+id/iv_head"
-                android:layout_width="@dimen/dp_20"
-                android:layout_height="@dimen/dp_20"
+                android:layout_width="@dimen/dp_18"
+                android:layout_height="@dimen/dp_18"
                 android:adjustViewBounds="true"
                 android:src="@mipmap/uh" />
 
@@ -33,59 +33,74 @@
                 android:id="@+id/tv_user_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/dp_5"
-                android:padding="@dimen/dp_2"
+                android:layout_marginLeft="@dimen/dp_2"
                 android:text="655644"
                 android:textColor="@color/color_f3"
-                android:textSize="@dimen/sp_14" />
+                android:textSize="@dimen/sp_12" />
         </LinearLayout>
 
         <View
             android:layout_width="@dimen/dp_0_5"
             android:layout_height="match_parent"
-            android:background="@color/colorLine" />
+            android:background="@color/color_f9" />
 
         <TextView
             android:id="@+id/tv_mobile"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="3"
+            android:layout_weight="4"
             android:gravity="center"
             android:padding="@dimen/dp_2"
             android:text="13077894546"
             android:textColor="@color/color_f6"
-            android:textSize="@dimen/sp_14" />
+            android:textSize="@dimen/sp_12" />
 
         <View
             android:layout_width="@dimen/dp_0_5"
             android:layout_height="match_parent"
-            android:background="@color/colorLine" />
+            android:background="@color/color_f9" />
 
         <TextView
             android:id="@+id/tv_bonus_grant"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
+            android:layout_weight="3"
             android:gravity="center"
             android:text="0.0"
             android:textColor="@color/colorPrimary"
-            android:textSize="@dimen/sp_14"
+            android:textSize="@dimen/sp_12"
             android:textStyle="bold" />
 
         <View
             android:layout_width="@dimen/dp_0_5"
             android:layout_height="match_parent"
-            android:background="@color/colorLine" />
+            android:background="@color/color_f9" />
 
         <TextView
             android:id="@+id/tv_bonus_amount"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
+            android:layout_weight="3"
             android:gravity="center"
             android:text="0.0"
             android:textColor="@color/colorPrimary"
-            android:textSize="@dimen/sp_14"
+            android:textSize="@dimen/sp_12"
+            android:textStyle="bold" />
+
+        <View
+            android:layout_width="@dimen/dp_0_5"
+            android:layout_height="match_parent"
+            android:background="@color/color_f9" />
+
+        <TextView
+            android:id="@+id/profit_totalView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:gravity="center"
+            android:text="0.0"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/sp_12"
             android:textStyle="bold" />
     </LinearLayout>
 
@@ -93,7 +108,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_0_5"
-        android:background="@color/colorLine" />
+        android:background="@color/color_f9" />
 
 
 </LinearLayout>

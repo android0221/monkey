@@ -15,6 +15,7 @@ class SignModle : BaseModle() {
      */
 
     var num: Int = 0
+    var signtype: Int = 0
     var money: String? = null
     var term_money: Int = 0
     var start_money: Double = 0.toDouble()

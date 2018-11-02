@@ -1,0 +1,465 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackGround"
+    android:orientation="vertical"
+    tools:context=".activity.ExplainActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_40"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/backView"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/dp_10"
+            android:paddingRight="@dimen/dp_10"
+            android:src="@mipmap/iv_back" />
+
+        <TextView
+            android:id="@+id/titleView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:text="收入指南"
+            android:textColor="@color/color_f3"
+            android:textSize="@dimen/sp_18" />
+
+
+        <TextView
+            android:id="@+id/xszdView"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:padding="@dimen/dp_5"
+            android:text="新手指导"
+            android:textColor="@color/colorAccent"
+            android:textSize="@dimen/sp_14" />
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_5" />
+
+    <WebView
+        android:id="@+id/wb_content"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="@dimen/dp_5"
+        android:layout_weight="1"
+        android:background="@color/white"
+        android:overScrollMode="never"
+        android:scrollbars="none"></WebView>
+
+
+    <!--<ScrollView-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="0dp"-->
+    <!--android:layout_marginBottom="@dimen/dp_10"-->
+    <!--android:layout_weight="1">-->
+
+    <!--<LinearLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_margin="@dimen/dp_5"-->
+    <!--android:background="@color/white"-->
+    <!--android:orientation="vertical">-->
+
+    <!--<View-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="@dimen/dp_0_5"-->
+    <!--android:background="@color/color_f9" />-->
+
+    <!--<LinearLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="@dimen/dp_30"-->
+    <!--android:gravity="center_vertical"-->
+    <!--android:orientation="horizontal">-->
+
+    <!--<View-->
+    <!--android:layout_width="@dimen/dp_0_5"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:background="@color/color_f9" />-->
+
+    <!--<TextView-->
+    <!--android:layout_width="0dp"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_weight="1"-->
+    <!--android:gravity="center"-->
+    <!--android:text="收入项"-->
+    <!--android:textColor="@color/color_f3"-->
+    <!--android:textSize="@dimen/sp_14" />-->
+
+    <!--<View-->
+    <!--android:layout_width="@dimen/dp_0_5"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:background="@color/color_f9" />-->
+
+    <!--<TextView-->
+    <!--android:layout_width="0dp"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_weight="3"-->
+    <!--android:gravity="center"-->
+    <!--android:text="说明"-->
+    <!--android:textColor="@color/color_f3"-->
+    <!--android:textSize="@dimen/sp_14" />-->
+
+
+    <!--<View-->
+    <!--android:layout_width="@dimen/dp_0_5"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:background="@color/color_f9" />-->
+
+    <!--</LinearLayout>-->
+
+    <!--<View-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="@dimen/dp_0_5"-->
+    <!--android:background="@color/color_f9" />-->
+
+    <!--<LinearLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="@dimen/dp_30"-->
+    <!--android:gravity="center_vertical"-->
+    <!--android:orientation="horizontal">-->
+
+    <!--<View-->
+    <!--android:layout_width="@dimen/dp_0_5"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:background="@color/color_f9" />-->
+
+    <!--<TextView-->
+    <!--android:layout_width="0dp"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_weight="1"-->
+    <!--android:gravity="center"-->
+    <!--android:text="新人红包"-->
+    <!--android:textColor="@color/color_f3"-->
+    <!--android:textSize="@dimen/sp_14" />-->
+
+    <!--<View-->
+    <!--android:layout_width="@dimen/dp_0_5"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:background="@color/color_f9" />-->
+
+    <!--<TextView-->
+    <!--android:id="@+id/hbView"-->
+    <!--android:layout_width="0dp"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_weight="3"-->
+    <!--android:gravity="center"-->
+    <!--android:text=""-->
+    <!--android:textColor="@color/color_f3"-->
+    <!--android:textSize="@dimen/sp_14" />-->
+
+
+    <!--<View-->
+    <!--android:layout_width="@dimen/dp_0_5"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:background="@color/color_f9" />-->
+
+    <!--</LinearLayout>-->
+
+    <!--<View-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="@dimen/dp_0_5"-->
+    <!--android:background="@color/color_f9" />-->
+
+    <!--<LinearLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="@dimen/dp_100"-->
+    <!--android:gravity="center_vertical"-->
+    <!--android:orientation="horizontal">-->
+
+    <!--<View-->
+    <!--android:layout_width="@dimen/dp_0_5"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:background="@color/color_f9" />-->
+
+    <!--<TextView-->
+    <!--android:layout_width="0dp"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_weight="1"-->
+    <!--android:gravity="center"-->
+    <!--android:text="转发收益"-->
+    <!--android:textColor="@color/color_f3"-->
+    <!--android:textSize="@dimen/sp_14" />-->
+
+    <!--<View-->
+    <!--android:layout_width="@dimen/dp_0_5"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:background="@color/color_f9" />-->
+
+    <!--<TextView-->
+    <!--android:id="@+id/zfView"-->
+    <!--android:layout_width="0dp"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_weight="3"-->
+    <!--android:gravity="center"-->
+    <!--android:text=""-->
+    <!--android:textColor="@color/color_f3"-->
+    <!--android:textSize="@dimen/sp_14" />-->
+
+
+    <!--<View-->
+    <!--android:layout_width="@dimen/dp_0_5"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:background="@color/color_f9" />-->
+
+    <!--</LinearLayout>-->
+
+    <!--<View-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="@dimen/dp_0_5"-->
+    <!--android:background="@color/color_f9" />-->
+
+
+    <!--<LinearLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="@dimen/dp_180"-->
+    <!--android:gravity="center_vertical"-->
+    <!--android:orientation="horizontal">-->
+
+    <!--<View-->
+    <!--android:layout_width="@dimen/dp_0_5"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:background="@color/color_f9" />-->
+
+    <!--<TextView-->
+    <!--android:layout_width="0dp"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_weight="1"-->
+    <!--android:gravity="center"-->
+    <!--android:text="收徒奖励"-->
+    <!--android:textColor="@color/color_f3"-->
+    <!--android:textSize="@dimen/sp_14" />-->
+
+    <!--<View-->
+    <!--android:layout_width="@dimen/dp_0_5"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:background="@color/color_f9" />-->
+
+    <!--<TextView-->
+    <!--android:id="@+id/ApprenticeView"-->
+    <!--android:layout_width="0dp"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_weight="3"-->
+    <!--android:gravity="center"-->
+    <!--android:text=""-->
+    <!--android:textColor="@color/color_f3"-->
+    <!--android:textSize="@dimen/sp_14" />-->
+
+
+    <!--<View-->
+    <!--android:layout_width="@dimen/dp_0_5"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:background="@color/color_f9" />-->
+
+    <!--</LinearLayout>-->
+
+    <!--<View-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="@dimen/dp_0_5"-->
+    <!--android:background="@color/color_f9" />-->
+
+
+    <!--<LinearLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="@dimen/dp_60"-->
+    <!--android:gravity="center_vertical"-->
+    <!--android:orientation="horizontal">-->
+
+    <!--<View-->
+    <!--android:layout_width="@dimen/dp_0_5"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:background="@color/color_f9" />-->
+
+    <!--<TextView-->
+    <!--android:layout_width="0dp"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_weight="1"-->
+    <!--android:gravity="center"-->
+    <!--android:text="下线分成"-->
+    <!--android:textColor="@color/color_f3"-->
+    <!--android:textSize="@dimen/sp_14" />-->
+
+    <!--<View-->
+    <!--android:layout_width="@dimen/dp_0_5"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:background="@color/color_f9" />-->
+
+    <!--<TextView-->
+    <!--android:id="@+id/downlineView"-->
+    <!--android:layout_width="0dp"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_weight="3"-->
+    <!--android:gravity="center"-->
+    <!--android:text=""-->
+    <!--android:textColor="@color/color_f3"-->
+    <!--android:textSize="@dimen/sp_14" />-->
+
+
+    <!--<View-->
+    <!--android:layout_width="@dimen/dp_0_5"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:background="@color/color_f9" />-->
+
+    <!--</LinearLayout>-->
+
+    <!--<View-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="@dimen/dp_0_5"-->
+    <!--android:background="@color/color_f9" />-->
+
+    <!--<LinearLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="@dimen/dp_200"-->
+    <!--android:gravity="center_vertical"-->
+    <!--android:orientation="horizontal">-->
+
+    <!--<View-->
+    <!--android:layout_width="@dimen/dp_0_5"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:background="@color/color_f9" />-->
+
+    <!--<TextView-->
+    <!--android:layout_width="0dp"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_weight="1"-->
+    <!--android:gravity="center"-->
+    <!--android:text="签到奖励"-->
+    <!--android:textColor="@color/color_f3"-->
+    <!--android:textSize="@dimen/sp_14" />-->
+
+    <!--<View-->
+    <!--android:layout_width="@dimen/dp_0_5"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:background="@color/color_f9" />-->
+
+    <!--<TextView-->
+    <!--android:id="@+id/signView"-->
+    <!--android:layout_width="0dp"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_weight="3"-->
+    <!--android:gravity="center"-->
+    <!--android:text=""-->
+    <!--android:textColor="@color/color_f3"-->
+    <!--android:textSize="@dimen/sp_14" />-->
+
+
+    <!--<View-->
+    <!--android:layout_width="@dimen/dp_0_5"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:background="@color/color_f9" />-->
+
+    <!--</LinearLayout>-->
+
+    <!--<View-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="@dimen/dp_0_5"-->
+    <!--android:background="@color/color_f9" />-->
+
+
+    <!--<LinearLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="@dimen/dp_50"-->
+    <!--android:gravity="center_vertical"-->
+    <!--android:orientation="horizontal">-->
+
+    <!--<View-->
+    <!--android:layout_width="@dimen/dp_0_5"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:background="@color/color_f9" />-->
+
+    <!--<TextView-->
+    <!--android:layout_width="0dp"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_weight="1"-->
+    <!--android:gravity="center"-->
+    <!--android:text="会员提现"-->
+    <!--android:textColor="@color/color_f3"-->
+    <!--android:textSize="@dimen/sp_14" />-->
+
+    <!--<View-->
+    <!--android:layout_width="@dimen/dp_0_5"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:background="@color/color_f9" />-->
+
+    <!--<TextView-->
+    <!--android:id="@+id/withdrawView"-->
+    <!--android:layout_width="0dp"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_weight="3"-->
+    <!--android:gravity="center"-->
+    <!--android:text=""-->
+    <!--android:textColor="@color/color_f3"-->
+    <!--android:textSize="@dimen/sp_14" />-->
+
+
+    <!--<View-->
+    <!--android:layout_width="@dimen/dp_0_5"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:background="@color/color_f9" />-->
+
+    <!--</LinearLayout>-->
+
+    <!--<View-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="@dimen/dp_0_5"-->
+    <!--android:layout_marginBottom="@dimen/dp_5"-->
+    <!--android:background="@color/color_f9" />-->
+    <!--</LinearLayout>-->
+
+    <!--</ScrollView>-->
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_45"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/zfButton"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="#F64365"
+            android:gravity="center"
+            android:text="去转发"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_18"
+            android:textStyle="bold" />
+
+        <View
+            android:layout_width="@dimen/dp_1"
+            android:layout_height="match_parent"
+            android:background="@color/white" />
+
+        <TextView
+            android:id="@+id/apprenticeButton"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="#7495C2"
+            android:gravity="center"
+            android:text="去收徒"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_18"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+</LinearLayout>

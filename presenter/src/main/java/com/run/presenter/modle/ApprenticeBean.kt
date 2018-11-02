@@ -17,5 +17,6 @@ class ApprenticeBean {
     var bonus_amount: String? = null
     var mobile: String? = null
     var head_avatar: String? = null
+    var profit_total: String? = null
 
 }

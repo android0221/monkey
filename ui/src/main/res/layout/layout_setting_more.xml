@@ -32,7 +32,6 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-
                     android:drawablePadding="@dimen/dp_5"
                     android:text="收徒大赛"
                     android:textColor="@color/color_f3"
@@ -45,6 +44,7 @@
                     android:text="" />
 
                 <TextView
+                    android:id="@+id/invitegameView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="@dimen/dp_5"
@@ -98,10 +98,11 @@
                     android:text="" />
 
                 <TextView
+                    android:id="@+id/progressAwardView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="@dimen/dp_5"
-                    android:text="火热进行中"
+                    android:text=""
                     android:textColor="@color/colorRed"
                     android:textSize="@dimen/sp_12" />
 
@@ -141,7 +142,6 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-
                     android:drawablePadding="@dimen/dp_5"
                     android:text="转发送现金红包"
                     android:textColor="@color/color_f3"
@@ -154,10 +154,11 @@
                     android:text="" />
 
                 <TextView
+                    android:id="@+id/transmitMsgView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="@dimen/dp_5"
-                    android:text="火热进行中"
+                    android:text=""
                     android:textColor="@color/colorRed"
                     android:textSize="@dimen/sp_12" />
 
@@ -181,7 +182,8 @@
             android:id="@+id/truntableLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:visibility="gone">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -247,7 +249,6 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-
                     android:drawablePadding="@dimen/dp_5"
                     android:text="发财树"
                     android:textColor="@color/color_f3"
@@ -260,21 +261,19 @@
                     android:text="" />
 
                 <TextView
+                    android:id="@+id/treeMsgView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="@dimen/dp_5"
-                    android:text="火热进行中"
+                    android:text=""
                     android:textColor="@color/colorRed"
                     android:textSize="@dimen/sp_12" />
-
                 <ImageView
                     android:layout_width="@dimen/dp_15"
                     android:layout_height="@dimen/dp_15"
                     android:adjustViewBounds="true"
                     android:src="@mipmap/e" />
-
             </LinearLayout>
-
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_0_5"
@@ -297,6 +296,7 @@
         android:layout_height="wrap_content"
         android:background="@color/white"
         android:orientation="vertical">
+
         <LinearLayout
             android:id="@+id/ll_wt"
             android:layout_width="match_parent"

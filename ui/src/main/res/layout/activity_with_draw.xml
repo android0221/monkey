@@ -49,8 +49,8 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_0_5"
-        android:background="@color/colorLine" />
+        android:layout_height="@dimen/dp_5"
+        android:background="@color/colorBackGround" />
 
 
     <ScrollView
@@ -66,8 +66,8 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_8"
-                android:background="#F2F2F2" />
+                android:layout_height="@dimen/dp_5"
+                android:background="@color/colorBackGround" />
 
             <include layout="@layout/layout_withdraw_content" />
 

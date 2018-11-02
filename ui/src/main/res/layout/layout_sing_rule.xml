@@ -30,7 +30,7 @@
             android:padding="@dimen/dp_5"
             android:text="1.每天转发收入满2元可签到;"
             android:textColor="@color/color_f3"
-            android:textSize="18sp" />
+            android:textSize="@dimen/sp_16" />
 
         <TextView
             android:layout_width="match_parent"
@@ -38,7 +38,7 @@
             android:padding="@dimen/dp_5"
             android:text="2.连续签到奖励更高"
             android:textColor="@color/color_f3"
-            android:textSize="18sp" />
+            android:textSize="@dimen/sp_16" />
 
 
         <LinearLayout
@@ -390,7 +390,7 @@
             android:padding="@dimen/dp_5"
             android:text="3.断签重新计算"
             android:textColor="@color/color_f3"
-            android:textSize="18sp" />
+            android:textSize="@dimen/sp_16" />
 
     </LinearLayout>
 

@@ -5,7 +5,9 @@ import android.widget.ImageView
 import com.run.common.base.BaseFragment
 import com.run.common.utils.UAnim
 import com.run.common.utils.UStatusBar
+import com.run.presenter.LoginHelper
 import com.run.ui.R
+import com.run.ui.activity.ExplainActivity
 import com.run.ui.activity.InviteActivity
 import com.run.ui.activity.SearchActivity
 
@@ -29,7 +31,11 @@ class VedioFragment : BaseFragment<Nothing>() {
     override fun initView(view: View) {
         redpackageView = view.findViewById(R.id.redpackage_imageview)
         view.findViewById<View>(R.id.serachView).setOnClickListener { SearchActivity.newInstance(context!!) }
-        redpackageView.setOnClickListener { InviteActivity.newInstance(activity!!) }
+        redpackageView.setOnClickListener {
+            if (LoginHelper.instance.isLogin(activity!!)) {
+                ExplainActivity.newInstance(activity!!)
+            }
+        }
     }
 
     private lateinit var fragment: ArticleFragment
@@ -39,13 +45,11 @@ class VedioFragment : BaseFragment<Nothing>() {
         fragmentTransaction.add(R.id.framelayout, fragment)
         fragmentTransaction.commit()
     }
-    
+
     override fun visiable() {
         super.visiable()
-        UStatusBar.setLightMode(this!!.activity!!)
+        UStatusBar.setLightMode(this.activity!!)
         UAnim.startShakeByPropertyAnim(redpackageView, 0.6f, 1.0f, 10f, 1000, 3)
-        if (fragment != null) {
-            fragment.requestData()
-        }
+        fragment.requestData()
     }
 }

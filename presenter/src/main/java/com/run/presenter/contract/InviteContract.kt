@@ -16,7 +16,7 @@ import io.reactivex.schedulers.Schedulers
 interface InviteContract {
     interface InviteView : BaseMvpView {
         fun showInvite(modle: InviteModle)
-        fun showData(modle: SeniorityModle)
+//        fun showData(modle: SeniorityModle)
     }
 
     class InvitePresenter(private val v: InviteView) : BaseMvpPresenter(v) {
@@ -38,19 +38,19 @@ interface InviteContract {
 
         }
 
-        fun seniority(type: String) {
-            addDisposable(ApiManager.seniority(type), object : BaseObserver<SeniorityModle>() {
-                override fun onSuccess(o: SeniorityModle) {
-                    if (isViewAttached()) v.showData(o)
-                }
-
-                override fun onError(errorType: Int, msg: String?) {
-                    if (isViewAttached()) v.showErr(errorType, msg!!)
-                }
-
-            })
-
-        }
+//        fun seniority(type: String) {
+//            addDisposable(ApiManager.seniority(type), object : BaseObserver<SeniorityModle>() {
+//                override fun onSuccess(o: SeniorityModle) {
+//                    if (isViewAttached()) v.showData(o)
+//                }
+//
+//                override fun onError(errorType: Int, msg: String?) {
+//                    if (isViewAttached()) v.showErr(errorType, msg!!)
+//                }
+//
+//            })
+//
+//        }
 
 
     }

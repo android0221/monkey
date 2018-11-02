@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_90"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="@dimen/dp_5">
+
+
+        <ImageView
+            android:id="@+id/headavatarView"
+            android:layout_width="@dimen/dp_80"
+            android:layout_height="@dimen/dp_60"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:scaleType="fitXY"
+            android:src="@mipmap/df" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dp_60"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/dp_5"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:id="@+id/createTimeView"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_centerVertical="true"
+                android:layout_weight="1"
+                android:gravity="top"
+                android:padding="@dimen/dp_5"
+                android:singleLine="true"
+                android:text=""
+                android:textColor="@color/color_f6"
+                android:textSize="@dimen/sp_10" />
+
+            <TextView
+                android:id="@+id/expiretimeView"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="bottom"
+                android:padding="@dimen/dp_5"
+                android:singleLine="true"
+                android:text=""
+                android:textColor="@color/color_f6"
+                android:textSize="@dimen/sp_10" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/moneyView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="+10"
+                android:textColor="@color/colorAccent"
+                android:textSize="@dimen/sp_18"
+                android:textStyle="bold" />
+
+
+            <TextView
+                android:id="@+id/statusView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_5"
+                android:background="@drawable/select_button"
+                android:paddingLeft="@dimen/dp_10"
+                android:paddingTop="@dimen/dp_2"
+                android:paddingRight="@dimen/dp_10"
+                android:paddingBottom="@dimen/dp_2"
+                android:text="未领取"
+                android:textColor="@color/white"
+                android:textSize="@dimen/sp_14" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_0_5"
+        android:background="@color/colorLine" />
+
+
+</LinearLayout>

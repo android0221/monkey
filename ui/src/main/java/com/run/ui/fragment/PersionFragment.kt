@@ -6,7 +6,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.run.common.base.BaseFragment
 import com.run.common.dialog.DialogHelper
-import com.run.common.utils.UAnim
 import com.run.common.utils.UGlide
 import com.run.common.utils.USharePreference
 import com.run.common.utils.UStatusBar
@@ -16,6 +15,7 @@ import com.run.presenter.modle.UserJsonModle
 import com.run.ui.R
 import com.run.ui.activity.*
 import kotlinx.android.synthetic.main.fragment_persion.*
+import kotlinx.android.synthetic.main.layout_setting_more.*
 
 open class PersionFragment : BaseFragment<PersionContract.PersionPresenter>(), PersionContract.PersionView {
 
@@ -68,6 +68,7 @@ open class PersionFragment : BaseFragment<PersionContract.PersionPresenter>(), P
         view.findViewById<View>(R.id.ll_invite).setOnClickListener(this)
         view.findViewById<View>(R.id.ll_withdraw).setOnClickListener(this)
         view.findViewById<View>(R.id.totalMoneyLayout).setOnClickListener(this)
+
         iv_usericon.setOnClickListener(this)
         invitegameLayout.setOnClickListener(this)
         progressAwardLayout.setOnClickListener(this)
@@ -87,7 +88,7 @@ open class PersionFragment : BaseFragment<PersionContract.PersionPresenter>(), P
      * fragment页面可见时调用；
      */
     override fun visiable() {
-        UStatusBar.setDarkMode(this!!.activity!!)
+        UStatusBar.setDarkMode(this.activity!!)
         requestData()
     }
 
@@ -112,7 +113,7 @@ open class PersionFragment : BaseFragment<PersionContract.PersionPresenter>(), P
             R.id.ll_sign -> SignActivity.newInstance(activity!!, signtype)//doSign()
             R.id.ll_wt -> ProblemActivity.newInstance(activity!!, 1)
             R.id.ll_yi -> FeedBackActivity.newInstance(activity!!)
-            R.id.ll_symx, R.id.totalMoneyLayout -> MyWalletActivity.newInstance(activity!!)
+            R.id.ll_symx, R.id.totalMoneyLayout -> MyWalletActivity.newInstance(activity!!, nick, avatar, total)
             R.id.iv_usericon -> UserInfoActivity.newInstance(activity!!)
             R.id.ll_invite -> InviteActivity.newInstance(activity!!)
             R.id.ll_withdraw -> WithDrawActivity.newInstance(activity!!)
@@ -120,7 +121,7 @@ open class PersionFragment : BaseFragment<PersionContract.PersionPresenter>(), P
             R.id.progressAwardLayout -> ProgressActiveActivity.newInstance(activity!!, userid)
             R.id.transmitLayout -> TransmitActivity.newInstance(activity!!, userid)
             R.id.truntableLayout -> LuckTurnTableActivity.newInstance(activity!!)
-            R.id.treeLayout -> RiceTreeActivity.newInstance(activity!!)
+            R.id.treeLayout -> RiceTreeActivity.newInstance(activity!!, avatar)
         }
     }
 
@@ -146,7 +147,7 @@ open class PersionFragment : BaseFragment<PersionContract.PersionPresenter>(), P
         tv_today_money.text = if (TextUtils.isEmpty(modle.count_income)) "0.0" else modle.count_income + ""//今日收益
         val bean = modle.data
         if (bean != null) {
-            avatar = bean!!.head_avatar
+            avatar = bean.head_avatar
             userid = bean.user_id
             nick = if (TextUtils.isEmpty(bean.wechat_nick_name)) "" + bean.user_id.toString() else bean.wechat_nick_name + "(ID: " + bean.user_id + ")"
             total = if (TextUtils.isEmpty(bean.profit_total)) "0.0" else bean.profit_total
@@ -169,6 +170,7 @@ open class PersionFragment : BaseFragment<PersionContract.PersionPresenter>(), P
         //收徒大赛
         activity_Type = modle.activity_type
         if (activity_Type == "0") {
+            invitegameView.text = modle.activity_msg
             invitegameLayout.visibility = View.GONE
         } else {//开启收徒大赛
             invitegameLayout.visibility = View.VISIBLE
@@ -177,6 +179,7 @@ open class PersionFragment : BaseFragment<PersionContract.PersionPresenter>(), P
         //本周进步奖活动
         progress_type = modle.progress_type!!
         if (progress_type == "1") { //没有开启
+            progressAwardView.text = modle.progress_msg
             progressAwardLayout.visibility = View.VISIBLE
         } else { //有开启
             progressAwardLayout.visibility = View.GONE
@@ -184,9 +187,17 @@ open class PersionFragment : BaseFragment<PersionContract.PersionPresenter>(), P
 
         //转发送现金红包
         if (modle.transmit_type == "1") {
+            transmitMsgView.text = modle.transmit_msg
             transmitLayout.visibility = View.VISIBLE
         } else {
             transmitLayout.visibility = View.GONE
+        }
+
+        if (modle.pachira_macrocarpa_type == "1") {
+            treeMsgView.text = modle.pachira_msg
+            treeLayout.visibility = View.VISIBLE
+        } else {
+            treeLayout.visibility = View.GONE
         }
 
     }

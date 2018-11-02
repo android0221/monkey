@@ -366,10 +366,11 @@ object ApiManager {
     /**
      * 我的收徒列表
      */
-    fun invite_list(page: Int): Observable<ApprenticeModle> {
+    fun invite_list(page: Int, order: Int): Observable<ApprenticeModle> {
         val jsonObject = JSONObject()
         try {
             jsonObject.put("page", page)
+            jsonObject.put("order", order)
             jsonObject.put("channel", AppConstants.CHANNEL_KEY)
         } catch (e: JSONException) {
             e.printStackTrace()
@@ -388,6 +389,45 @@ object ApiManager {
         jsonObject.put("channel", AppConstants.CHANNEL_KEY)
 
         return ApiManager.instance.first(LoginHelper.instance.getmToken(), UEncrypt.encrypt_AES(jsonObject.toString(), AppConstants.DES_KEY))
+    }
+
+
+    /**
+     * 发财树红包
+     */
+    fun my_packet(): Observable<PacketModle> {
+        val jsonObject = JSONObject()
+        jsonObject.put("channel", AppConstants.CHANNEL_KEY)
+        return ApiManager.instance.my_packet(LoginHelper.instance.getmToken(), UEncrypt.encrypt_AES(jsonObject.toString(), AppConstants.DES_KEY))
+    }
+
+    /**
+     * 发财树红包
+     */
+    fun get_pack(pack_id: Int): Observable<PacketResultModle> {
+        val jsonObject = JSONObject()
+        jsonObject.put("channel", AppConstants.CHANNEL_KEY)
+        jsonObject.put("pack_id", pack_id)
+        return ApiManager.instance.get_pack(LoginHelper.instance.getmToken(), UEncrypt.encrypt_AES(jsonObject.toString(), AppConstants.DES_KEY))
+    }
+
+    /**
+     * 发财树兑奖
+     */
+    fun receive_award(): Observable<BaseModle> {
+        val jsonObject = JSONObject()
+        jsonObject.put("channel", AppConstants.CHANNEL_KEY)
+        return ApiManager.instance.receive_award(LoginHelper.instance.getmToken(), UEncrypt.encrypt_AES(jsonObject.toString(), AppConstants.DES_KEY))
+    }
+
+    /**
+     * 发财树 红包明细
+     */
+    fun pack_list(page: Int): Observable<PackageDetalModle> {
+        val jsonObject = JSONObject()
+        jsonObject.put("channel", AppConstants.CHANNEL_KEY)
+        jsonObject.put("page", page)
+        return ApiManager.instance.pack_list(LoginHelper.instance.getmToken(), UEncrypt.encrypt_AES(jsonObject.toString(), AppConstants.DES_KEY))
     }
 
 

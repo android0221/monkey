@@ -5,6 +5,7 @@
     <color name="white">#ffffff</color>
     <color name="black">#000000</color>
     <color name="transparent">#00000000</color>
+    <color name="transparent4">#44000000</color>
 
 
     <color name="color_enable">#929292</color>

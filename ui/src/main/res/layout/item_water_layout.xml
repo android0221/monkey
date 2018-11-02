@@ -1,11 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TextView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="3g"
+    android:layout_height="@dimen/dp_120"
     android:gravity="center"
-    android:textColor="#69c78e"
-    android:background="@drawable/shape_round">
+    android:orientation="vertical">
 
-</TextView>
+
+    <LinearLayout
+        android:id="@+id/ll_sign_status"
+        android:layout_width="@dimen/dp_48"
+        android:layout_height="@dimen/dp_80"
+        android:layout_margin="@dimen/dp_5"
+        android:background="@drawable/shape_redpark"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="@dimen/dp_25"
+            android:layout_height="@dimen/dp_25"
+            android:scaleType="fitXY"
+            android:src="@mipmap/coin" />
+
+
+        <TextView
+            android:id="@+id/tv_day"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_5"
+            android:gravity="center"
+            android:text="剩余"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_12"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/timeView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_2"
+            android:gravity="center"
+            android:text="00:00"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_12"
+            android:textStyle="bold" />
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

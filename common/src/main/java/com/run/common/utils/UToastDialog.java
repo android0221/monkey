@@ -25,6 +25,7 @@ public class UToastDialog {
         return mToastDialog;
     }
 
+
     /**
      * 显示
      */
@@ -34,9 +35,6 @@ public class UToastDialog {
             View view = LayoutInflater.from(context).inflate(R.layout.dialog_hint_layout, null);
             TextView tv_title = view.findViewById(R.id.tv_title);
             TextView tv_count = view.findViewById(R.id.tv_count);
-            if (count > 50) {
-                count = 50.00;
-            }
             tv_count.setText("+" + count);
             tv_title.setText(msg);
             toast = new Toast(context);
@@ -47,21 +45,15 @@ public class UToastDialog {
         }
     }
 
-
     public boolean isCanToast() {
         return canToast;
     }
-
     public void setCanToast(boolean canToast) {
         this.canToast = canToast;
     }
-
     private boolean canToast = false;
-
     public void ToastCancel() {
         if (canToast = false)
-            if (toast != null) {
-                toast.cancel();
-            }
+            if (toast != null) { toast.cancel(); }
     }
 }

@@ -30,4 +30,14 @@ class IncomeRecordModle : BaseModle() {
 
 
     }
+
+    var userinfo: MoneyBean? = null
+
+    class MoneyBean {
+        var profit_total: String? = null
+        var profit_share: String? = null
+        var profit_recruit: String? = null
+    }
+
+
 }

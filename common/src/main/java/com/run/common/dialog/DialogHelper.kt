@@ -1,13 +1,11 @@
-@file:Suppress("DEPRECATION")
+@file:Suppress("DEPRECATION", "NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
 
 package com.run.common.dialog
 
 import android.app.Dialog
 import android.content.Context
 import android.view.View
-import android.view.Window
 import android.view.WindowManager
-
 import com.run.common.R
 
 
@@ -21,9 +19,7 @@ object DialogHelper {
     @JvmOverloads
     fun showDialog(context: Context, contentView: View?, cancleable: Boolean = true) {
         if (contentView == null) return
-        if (mDialog == null) {
-            mDialog = Dialog(context, R.style.NormalDialogStyle)
-        }
+        mDialog = Dialog(context, R.style.NormalDialogStyle)
         mDialog!!.setContentView(contentView)
         mDialog!!.setCancelable(cancleable)
         mDialog!!.setCanceledOnTouchOutside(cancleable)

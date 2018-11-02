@@ -13,14 +13,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.LinearInterpolator;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 
+import com.run.common.utils.UTime;
+import com.run.presenter.modle.WaterModel;
 import com.run.ui.R;
 
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
-
 
 
 public class WaterFlake extends FrameLayout {
@@ -133,6 +135,20 @@ public class WaterFlake extends FrameLayout {
         for (int i = 0; i < modelList.size(); i++) {
             WaterModel waterModel = modelList.get(i);
             final View view = mLayoutInflater.inflate(R.layout.item_water_layout, this, false);
+
+            TextView timeView = view.findViewById(R.id.timeView);
+            long startTime = UTime.timeStrToNumber(waterModel.getCreate_time());
+            long endTime = UTime.timeStrToNumber(waterModel.getExpire_time());
+
+
+            long dexTime = endTime - System.currentTimeMillis();
+
+            System.out.println("startTime :" + startTime);
+            System.out.println("endTime :" + endTime);
+            System.out.println("dexTime :" + dexTime);
+
+            timeView.setText(UTime.chutDownTiem(dexTime));
+
             view.setX((float) ((mWidth * xRandom[i] * 0.11)));
             view.setY((float) ((mHeight * yRandom[i] * 0.08)));
             view.setTag(waterModel);

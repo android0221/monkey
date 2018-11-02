@@ -16,10 +16,10 @@
         android:background="@color/white"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:paddingBottom="10dp"
         android:paddingLeft="20dp"
+        android:paddingTop="10dp"
         android:paddingRight="20dp"
-        android:paddingTop="10dp">
+        android:paddingBottom="10dp">
 
         <ImageView
             android:layout_width="20dp"
@@ -43,10 +43,10 @@
             android:layout_marginLeft="10dp"
             android:layout_weight="1"
             android:singleLine="true"
-            android:textStyle="bold"
             android:text=""
             android:textColor="@color/colorAccent"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            android:textStyle="bold" />
 
         <ImageView
             android:layout_width="20dp"
@@ -66,10 +66,10 @@
         android:background="@color/white"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:paddingBottom="10dp"
         android:paddingLeft="20dp"
+        android:paddingTop="10dp"
         android:paddingRight="20dp"
-        android:paddingTop="10dp">
+        android:paddingBottom="10dp">
 
         <ImageView
             android:layout_width="20dp"
@@ -90,13 +90,13 @@
         <TextView
             android:id="@+id/tv_incarnate_money"
             android:layout_width="0dp"
-            android:textStyle="bold"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_weight="1"
             android:text="5元"
             android:textColor="@color/colorAccent"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
         <ImageView
             android:layout_width="20dp"
@@ -117,7 +117,6 @@
 
 
     <LinearLayout
-        android:visibility="gone"
         android:id="@+id/ll_card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -125,10 +124,11 @@
         android:background="@color/white"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:paddingBottom="10dp"
         android:paddingLeft="20dp"
+        android:paddingTop="10dp"
         android:paddingRight="20dp"
-        android:paddingTop="10dp">
+        android:paddingBottom="10dp"
+        android:visibility="gone">
 
         <ImageView
             android:layout_width="20dp"
@@ -152,10 +152,10 @@
             android:layout_marginLeft="10dp"
             android:layout_weight="1"
             android:hint="请正确选择等额代金券"
-            android:textStyle="bold"
             android:text=""
             android:textColor="@color/colorAccent"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            android:textStyle="bold" />
 
         <ImageView
             android:layout_width="20dp"
@@ -170,22 +170,22 @@
         android:id="@+id/btn_income"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
+        android:layout_margin="@dimen/dp_10"
         android:background="@drawable/select_button"
         android:text="提现"
-        android:textColor="@color/white" />
+        android:textColor="@color/white"
+        android:textSize="@dimen/sp_18" />
 
 
     <WebView
         android:id="@+id/wb_msg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:minHeight="100dp"
-        android:padding="10dp"
         android:layout_margin="5dp"
         android:layout_marginTop="20dp"
+        android:minHeight="100dp"
+        android:padding="10dp"
         tools:ignore="WebViewLayout"></WebView>
-
 
 
 </LinearLayout>

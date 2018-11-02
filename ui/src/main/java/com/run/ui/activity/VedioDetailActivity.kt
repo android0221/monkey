@@ -20,6 +20,7 @@ import com.run.presenter.contract.ArticleDetailContract
 import com.run.presenter.modle.ArticleBean
 import com.run.presenter.modle.ArticleDetailModle
 import com.run.share.ShareHelper
+import com.run.ui.ArticleHelper
 import com.run.ui.R
 import com.run.ui.adapter.ArticleMoreAdapter
 import com.yun.uvedio.JZVideoPlayerStandard
@@ -126,11 +127,11 @@ class VedioDetailActivity : BaseActivity<ArticleDetailContract.ArticlePresenter>
             ll_artice_more!!.visibility = View.VISIBLE
             adapter!!.setNewData(modle.list)
         } else {
-            var datas: List<ArticleBean> = arrayListOf(ArticleBean())
-            adapter!!.setNewData(datas)
-//            ll_artice_more!!.visibility = View.GONE
+            ll_artice_more!!.visibility = View.VISIBLE
+            adapter!!.setNewData(ArticleHelper.instance.getList())
         }
     }
+
     //====================================热门推荐=============================================================================
     var recyclerView: RecyclerView? = null
     var adapter: ArticleMoreAdapter? = null

@@ -12,8 +12,10 @@ import com.run.common.utils.UAnim
 import com.run.common.utils.UStatusBar
 import com.run.common.utils.UTabLayout
 import com.run.persioninfomation.presenter.HomeContract
+import com.run.presenter.LoginHelper
 import com.run.presenter.modle.ArticleTypeModle
 import com.run.ui.R
+import com.run.ui.activity.ExplainActivity
 import com.run.ui.activity.InviteActivity
 import com.run.ui.activity.SearchActivity
 
@@ -39,7 +41,11 @@ class HomeFragment : BaseFragment<HomeContract.HomePresenter>(), HomeContract.Ho
         tabLayout = view.findViewById(R.id.tabLayout)
         viewPager = view.findViewById(R.id.viewPager)
         view.findViewById<View>(R.id.searchView).setOnClickListener { SearchActivity.newInstance(activity!!) }
-        redImage.setOnClickListener { InviteActivity.newInstance(activity!!) }
+        redImage.setOnClickListener {
+            if (LoginHelper.instance.isLogin(activity!!)) {
+                ExplainActivity.newInstance(activity!!)
+            }
+        }
     }
 
 

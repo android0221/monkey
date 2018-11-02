@@ -19,7 +19,7 @@ import com.run.ui.activity.VedioDetailActivity
  */
 class ArticleMoreAdapter : BaseQuickAdapter<ArticleBean, BaseViewHolder>(R.layout.item_article_more_layout, null) {
     override fun convert(helper: BaseViewHolder, item: ArticleBean) {
-        if (item == null) {
+        if (item.category_id <= 0) {
             helper.getView<View>(R.id.rl_root).visibility = View.GONE
             return
         }
@@ -28,7 +28,7 @@ class ArticleMoreAdapter : BaseQuickAdapter<ArticleBean, BaseViewHolder>(R.layou
         val tv_title: TextView = helper.getView(R.id.tv_title)
         tv_title!!.text = SpanStringUtils.getEmotionContent(EmotionUtils.EMOTION_CLASSIC_TYPE, mContext, tv_title, item.title)
         helper.setText(R.id.tv_view_count, "阅读:" + (item.view_count + item.fake_view_max))
-        var money = if (!item.money_view_user.equals("0.000")) {
+        val money = if (!item.money_view_user.equals("0.000")) {
             item.money_view_user
         } else {
             "0.2"

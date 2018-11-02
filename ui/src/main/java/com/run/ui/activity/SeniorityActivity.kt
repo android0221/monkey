@@ -55,7 +55,7 @@ class SeniorityActivity : BaseActivity<Nothing>() {
         tv_userid.text = intent.getStringExtra("nick")
 
         val adapter = SeniorityPagerAdapter(supportFragmentManager)
-        mViewPager!!.adapter = adapter
+        mViewPager.adapter = adapter
         mTab.setupWithViewPager(mViewPager)
         UTabLayout.setTabLayoutLine(mTab)
     }
@@ -63,7 +63,6 @@ class SeniorityActivity : BaseActivity<Nothing>() {
     override fun initPresenter(): Nothing? {
         return null
     }
-
 
     private inner class SeniorityPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
         var mTilte: Array<String> = resources.getStringArray(R.array.tab_seniority_Title)

@@ -47,7 +47,7 @@ class ProblemFragment : BaseListFragment<ProblemContract.ProblemPresenter, UserI
 
     override fun onItemClick(adapter: BaseQuickAdapter<*, *>?, view: View?, position: Int) {
         val bean: UserItemBean = adapter!!.getItem(position) as UserItemBean
-        ContentDetailActivity.newInstance(this!!.activity!!, bean.title!!, bean.id)
+        ContentDetailActivity.newInstance(this.activity!!, bean.title!!, bean.id)
     }
 
 }

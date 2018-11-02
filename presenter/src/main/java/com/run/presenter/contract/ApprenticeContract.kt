@@ -20,9 +20,9 @@ interface ApprenticeContract {
     }
 
     class ApprenticePresenter(private val v: ApprenticeView) : BaseMvpPresenter(v) {
-        fun invite_list(mPage: Int) {
+        fun invite_list(mPage: Int, order: Int) {
 
-            addDisposable(ApiManager.invite_list(mPage), object : BaseObserver<ApprenticeModle>() {
+            addDisposable(ApiManager.invite_list(mPage, order), object : BaseObserver<ApprenticeModle>() {
                 override fun onSuccess(o: ApprenticeModle) {
                     if (isViewAttached()) v.showData(o.data!!)
                 }

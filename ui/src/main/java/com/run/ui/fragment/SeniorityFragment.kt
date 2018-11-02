@@ -10,7 +10,9 @@ import android.widget.ImageView
 import com.run.common.base.BaseFragment
 import com.run.common.utils.*
 import com.run.config.modle.BaseRxBean
+import com.run.presenter.LoginHelper
 import com.run.ui.R
+import com.run.ui.activity.ExplainActivity
 import com.run.ui.activity.InviteActivity
 import com.run.ui.activity.SearchActivity
 
@@ -34,7 +36,9 @@ class SeniorityFragment : BaseFragment<Nothing>() {
         tabLayout = view.findViewById(R.id.tabLayout)
         viewPager = view.findViewById(R.id.viewPager)
         view.findViewById<View>(R.id.iv_seach).setOnClickListener { SearchActivity.newInstance(context!!) }
-        redImage.setOnClickListener { InviteActivity.newInstance(activity!!) }
+        redImage.setOnClickListener {   if (LoginHelper.instance.isLogin(activity!!)) {
+            ExplainActivity.newInstance(activity!!)
+        }}
     }
 
     override fun initPresenter(): Nothing? {
@@ -47,11 +51,6 @@ class SeniorityFragment : BaseFragment<Nothing>() {
         tabLayout.setupWithViewPager(viewPager)
         UTabLayout.setTabLayoutLine(tabLayout)
         viewPager.currentItem = 0
-        URxBus.get().toFlowable().map { o -> o as BaseRxBean<*> }.subscribe {
-            if (it.type == 1 && it.code == 1) {
-                viewPager.currentItem = 0
-            }
-        }
     }
 
     override fun visiable() {
@@ -65,7 +64,6 @@ class SeniorityFragment : BaseFragment<Nothing>() {
         */
         UAnim.startShakeByPropertyAnim(redImage, 0.6f, 1.0f, 10f, 1000, 3)
     }
-
     //================================adapter===========================================================
     private inner class SeniorityPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
         var mTilte: Array<String> = resources.getStringArray(R.array.tab_seniorty_Title)

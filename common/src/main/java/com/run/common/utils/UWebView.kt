@@ -1,12 +1,9 @@
 package com.run.common.utils
 
 import android.os.Build
-import android.webkit.JavascriptInterface
 import android.webkit.WebSettings
 import android.webkit.WebView
 import android.webkit.WebViewClient
-import io.reactivex.Observable
-import io.reactivex.android.schedulers.AndroidSchedulers
 import java.util.regex.Pattern
 
 object UWebView {
@@ -46,7 +43,13 @@ object UWebView {
         return "<html>$head<body>$htmltext</body></html>"
     }
 
-
+    fun getNewContent3(htmltext: String): String {
+        val head = "<head>" +
+                "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, user-scalable=no\"> " +
+                "<style>*{font-size:13px;color:#666; margin:0;padding:0; letter-spacing:1px;text-align:center;line-height:22pt;}img{max-width: 100%; width:auto; height:auto;}</style>" +
+                "</head>"
+        return "<html>$head<body>$htmltext</body></html>"
+    }
 
     fun getNewContent2(htmltext: String): String {
         val head = "<head>" +

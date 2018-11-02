@@ -28,7 +28,7 @@ android {
             zipAlignEnabled rootProject.ext.minifyEnabled
             // 移除无用的resource文件
             shrinkResources rootProject.ext.minifyEnabled
-            debuggable true
+            debuggable false
             signingConfig signingConfigs.debug
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }

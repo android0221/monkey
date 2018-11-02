@@ -23,24 +23,59 @@
             android:src="@mipmap/iv_back" />
 
 
-        <TextView
-            android:id="@+id/tv_title"
+        <LinearLayout
+            android:id="@+id/titleLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="我的徒弟"
-            android:textColor="@color/color_f3"
-            android:textSize="@dimen/sp_18" />
+            android:gravity="center">
 
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="我的徒弟"
+                android:textColor="@color/color_f3"
+                android:textSize="@dimen/sp_18" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="(奖励规则)"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/sp_14" />
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/sortView"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:padding="@dimen/dp_5"
+            android:text="排序"
+            android:textColor="@color/colorAccent"
+            android:textSize="@dimen/sp_14" />
 
     </RelativeLayout>
 
 
-    <FrameLayout
-        android:id="@+id/framelayout"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"></FrameLayout>
+        android:layout_height="match_parent">
+
+        <FrameLayout
+            android:id="@+id/framelayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"></FrameLayout>
+
+        <include layout="@layout/apprentice_expain_layout"/>
+
+    </RelativeLayout>
 
 
 </LinearLayout>

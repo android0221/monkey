@@ -3,19 +3,126 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".activity.RiceTreeActivity">
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_360"
+        android:layout_height="match_parent"
         android:background="@mipmap/tree">
+
 
         <com.run.ui.ricetree.WaterFlake
             android:id="@+id/waterFlakeView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/dp_85" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/statusbar_view_height"
+            android:orientation="vertical"
+            android:paddingTop="@dimen/dp_5">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_35"
+                android:gravity="center_vertical">
+
+                <ImageView
+                    android:id="@+id/backView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="@dimen/dp_5"
+                    android:src="@mipmap/irt" />
+
+                <TextView
+                    android:id="@+id/activeView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:background="@drawable/shape_package_tree"
+                    android:paddingLeft="@dimen/dp_15"
+                    android:paddingTop="@dimen/dp_3"
+                    android:paddingRight="@dimen/dp_15"
+                    android:paddingBottom="@dimen/dp_3"
+                    android:text="活动说明"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/sp_14" />
+
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/dp_60"
+                android:layout_marginLeft="@dimen/dp_5"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+
+                <ImageView
+                    android:id="@+id/headerView"
+                    android:layout_width="@dimen/dp_60"
+                    android:layout_height="@dimen/dp_60"
+                    android:padding="@dimen/dp_5"
+                    android:src="@mipmap/uh" />
+
+
+                <TextView
+                    android:id="@+id/totalmoneyView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="总收益：100.0"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/sp_18"
+                    android:textStyle="bold" />
+
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+
+                <TextView
+                    android:id="@+id/packdetailView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/shape_package_tree"
+                    android:paddingLeft="@dimen/dp_15"
+                    android:paddingTop="@dimen/dp_3"
+                    android:paddingRight="@dimen/dp_15"
+                    android:paddingBottom="@dimen/dp_3"
+                    android:text="红包明细"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/sp_14" />
+
+
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/singStatusView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|center_horizontal"
+                android:layout_marginTop="@dimen/dp_120"
+                android:background="@drawable/select_button"
+                android:gravity="center"
+                android:paddingLeft="@dimen/dp_20"
+                android:paddingTop="@dimen/dp_5"
+                android:paddingRight="@dimen/dp_20"
+                android:paddingBottom="@dimen/dp_5"
+                android:text="立即领取"
+                android:textColor="@color/white"
+                android:textSize="@dimen/sp_18"
+                android:visibility="gone" />
+
+        </LinearLayout>
 
     </FrameLayout>
-
 
 </LinearLayout>

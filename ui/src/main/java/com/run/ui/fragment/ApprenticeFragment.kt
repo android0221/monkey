@@ -29,15 +29,14 @@ class ApprenticeFragment : BaseListFragment<ApprenticeContract.ApprenticePresent
         initAdapter(adapter)
         if (headView == null) {
             headView = View.inflate(activity, R.layout.header_apprentice_layout, null)
-            if (adapter != null) {
-                adapter.addHeaderView(headView)
-            }
+            adapter.addHeaderView(headView)
         }
         requestData()
     }
 
-    override fun requestData() {
-        mPresenter!!.invite_list(mPage)
+    public var order: Int = 1
+    public override fun requestData() {
+        mPresenter!!.invite_list(mPage, order)
     }
 
     override fun showData(list: List<ApprenticeBean>) {

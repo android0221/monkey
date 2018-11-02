@@ -114,7 +114,7 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.MainView {
         return MainPresenter(this)
     }
 
-    //==============================================fragment集合====================================
+    //==============================================fragment集合=====================================
     inner class MainFragmentAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
         override fun getItem(position: Int): Fragment {
             return fragmentList[position]
@@ -124,7 +124,6 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.MainView {
             return fragmentList.size
         }
     }
-
 
     //======================================= 退出应用 ==============================================
     private var mIsExit: Boolean = false

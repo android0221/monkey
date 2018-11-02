@@ -16,9 +16,10 @@ class MainApplication : BaseApplication() {
         ULog.init(true)
         initCrashReport()
     }
+
     private fun initCrashReport() {
-        //小辣椒 5c9348eb09
-        CrashReport.initCrashReport(applicationContext, "5c9348eb09", false)
+        //红荔枝 208c16ede9
+        CrashReport.initCrashReport(applicationContext, "208c16ede9", false)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             val builder = StrictMode.VmPolicy.Builder()
             StrictMode.setVmPolicy(builder.build())
@@ -26,14 +27,14 @@ class MainApplication : BaseApplication() {
     }
 
 
-
-
     /**
      * 初始化分享插件
      */
     private fun initShare() {
-        PlatformConfig.setWeixin("wx07f7a310c8bb9537", "aa798e4fc45a0dfa878500492a7ef656")
+        PlatformConfig.setWeixin("wx07f7a310c8bb9537",
+                "aa798e4fc45a0dfa878500492a7ef656")
         UMShareAPI.get(this)
         Config.DEBUG = false
     }
+
 }

@@ -59,9 +59,12 @@
         <activity android:name=".activity.LuckTurnTableActivity" />
         <activity android:name=".activity.RiceTreeActivity" />
         <activity android:name=".activity.SignActivity" />
-        <activity android:name=".activity.MyWalletActivity"
-            android:theme="@style/AppTheme"
-            ></activity>
+        <activity
+            android:name=".activity.MyWalletActivity"
+            android:theme="@style/AppTheme" />
+        <activity android:name=".activity.ExplainActivity" />
+        <activity android:name=".activity.PackageDetailActivity" />
+        <activity android:name=".activity.PackResultActivity"></activity>
     </application>
 
 </manifest>

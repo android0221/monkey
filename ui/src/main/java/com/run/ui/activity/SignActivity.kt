@@ -4,14 +4,23 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.support.v7.widget.GridLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.text.Html
 import android.text.TextUtils
+import android.view.View
+import android.widget.ImageView
+import android.widget.TextView
 import com.run.common.base.BaseActivity
 import com.run.common.dialog.DialogCallBack
+import com.run.common.dialog.DialogHelper
+import com.run.common.utils.UGlide
 import com.run.common.utils.UToastDialog
 import com.run.common.utils.UType
 import com.run.presenter.contract.SignContract
+import com.run.presenter.modle.ArticleBean
 import com.run.presenter.modle.SignModle
+import com.run.share.ShareHelper
+import com.run.ui.ArticleHelper
 import com.run.ui.R
 import com.run.ui.adapter.SignAdapter
 import com.run.ui.dialog.SignDialog
@@ -39,6 +48,7 @@ class SignActivity : BaseActivity<SignContract.SignPresenter>(), SignContract.Si
         return R.layout.activity_sign
     }
 
+
     override fun initViews() {
         backView.setOnClickListener { finish() }
         singRecyclerView.layoutManager = GridLayoutManager(this, 7)
@@ -47,20 +57,62 @@ class SignActivity : BaseActivity<SignContract.SignPresenter>(), SignContract.Si
         singStatusView.setOnClickListener { doSign() }
     }
 
+
+    private var mPosition: Int = 0
     /**
      * 执行签到任务
      */
+    @SuppressLint("SetTextI18n")
     private fun doSign() {
         if (money.toDouble() < 2.00) {
-            SignDialog.newInstance(this, "您今天的转发收益暂时没有满" + mModle.term_money + "元哦，请继续转发赚钱")
-                    .show(this@SignActivity, callBack = object : DialogCallBack {
-                        override fun onNext() {
-                            MainActivity.newInstance(this@SignActivity)
-                        }
+            val mList: List<ArticleBean>? = ArticleHelper.instance.getList()
+            if (mList == null || mList.isEmpty()) {
+                SignDialog.newInstance(this, "您今天的转发收益暂时没有满" + mModle.term_money + "元哦，请继续转发赚钱")
+                        .show(this@SignActivity, callBack = object : DialogCallBack {
+                            override fun onNext() {
+                                MainActivity.newInstance(this@SignActivity)
+                            }
 
-                        override fun cancle() {
+                            override fun cancle() {
+                            }
+                        })
+            } else {
+                var bean = mList[mPosition]
+
+                val contentView = View.inflate(this@SignActivity, R.layout.dialog_sign_layout, null)
+                val dialogTitleView: TextView = contentView.findViewById(R.id.dialogTitleView)
+                val articleImageView: ImageView = contentView.findViewById(R.id.articleImageView)
+                val articleTitleView: TextView = contentView.findViewById(R.id.articleTitleView)
+                val nextView: TextView = contentView.findViewById(R.id.nextView)
+                dialogTitleView.text = "您今天的转发收益暂时没有满" + mModle.term_money + "元哦，请继续转发赚钱"
+                articleTitleView.text = bean.title
+                UGlide.loadImage(this, bean.cover_picture!!, articleImageView)
+
+                contentView.findViewById<View>(R.id.cancleView).setOnClickListener { DialogHelper.closeDialog() }
+
+                contentView.findViewById<View>(R.id.nextView).setOnClickListener {
+
+                    if (mPosition >= 10) {
+                        MainActivity.newInstance(this@SignActivity)
+                    } else {
+                        if (mPosition == 9) {
+                            nextView.text = "更多"
                         }
-                    })
+                        mPosition++
+                        bean = mList[mPosition]
+                        articleTitleView.text = bean.title
+                        UGlide.loadImage(this, bean.cover_picture!!, articleImageView)
+                    }
+                }
+
+                contentView.findViewById<View>(R.id.doShareView).setOnClickListener {
+                    ShareHelper.instance.doShare(this, bean.article_id, bean.money_view_user!!)
+                    DialogHelper.closeDialog()
+                }
+                DialogHelper.showDialog(this@SignActivity, contentView)
+            }
+
+
         } else {
             mPresenter!!.sign()
         }
@@ -70,7 +122,10 @@ class SignActivity : BaseActivity<SignContract.SignPresenter>(), SignContract.Si
     private var signList: ArrayList<Int> = arrayListOf(0, 1, 2, 3, 4, 5, 6)
     private lateinit var signAdapter: SignAdapter
     override fun initData() {
-        if (intent.getIntExtra("SIGNTYPE", 0) == 1) singStatusView.isEnabled = false
+        if (intent.getIntExtra("SIGNTYPE", 0) == 1) {
+            singStatusView.isEnabled = false
+            singStatusView.text = "已签到"
+        }
         mPresenter!!.requestSignInfo()
 
     }
@@ -84,17 +139,23 @@ class SignActivity : BaseActivity<SignContract.SignPresenter>(), SignContract.Si
     private lateinit var mModle: SignModle
     @SuppressLint("SetTextI18n")
     override fun showSignData(modle: SignModle) {
+        if (modle.signtype == 1) {
+            singStatusView.isEnabled = false
+            singStatusView.text = "已签到"
+        }
         this.mModle = modle
         sign_degree = modle.num
-        signAdapter.sign_degree = modle.num
+        signAdapter.sign_degree = sign_degree
         signAdapter.increasing = modle.increasing
         signAdapter.start_money = modle.start_money
         signAdapter.setNewData(signList)
 
         money = if (TextUtils.isEmpty(modle.money)) "0.0" else modle.money!!
         val termMsg = "每天转发收益满 <font color='#ff0000'>${modle.term_money}元</font> 即可签到"
-        val singMsg = "连续签到：<font color='#ff0000'>${modle.num}天</font>，转发收益：<font color='#ff0000'>${money}元</font>"
+        val singMsg = "连续签到：<font color='#ff0000'>${sign_degree}天</font>"
         signDayView.text = Html.fromHtml(singMsg)
+        val moneyMsg = "今天转发收益：<font color='#ff0000'>${money}元</font>"
+        signMoneyView.text = Html.fromHtml(moneyMsg)
         termView.text = Html.fromHtml(termMsg)
 
 
@@ -115,21 +176,25 @@ class SignActivity : BaseActivity<SignContract.SignPresenter>(), SignContract.Si
         prizeDayView7.text = "奖励" + UType.doubleToString(day7) + "元"
 
         ruleView.text = Html.fromHtml("1.$termMsg")
-
     }
 
-
     /**
-     * 签到成功回调
+     * 签到完成回调
      */
     override fun callBackSign(key: String) {
         UToastDialog.getToastDialog().isCanToast = true
-        UToastDialog.getToastDialog().ToastShow(this, "签到奖励", mModle.start_money + sign_degree * mModle.increasing)
+        if (sign_degree <= 7) {
+            UToastDialog.getToastDialog().ToastShow(this, "签到奖励", mModle.start_money + sign_degree * mModle.increasing)
+        } else {
+            UToastDialog.getToastDialog().ToastShow(this, "签到奖励", mModle.start_money + 7 * mModle.increasing)
+        }
         singStatusView.isEnabled = false
+        singStatusView.text = "已签到"
         sign_degree++
-        val singMsg = "连续签到：<font color='#ff0000'>${sign_degree}天</font>，转发收益：<font color='#ff0000'>${money}元</font>"
+        val singMsg = "连续签到：<font color='#ff0000'>${sign_degree}天</font>"
         signDayView.text = Html.fromHtml(singMsg)
         signAdapter.sign_degree = sign_degree
         signAdapter.notifyDataSetChanged()
     }
+
 }
