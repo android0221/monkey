@@ -84,7 +84,6 @@ class RiceTreeActivity : BaseActivity<RiceTreeContract.RiceTreePresenter>(), Ric
 
             }
         }
-
         Observable.timer(60, TimeUnit.SECONDS).subscribe {
             if (mPresenter != null) {
                 initData()
@@ -95,7 +94,7 @@ class RiceTreeActivity : BaseActivity<RiceTreeContract.RiceTreePresenter>(), Ric
 
     override fun callBackResult(msg: String) {
         showMsg("恭喜你获得" + msg + "元红包")
-        Observable.timer(5, TimeUnit.SECONDS).subscribe {
+        Observable.timer(3, TimeUnit.SECONDS).subscribe {
             if (mPresenter != null) {
                 initData()
             }

@@ -16,12 +16,10 @@ import com.run.presenter.LoginHelper
 import com.run.presenter.modle.ArticleTypeModle
 import com.run.ui.R
 import com.run.ui.activity.ExplainActivity
-import com.run.ui.activity.InviteActivity
 import com.run.ui.activity.SearchActivity
 
 
 class HomeFragment : BaseFragment<HomeContract.HomePresenter>(), HomeContract.HomeView {
-
 
     companion object {
         fun newInstance(): HomeFragment {
@@ -62,45 +60,37 @@ class HomeFragment : BaseFragment<HomeContract.HomePresenter>(), HomeContract.Ho
         if (mPresenter != null) mPresenter!!.requestData()
     }
 
-    override fun initData() {
-
-    }
-
+    override fun initData() {}
     //======================================================初始化数据=====================================================
     override fun initPresenter(): HomeContract.HomePresenter? {
         return HomeContract.HomePresenter(this)
     }
-
     override fun showData(lists: List<ArticleTypeModle.DataBean>?) {
         this.mList = lists
         if (mList == null || mList!!.isEmpty()) {
-            mList = arrayListOf(ArticleTypeModle.DataBean(0, "推荐"), ArticleTypeModle.DataBean(37, "热点"))
+            mList = arrayListOf(ArticleTypeModle.DataBean(0, "推荐"),
+                    ArticleTypeModle.DataBean(37, "热点"))
         }
         val adapter = HomePagerAdapter(childFragmentManager)
         viewPager.adapter = adapter
         tabLayout.setupWithViewPager(viewPager)
         UTabLayout.setTabLayoutLine(tabLayout)
     }
-
     /**
      * 显示错误信息
      */
     override fun showErr(errorType: Int, msg: String) {
         showData(null)
     }
-
-    //========================================adapter ===================================================================
+    //========================================adapter ==============================================
     private var mList: List<ArticleTypeModle.DataBean>? = null
-
     private inner class HomePagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
         override fun getPageTitle(position: Int): CharSequence? {
             return mList!![position].name
         }
-
         override fun getItem(position: Int): Fragment {
             return ArticleFragment.newInstance(mList!![position].category_id)
         }
-
         override fun getCount(): Int {
             return mList!!.size
         }
