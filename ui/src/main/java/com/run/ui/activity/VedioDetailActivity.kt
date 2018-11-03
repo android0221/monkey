@@ -17,7 +17,6 @@ import com.run.common.utils.UGlide
 import com.run.common.utils.UStatusBar
 import com.run.common.utils.UWebView
 import com.run.presenter.contract.ArticleDetailContract
-import com.run.presenter.modle.ArticleBean
 import com.run.presenter.modle.ArticleDetailModle
 import com.run.share.ShareHelper
 import com.run.ui.ArticleHelper
@@ -129,6 +128,7 @@ class VedioDetailActivity : BaseActivity<ArticleDetailContract.ArticlePresenter>
         } else {
             ll_artice_more!!.visibility = View.VISIBLE
             adapter!!.setNewData(ArticleHelper.instance.getList())
+            adapter!!.money = money
         }
     }
 

@@ -66,7 +66,7 @@ class HomeFragment : BaseFragment<HomeContract.HomePresenter>(), HomeContract.Ho
 
     }
 
-    //======================================================初始化数据===================================================
+    //======================================================初始化数据=====================================================
     override fun initPresenter(): HomeContract.HomePresenter? {
         return HomeContract.HomePresenter(this)
     }
@@ -89,7 +89,7 @@ class HomeFragment : BaseFragment<HomeContract.HomePresenter>(), HomeContract.Ho
         showData(null)
     }
 
-    //========================================adapter =========================================
+    //========================================adapter ===================================================================
     private var mList: List<ArticleTypeModle.DataBean>? = null
 
     private inner class HomePagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
@@ -105,6 +105,4 @@ class HomeFragment : BaseFragment<HomeContract.HomePresenter>(), HomeContract.Ho
             return mList!!.size
         }
     }
-
-
 }

@@ -1,5 +1,6 @@
 package com.run.ui.activity
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.os.Handler
@@ -10,18 +11,22 @@ import android.view.KeyEvent
 import android.widget.TextView
 import android.widget.Toast
 import com.run.common.base.BaseActivity
+import com.run.common.helper.SharedPreferenceHelper
 import com.run.common.utils.UActivityManager
 import com.run.common.utils.UStatusBar
 import com.run.common.view.NoScrollViewPager
 import com.run.presenter.LoginHelper
 import com.run.presenter.contract.MainContract
 import com.run.presenter.contract.MainContract.MainPresenter
+import com.run.share.ShareHelper
 import com.run.ui.R
 import com.run.ui.fragment.HomeFragment
 import com.run.ui.fragment.PersionFragment
 import com.run.ui.fragment.SeniorityFragment
 import com.run.ui.fragment.VedioFragment
 import com.run.version.UpdataVersionHelper
+import io.reactivex.Observable
+import java.util.concurrent.TimeUnit
 
 
 @Suppress("JAVA_CLASS_ON_COMPANION")
@@ -97,6 +102,7 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.MainView {
      */
     lateinit var fragmentList: List<Fragment>
 
+    @SuppressLint("CheckResult")
     override fun initData() {
         fragmentList = arrayListOf(HomeFragment.newInstance(),
                 SeniorityFragment.newInstance(),
@@ -107,8 +113,24 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.MainView {
         setStatus(0)
         //统计APP的激活数据
         mPresenter!!.statisticsActive(this@MainActivity)
-        UpdataVersionHelper.getInstance().checkUpadata(this, 1)
+
+        if (SharedPreferenceHelper.firstOpenApp(this) || !LoginHelper.instance.isLogin) {
+            UpdataVersionHelper.getInstance().checkUpadata(this, 1)
+        } else {
+            SharedPreferenceHelper.getOpenApp(this)
+            Observable.timer(2, TimeUnit.SECONDS).subscribe {
+                ExplainActivity.newInstance(this, 1)
+            }
+
+        }
     }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (requestCode == 1 && resultCode == Activity.RESULT_OK) {
+            UpdataVersionHelper.getInstance().checkUpadata(this, 1)
+        }
+    }
+
 
     override fun initPresenter(): MainPresenter? {
         return MainPresenter(this)

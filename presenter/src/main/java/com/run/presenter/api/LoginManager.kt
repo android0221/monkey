@@ -310,6 +310,14 @@ object LoginManager {
     }
 
 
+    fun share_record_button(): Observable<ShareOpenModle> {
+        val jsonObject = JSONObject()
+        jsonObject.put("channel", AppConstants.CHANNEL_KEY)
+
+        return LoginManager.instance.share_record_button(LoginHelper.instance.getmToken()!!, UEncrypt.encrypt_AES(jsonObject.toString(), AppConstants.DES_KEY))
+    }
+
+
     //=============================================================版本更新=================================
 
     /**

@@ -45,7 +45,6 @@ class InviteActivity : BaseActivity<InviteContract.InvitePresenter>(), InviteCon
     }
 
 
-
     override fun onClick(v: View) {
         when (v.id) {
             R.id.tv_back -> finish()

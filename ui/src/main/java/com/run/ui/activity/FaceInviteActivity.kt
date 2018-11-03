@@ -45,10 +45,10 @@ class FaceInviteActivity : BaseActivity<Nothing>(), View.OnLongClickListener {
     private lateinit var iv_card: ImageView
     override fun initViews() {
         UStatusBar.setStatusBarTranslucent(this)
-        findViewById<View>(R.id.iv_back).setOnClickListener({ finish() })
+        findViewById<View>(R.id.iv_back).setOnClickListener { finish() }
         iv_card = findViewById(R.id.iv_card)
         rl_root = findViewById(R.id.rl_root)
-        rl_root!!.setOnLongClickListener(this)
+        rl_root.setOnLongClickListener(this)
     }
 
 

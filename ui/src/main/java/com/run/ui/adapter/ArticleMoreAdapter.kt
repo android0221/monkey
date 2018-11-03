@@ -18,6 +18,8 @@ import com.run.ui.activity.VedioDetailActivity
  * 更多推荐
  */
 class ArticleMoreAdapter : BaseQuickAdapter<ArticleBean, BaseViewHolder>(R.layout.item_article_more_layout, null) {
+
+     var money: String = "0.15"
     override fun convert(helper: BaseViewHolder, item: ArticleBean) {
         if (item.category_id <= 0) {
             helper.getView<View>(R.id.rl_root).visibility = View.GONE
@@ -31,7 +33,7 @@ class ArticleMoreAdapter : BaseQuickAdapter<ArticleBean, BaseViewHolder>(R.layou
         val money = if (!item.money_view_user.equals("0.000")) {
             item.money_view_user
         } else {
-            "0.2"
+            money
         }
         helper.setText(R.id.tv_share, "分享阅读$money" + "元/位")
         helper.getView<View>(R.id.rl_root).setOnClickListener {

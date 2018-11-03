@@ -16,7 +16,6 @@ import com.run.common.base.BaseActivity
 import com.run.common.emoj.EmotionUtils
 import com.run.common.emoj.SpanStringUtils
 import com.run.common.utils.ULog
-import com.run.common.utils.UStatusBar
 import com.run.common.utils.UWebView
 import com.run.presenter.contract.ArticleDetailContract
 import com.run.presenter.modle.ArticleDetailModle
@@ -49,8 +48,9 @@ class ArticleDetailActivity : BaseActivity<ArticleDetailContract.ArticlePresente
     }
 
     private lateinit var shareMoneyView: TextView
-    private lateinit var hintView: ImageView
+    private lateinit var hintView: View
     private lateinit var titleView: TextView
+    private lateinit var hintMsgView: TextView
     private lateinit var contentWebView: WebView
     private lateinit var moreLayout: View
     @SuppressLint("AddJavascriptInterface")
@@ -73,7 +73,7 @@ class ArticleDetailActivity : BaseActivity<ArticleDetailContract.ArticlePresente
             }
         }, "jsCallJavaObj")
 
-
+        hintMsgView = findViewById(R.id.hintMsgView)
         moreLayout = findViewById(R.id.moreLayout)
         findViewById<ImageView>(R.id.iv_return).setOnClickListener(this)
         findViewById<View>(R.id.iv_share).setOnClickListener(this)
@@ -160,6 +160,7 @@ class ArticleDetailActivity : BaseActivity<ArticleDetailContract.ArticlePresente
                         view.loadUrl(url)// 使用当前WebView处理跳转
                         return false//true表示此事件在此处被处理，不需要再广播
                     }
+
                     override//转向错误时的处理
                     fun onReceivedError(view: WebView, errorCode: Int, description: String, failingUrl: String) {
                         ULog.e(TAG, "文章的url加载错误： errorCode:$errorCode,description $description,failingUrl:$failingUrl")
@@ -174,6 +175,7 @@ class ArticleDetailActivity : BaseActivity<ArticleDetailContract.ArticlePresente
             moreLayout.visibility = View.VISIBLE
             if (modle.list != null && modle.list!!.isNotEmpty()) {
                 adapter!!.setNewData(modle.list)
+                adapter!!.money = money
             }
         }
         showShareHint()
@@ -181,18 +183,19 @@ class ArticleDetailActivity : BaseActivity<ArticleDetailContract.ArticlePresente
 
     //================================================显示分享内容===============================================
     private var hasHint: Boolean = false
+
     private fun showShareHint() {
-        if (money.toDouble() == 0.2) {
-            Observable.timer(5, TimeUnit.SECONDS).observeOn(AndroidSchedulers.mainThread()).subscribe {
-                if (!hasHint) {
-                    hasHint = true
-                    hintView.visibility = View.VISIBLE
-                    Observable.timer(5, TimeUnit.SECONDS).observeOn(AndroidSchedulers.mainThread()).subscribe {
-                        hintView.visibility = View.GONE
-                    }
+        Observable.timer(5, TimeUnit.SECONDS).observeOn(AndroidSchedulers.mainThread()).subscribe {
+            if (!hasHint) {
+                hasHint = true
+                hintMsgView.text = "分享被阅读" + money + "元/位 \n越多好友阅读奖励也越多"
+                hintView.visibility = View.VISIBLE
+                Observable.timer(5, TimeUnit.SECONDS).observeOn(AndroidSchedulers.mainThread()).subscribe {
+                    hintView.visibility = View.GONE
                 }
             }
         }
+
 
     }
 

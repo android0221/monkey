@@ -160,6 +160,13 @@ interface LoginService {
 
 
     /**
+     *复制分享的开关
+     */
+    @GET("web/Article/share_record_button")
+    fun share_record_button(@Header("xytoken") token: String, @Query("content") content: String): Observable<ShareOpenModle>
+
+
+    /**
      * 活动公告
      */
     @GET("web/config/inform")

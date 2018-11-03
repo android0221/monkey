@@ -1,7 +1,9 @@
 package com.run.ui.activity
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.content.SyncRequest
 import android.text.Html
 import com.run.common.base.BaseActivity
 import com.run.common.base.BaseObserver
@@ -21,7 +23,12 @@ class ExplainActivity : BaseActivity<Nothing>() {
         fun newInstance(context: Context) {
             context.startActivity(Intent(context, ExplainActivity::class.java))
         }
+
+        fun newInstance(context: Activity, request: Int) {
+            context.startActivityForResult(Intent(context, ExplainActivity::class.java), request)
+        }
     }
+
 
     override fun initContentView(): Int {
         return R.layout.activity_explain
@@ -32,7 +39,10 @@ class ExplainActivity : BaseActivity<Nothing>() {
         apprenticeButton.setOnClickListener { InviteActivity.newInstance(this) }
 //        UWebView.initWebView(wb_content)
         backView.setOnClickListener { finish() }
-        zfButton.setOnClickListener { finish() }
+        zfButton.setOnClickListener {
+            setResult(Activity.RESULT_OK)
+            finish()
+        }
     }
 
     override fun initData() {
@@ -82,6 +92,7 @@ class ExplainActivity : BaseActivity<Nothing>() {
                     override fun onError(errorType: Int, msg: String?) {
                         showErr(errorType, msg!!)
                     }
+
                     override fun onSuccess(model: DyContentModle) {
                         titleView.text = model.data!!.title
                         val contentMsg = model.data!!.content!!.replace("949", "100%")

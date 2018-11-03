@@ -2,6 +2,7 @@ package com.run.common.helper
 
 import android.content.Context
 import com.run.common.utils.USharePreference
+import java.net.URLStreamHandler
 
 /**
  * SharedPreferenceHelper配置文件保存
@@ -13,10 +14,20 @@ object SharedPreferenceHelper {
     fun checkHasOpenGuide(context: Context): Boolean {
         return USharePreference.get(context, "open_guide", false) as Boolean
     }
+
     /**
      * 设置开启过Guide
      */
     fun openGuide(context: Context) {
         USharePreference.put(context, "open_guide", true)
+    }
+
+
+    fun firstOpenApp(context: Context): Boolean {
+        return USharePreference.get(context, "first_open", false) as Boolean
+    }
+
+    fun getOpenApp(context: Context) {
+        USharePreference.put(context, "first_open", true)
     }
 }

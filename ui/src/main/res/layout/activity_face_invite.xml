@@ -12,7 +12,7 @@
         android:layout_marginTop="@dimen/dp_20"
         android:adjustViewBounds="true"
         android:padding="@dimen/dp_10"
-        android:src="@mipmap/irt" />
+        android:src="@mipmap/iv_back" />
 
     <ImageView
         android:id="@+id/iv_card"
@@ -20,8 +20,18 @@
         android:layout_height="@dimen/dp_150"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="@dimen/dp_160"
+        android:layout_marginBottom="@dimen/dp_150"
         android:src="@mipmap/df" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_20"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/dp_130"
+        android:gravity="center"
+        android:text="长按保存图片"
+        android:textColor="@color/colorRed"
+        android:textSize="@dimen/sp_14" />
 
 
 </RelativeLayout>

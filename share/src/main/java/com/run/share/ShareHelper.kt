@@ -3,16 +3,20 @@ package com.run.share
 
 import android.content.ClipboardManager
 import android.content.Context
+import android.text.TextUtils
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
 import com.run.common.BaseApplication
 import com.run.common.base.BaseObserver
+import com.run.common.utils.ULog
 import com.run.common.view.MyBottomSheetDialog
 import com.run.config.AppIntentAction
+import com.run.config.modle.BaseModle
 import com.run.login.api.LoginManager
 import com.run.presenter.LoginHelper
 import com.run.presenter.modle.login.ShareModle
+import com.run.presenter.modle.login.ShareOpenModle
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
@@ -24,20 +28,46 @@ class ShareHelper private constructor() {
     /**
      * 打开分享弹窗
      */
-    fun doShare(context: Context?, articleid: Int, msg: String) {
+    fun doShare(context: Context?, articleid: Int, msg: String?) {
         if (context == null) return
         mContext = context
         showDialog(context, articleid, msg)
     }
 
-    private fun showDialog(context: Context?, articleid: Int, msg: String) {
+    private fun showDialog(context: Context?, articleid: Int, msg: String?) {
         if (context == null) return
         mContext = context
+
+        LoginManager.share_record_button().subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(object : BaseObserver<ShareOpenModle>() {
+                    override fun onSuccess(o: ShareOpenModle) {
+                        ULog.d("VersionData :" + o.data)
+                        if (o.data == 1) {
+                            exoDialog(context, articleid, msg, true)
+                        } else {
+                            exoDialog(context, articleid, msg, false)
+                        }
+                    }
+
+                    override fun onError(errorType: Int, msg: String?) {
+                        exoDialog(context, articleid, msg, false)
+                        Toast.makeText(context, msg!!, Toast.LENGTH_SHORT).show()
+                    }
+                })
+
+    }
+
+    fun exoDialog(context: Context?, articleid: Int, msg: String?, open: Boolean) {
         val dialog = MyBottomSheetDialog(mContext!!)
         val view = View.inflate(mContext, R.layout.dialog_share_layout, null)
-        var tv_msg: TextView = view.findViewById(R.id.tv_msg)
+        val tv_msg: TextView = view.findViewById(R.id.tv_msg)
         tv_msg.text = "+" + msg + "元/位"
         dialog.setContentView(view)
+
+        if (open) {
+            view.findViewById<View>(R.id.ll_share_code).visibility = View.VISIBLE
+        }
         view.findViewById<View>(R.id.tv_cancle).setOnClickListener { dialog.cancel() }
         view.findViewById<View>(R.id.ll_share_wc).setOnClickListener {
             //微信分享
@@ -49,10 +79,15 @@ class ShareHelper private constructor() {
             requestShare(context, 2, articleid)
             dialog.cancel()
         }
+        view.findViewById<View>(R.id.ll_share_code).setOnClickListener {
+            //复制链接
+            requestShare(context, 3, articleid)
+            dialog.cancel()
+        }
         view.findViewById<View>(R.id.tv_shouming).setOnClickListener {
             //计费说明
             if (LoginHelper.instance.isLogin(mContext!!)) {
-                  AppIntentAction.jumpToShareDetailActivity(mContext!!)
+                AppIntentAction.jumpToShareDetailActivity(mContext!!)
             }
         }
         dialog.show()
@@ -69,12 +104,15 @@ class ShareHelper private constructor() {
                         override fun onError(errorType: Int, msg: String?) {
                             Toast.makeText(mContext, msg, Toast.LENGTH_SHORT).show()
                         }
+
                         override fun onSuccess(o: ShareModle) {
                             exShare(o.share_data, type)
                         }
                     })
         }
     }
+
+
     /**
      * {"status":200,
      * "share_data":
@@ -90,14 +128,16 @@ class ShareHelper private constructor() {
      * 执行分享操作
      */
     private fun exShare(shareBean: ShareModle.ShareDataBean?, type: Int) {
-        if (mContext == null) { mContext = BaseApplication.context }
+        if (mContext == null) {
+            mContext = BaseApplication.context
+        }
         if (shareBean == null) return
         var platform = "wechat_friend"
         var url = shareBean.url
         if (type == 3) {
             //复制链接
             val cm = mContext!!.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-            cm.text = shareBean!!.title + ";" + shareBean!!.url
+            cm.text = shareBean.content_describe
             Toast.makeText(mContext, "链接复制成功!", Toast.LENGTH_SHORT).show()
             return
         } else if (type == 2 || type == 4) {

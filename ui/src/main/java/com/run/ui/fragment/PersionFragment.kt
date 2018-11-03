@@ -68,6 +68,7 @@ open class PersionFragment : BaseFragment<PersionContract.PersionPresenter>(), P
         view.findViewById<View>(R.id.ll_invite).setOnClickListener(this)
         view.findViewById<View>(R.id.ll_withdraw).setOnClickListener(this)
         view.findViewById<View>(R.id.totalMoneyLayout).setOnClickListener(this)
+        view.findViewById<View>(R.id.ll_money).setOnClickListener(this)
 
         iv_usericon.setOnClickListener(this)
         invitegameLayout.setOnClickListener(this)
@@ -122,6 +123,7 @@ open class PersionFragment : BaseFragment<PersionContract.PersionPresenter>(), P
             R.id.transmitLayout -> TransmitActivity.newInstance(activity!!, userid)
             R.id.truntableLayout -> LuckTurnTableActivity.newInstance(activity!!)
             R.id.treeLayout -> RiceTreeActivity.newInstance(activity!!, avatar)
+            R.id.ll_money -> ExplainActivity.newInstance(activity!!)
         }
     }
 

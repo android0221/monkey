@@ -106,7 +106,8 @@ class SignActivity : BaseActivity<SignContract.SignPresenter>(), SignContract.Si
                 }
 
                 contentView.findViewById<View>(R.id.doShareView).setOnClickListener {
-                    ShareHelper.instance.doShare(this, bean.article_id, bean.money_view_user!!)
+                    val money = if (bean.money_view_user!!.toDouble() <= 0.15) "0.15" else bean.money_view_user
+                    ShareHelper.instance.doShare(this, bean.article_id, money)
                     DialogHelper.closeDialog()
                 }
                 DialogHelper.showDialog(this@SignActivity, contentView)
@@ -125,6 +126,7 @@ class SignActivity : BaseActivity<SignContract.SignPresenter>(), SignContract.Si
         if (intent.getIntExtra("SIGNTYPE", 0) == 1) {
             singStatusView.isEnabled = false
             singStatusView.text = "已签到"
+
         }
         mPresenter!!.requestSignInfo()
 
