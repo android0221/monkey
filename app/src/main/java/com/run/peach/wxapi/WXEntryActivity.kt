@@ -1,4 +1,4 @@
-package com.run.lychee.wxapi
+package com.run.peach.wxapi
 
 import com.umeng.weixin.callback.WXCallbackActivity
 

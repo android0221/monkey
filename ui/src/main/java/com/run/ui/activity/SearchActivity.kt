@@ -27,7 +27,7 @@ class SearchActivity : BaseActivity<Nothing>() {
     private lateinit var et_search: EditText
     override fun initViews() {
         et_search = findViewById(R.id.et_search)
-        et_search.setOnKeyListener { v, keyCode, event ->
+        et_search.setOnKeyListener { _, keyCode, _ ->
             if (keyCode == KeyEvent.KEYCODE_ENTER) { doSearch() }
             false
         }

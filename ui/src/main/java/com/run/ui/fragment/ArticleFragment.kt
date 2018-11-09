@@ -30,7 +30,6 @@ class ArticleFragment : BaseListFragment<ArticleContract.ArticlePresenter, Artic
             return fragment
         }
     }
-
     override fun initPresenter(): ArticleContract.ArticlePresenter? {
         return ArticleContract.ArticlePresenter(this)
     }
@@ -64,7 +63,6 @@ class ArticleFragment : BaseListFragment<ArticleContract.ArticlePresenter, Artic
             mPresenter!!.requestData(mType!!, mPage)
         }
     }
-
 
     override fun callBackData(modle: ArticleModle) {
         ArticleHelper.instance.saveList(modle.data!!)

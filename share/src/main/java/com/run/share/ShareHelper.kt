@@ -1,8 +1,13 @@
 package com.run.share
 
 
+import android.annotation.SuppressLint
 import android.content.ClipboardManager
+import android.content.ComponentName
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
+import android.os.Build
 import android.text.TextUtils
 import android.view.View
 import android.widget.TextView
@@ -19,6 +24,10 @@ import com.run.presenter.modle.login.ShareModle
 import com.run.presenter.modle.login.ShareOpenModle
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import java.util.ArrayList
+import android.content.pm.PackageInfo
+import android.content.pm.PackageManager
+
 
 @Suppress("DEPRECATION")
 class ShareHelper private constructor() {
@@ -43,7 +52,7 @@ class ShareHelper private constructor() {
                 .subscribe(object : BaseObserver<ShareOpenModle>() {
                     override fun onSuccess(o: ShareOpenModle) {
                         ULog.d("VersionData :" + o.data)
-                        if (o.data == 1) {
+                        if (o.data == 0) {
                             exoDialog(context, articleid, msg, true)
                         } else {
                             exoDialog(context, articleid, msg, false)
@@ -136,22 +145,59 @@ class ShareHelper private constructor() {
         var url = shareBean.url
         if (type == 3) {
             //复制链接
-            val cm = mContext!!.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-            cm.text = shareBean.content_describe
-            Toast.makeText(mContext, "链接复制成功!", Toast.LENGTH_SHORT).show()
+//            val cm = mContext!!.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+//            cm.text = shareBean.content_describe
+//            Toast.makeText(mContext, "链接复制成功!", Toast.LENGTH_SHORT).show()
+
+            shareText(mContext!!, shareBean.title + "\n" + shareBean.url)
             return
         } else if (type == 2 || type == 4) {
             platform = "wechat_moments"
             url = shareBean.friend_url
         }
         if (type == 4) {
-            UShare.doShare(mContext!!, platform, shareBean!!.title, shareBean!!.content_describe, url!!, shareBean!!.share_picture, shareBean!!.sort, 0, 2)
+            UShare.doShare(mContext!!, platform, shareBean.title, shareBean.content_describe, url!!, shareBean.share_picture, shareBean.sort, 0, 2)
         } else {
-            UShare.doShare(mContext!!, platform, shareBean!!.title, shareBean!!.content_describe, url!!, shareBean!!.share_picture, shareBean!!.sort, 0, shareBean!!.friend_type)
+            UShare.doShare(mContext!!, platform, shareBean.title, shareBean.content_describe, url!!, shareBean.share_picture, shareBean.sort, 0, shareBean.friend_type)
         }
     }
 
+    /**
+     * 分享多篇
+     */
+    private fun shareText(context: Context, msg: String) {
+        if (isWeixinAvilible(context)) {//有微信分享到微信
+            //判断是否安装了微信
+            val intent = Intent(Intent.ACTION_SEND)
+            intent.putExtra(Intent.EXTRA_TEXT, msg)
+            intent.type = "text/plain"
+            intent.setClassName("com.tencent.mm", "com.tencent.mm.ui.tools.ShareImgUI")//微信朋友
+            context.startActivity(intent)
+        } else {//没有微信选择复制
+            val sendIntent = Intent()
+            sendIntent.action = Intent.ACTION_SEND;
+            sendIntent.putExtra(Intent.EXTRA_TEXT, "分享文章到 \n$msg")//注意：这里只是分享文本内容
+            sendIntent.type = "text/plain"
+            context.startActivity(sendIntent)
+        }
+    }
+
+    fun isWeixinAvilible(context: Context): Boolean {
+        val packageManager = context.packageManager// 获取packagemanager
+        val pinfo = packageManager.getInstalledPackages(0)// 获取所有已安装程序的包信息
+        if (pinfo != null) {
+            for (i in pinfo.indices) {
+                val pn = pinfo[i].packageName
+                if (pn == "com.tencent.mm") {
+                    return true
+                }
+            }
+        }
+        return false
+    }
+
     companion object {
+        @SuppressLint("StaticFieldLeak")
         private var shareHelper: ShareHelper? = null
         val instance: ShareHelper
             get() {
@@ -162,7 +208,7 @@ class ShareHelper private constructor() {
                         }
                     }
                 }
-                return this!!.shareHelper!!
+                return this.shareHelper!!
             }
     }
 }

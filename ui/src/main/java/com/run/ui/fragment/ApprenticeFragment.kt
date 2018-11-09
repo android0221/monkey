@@ -17,7 +17,6 @@ class ApprenticeFragment : BaseListFragment<ApprenticeContract.ApprenticePresent
         }
     }
 
-
     override fun initPresenter(): ApprenticeContract.ApprenticePresenter? {
         return ApprenticeContract.ApprenticePresenter(this)
     }
@@ -34,8 +33,8 @@ class ApprenticeFragment : BaseListFragment<ApprenticeContract.ApprenticePresent
         requestData()
     }
 
-    public var order: Int = 1
-    public override fun requestData() {
+    var order: Int = 1
+    override fun requestData() {
         mPresenter!!.invite_list(mPage, order)
     }
 

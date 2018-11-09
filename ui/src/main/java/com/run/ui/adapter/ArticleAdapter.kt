@@ -114,10 +114,10 @@ class ArticleAdapter : BaseMultiItemQuickAdapter<ArticleBean, BaseViewHolder>(nu
                 }
             }
         }
-        var shareView: View = helper.getView(R.id.tv_share)
+        val shareView: View = helper.getView(R.id.tv_share)
         //分享
         shareView.setOnClickListener {
-            ShareHelper.instance.doShare(mContext, item!!.article_id, this!!.b_money!!)
+            ShareHelper.instance.doShare(mContext, item.article_id, this.b_money!!)
         }
     }
 

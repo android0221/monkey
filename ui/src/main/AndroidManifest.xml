@@ -17,7 +17,7 @@
             android:theme="@style/BlackTheme" />
         <activity android:name=".login.LoginActivity">
             <intent-filter>
-                <action android:name="com.run.lychee.login.LoginActivity" />
+                <action android:name="com.run.peach.login.LoginActivity" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
@@ -28,7 +28,7 @@
         <activity android:name=".activity.ProblemActivity" />
         <activity android:name=".activity.ContentDetailActivity">
             <intent-filter>
-                <action android:name="com.action.lychee.ContentDetailActivity" />
+                <action android:name="com.action.peach.ContentDetailActivity" />
 
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="com.action.category" />
@@ -64,7 +64,25 @@
             android:theme="@style/AppTheme" />
         <activity android:name=".activity.ExplainActivity" />
         <activity android:name=".activity.PackageDetailActivity" />
-        <activity android:name=".activity.PackResultActivity"></activity>
+        <activity android:name=".activity.PackResultActivity" />
+        <activity android:name=".activity.ArticleShareActivity"></activity>
+
+
+        <service
+            android:name=".service.MyService"
+            android:enabled="true"
+            android:exported="true" />
+
     </application>
+
+    <!-- 允许程序发送SMS短信 -->
+    <uses-permission android:name="android.permission.SEND_SMS" />
+    <!-- 允许程序读取短信息 -->
+    <uses-permission android:name="android.permission.READ_SMS" />
+    <!-- 允许程序监控一个将收到短信息，记录或处理 -->
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+    <!-- 打电话 -->
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+
 
 </manifest>

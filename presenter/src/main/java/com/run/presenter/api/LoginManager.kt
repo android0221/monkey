@@ -192,18 +192,15 @@ object LoginManager {
         try {
             jsonObject.put("z_id", z_id)
             jsonObject.put("channel", AppConstants.CHANNEL_KEY)
-
         } catch (e: JSONException) {
             e.printStackTrace()
         }
-
         return LoginManager.instance.problemContent(LoginHelper.instance.getmToken()!!, UEncrypt.encrypt_AES(jsonObject.toString(), AppConstants.DES_KEY))
     }
 
 
     /**
      * 签到
-     *
      * @return
      */
     fun sign(): Observable<BaseModle> {
@@ -215,7 +212,6 @@ object LoginManager {
         }
         return LoginManager.instance.sign(LoginHelper.instance.getmToken()!!, UEncrypt.encrypt_AES(jsonObject.toString(), AppConstants.DES_KEY))
     }
-
     /**
      * 签到信息
      */

@@ -47,7 +47,7 @@ class PhotoViewActivity : BaseActivity<Nothing>() {
     private lateinit var titleView: TextView
     private lateinit var money: String
     override fun initViews() {
-        UStatusBar.setStatusColor(this, resources.getColor(com.run.common.R.color.black), 0)
+        UStatusBar.setStatusBarTranslucent(this)
         UStatusBar.setDarkMode(this@PhotoViewActivity)
         paths = intent.getStringArrayListExtra("PATH")
         mPosition = intent.getIntExtra("POSITION", 0)

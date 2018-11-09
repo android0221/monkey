@@ -13,6 +13,14 @@
         android:orientation="horizontal"
         android:padding="@dimen/dp_10">
 
+        <ImageView
+            android:id="@+id/selectView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/dp_5"
+            android:adjustViewBounds="true"
+            android:src="@drawable/card_selector" />
+
 
         <FrameLayout
             android:layout_width="@dimen/dp_110"

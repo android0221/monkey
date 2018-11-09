@@ -1,15 +1,15 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.run.version" >
+    package="com.run.version">
 
     <!-- 8.0安装apk打不开 -->
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
 
-    <application >
+    <application>
 
         <!-- Android7.0打开相机 -->
         <provider
             android:name="android.support.v4.content.FileProvider"
-            android:authorities="lychee"
+            android:authorities="peach"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
@@ -18,7 +18,7 @@
         </provider>
         <provider
             android:name=".VersionFileProvider"
-            android:authorities="com.yun.updata.lychee.versionProvider"
+            android:authorities="com.yun.updata.peach.versionProvider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data

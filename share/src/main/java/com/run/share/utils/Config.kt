@@ -28,44 +28,54 @@ object Config {
         if (INFOS != null && INFOS.size > 0) {
             INFOS.clear()
         }
-        if (TextUtils.isEmpty(sort)) {
-            INFOS!!["com.UCMobile"] = "wx020a535dccd46c11"
-            INFOS["com.tencent.mtt"] = "wx64f9cf5b17af074d"
-            INFOS["com.tencent.mobileqq"] = "wxf0a80d0ac2e82aa7"
-        } else if (sort == "123") {
-            INFOS!!["com.tencent.mobileqq"] = "wxf0a80d0ac2e82aa7"
-            INFOS["com.tencent.mtt"] = "wx64f9cf5b17af074d"
-            INFOS["com.UCMobile"] = "wx020a535dccd46c11"
-        } else if (sort == "132") {
-            INFOS!!["com.tencent.mobileqq"] = "wxf0a80d0ac2e82aa7"
-            INFOS["com.UCMobile"] = "wx020a535dccd46c11"
-            INFOS["com.tencent.mtt"] = "wx64f9cf5b17af074d"
-        } else if (sort == "213") {
-            INFOS!!["com.tencent.mtt"] = "wx64f9cf5b17af074d"
-            INFOS["com.tencent.mobileqq"] = "wxf0a80d0ac2e82aa7"
-            INFOS["com.UCMobile"] = "wx020a535dccd46c11"
+        when {
+            TextUtils.isEmpty(sort) -> {
+                INFOS!!["com.UCMobile"] = "wx020a535dccd46c11"
+                INFOS["com.tencent.mtt"] = "wx64f9cf5b17af074d"
+                INFOS["com.tencent.mobileqq"] = "wxf0a80d0ac2e82aa7"
+            }
+            sort == "123" -> {
+                INFOS!!["com.tencent.mobileqq"] = "wxf0a80d0ac2e82aa7"
+                INFOS["com.tencent.mtt"] = "wx64f9cf5b17af074d"
+                INFOS["com.UCMobile"] = "wx020a535dccd46c11"
+            }
+            sort == "132" -> {
+                INFOS!!["com.tencent.mobileqq"] = "wxf0a80d0ac2e82aa7"
+                INFOS["com.UCMobile"] = "wx020a535dccd46c11"
+                INFOS["com.tencent.mtt"] = "wx64f9cf5b17af074d"
+            }
+            sort == "213" -> {
+                INFOS!!["com.tencent.mtt"] = "wx64f9cf5b17af074d"
+                INFOS["com.tencent.mobileqq"] = "wxf0a80d0ac2e82aa7"
+                INFOS["com.UCMobile"] = "wx020a535dccd46c11"
 
-        } else if (sort == "231") {
-            INFOS!!["com.tencent.mtt"] = "wx64f9cf5b17af074d"
-            INFOS["com.UCMobile"] = "wx020a535dccd46c11"
-            INFOS["com.tencent.mobileqq"] = "wxf0a80d0ac2e82aa7"
+            }
+            sort == "231" -> {
+                INFOS!!["com.tencent.mtt"] = "wx64f9cf5b17af074d"
+                INFOS["com.UCMobile"] = "wx020a535dccd46c11"
+                INFOS["com.tencent.mobileqq"] = "wxf0a80d0ac2e82aa7"
 
-        } else if (sort == "312") {
-            INFOS!!["com.UCMobile"] = "wx020a535dccd46c11"
-            INFOS["com.tencent.mobileqq"] = "wxf0a80d0ac2e82aa7"
-            INFOS["com.tencent.mtt"] = "wx64f9cf5b17af074d"
-        } else if (sort == "321") {
-            INFOS!!["com.UCMobile"] = "wx020a535dccd46c11"
-            INFOS["com.tencent.mtt"] = "wx64f9cf5b17af074d"
-            INFOS["com.tencent.mobileqq"] = "wxf0a80d0ac2e82aa7"
-        } else if (sort == "4") {
-            INFOS!!["com.UCMobile"] = "wx020a535dccd46c11"
-            INFOS["com.tencent.mtt"] = "wx64f9cf5b17af074d"
-            INFOS["com.tencent.mobileqq"] = "wxf0a80d0ac2e82aa7"
-        } else {
-            INFOS!!["com.UCMobile"] = "wx020a535dccd46c11"
-            INFOS["com.tencent.mtt"] = "wx64f9cf5b17af074d"
-            INFOS["com.tencent.mobileqq"] = "wxf0a80d0ac2e82aa7"
+            }
+            sort == "312" -> {
+                INFOS!!["com.UCMobile"] = "wx020a535dccd46c11"
+                INFOS["com.tencent.mobileqq"] = "wxf0a80d0ac2e82aa7"
+                INFOS["com.tencent.mtt"] = "wx64f9cf5b17af074d"
+            }
+            sort == "321" -> {
+                INFOS!!["com.UCMobile"] = "wx020a535dccd46c11"
+                INFOS["com.tencent.mtt"] = "wx64f9cf5b17af074d"
+                INFOS["com.tencent.mobileqq"] = "wxf0a80d0ac2e82aa7"
+            }
+            sort == "4" -> {
+                INFOS!!["com.UCMobile"] = "wx020a535dccd46c11"
+                INFOS["com.tencent.mtt"] = "wx64f9cf5b17af074d"
+                INFOS["com.tencent.mobileqq"] = "wxf0a80d0ac2e82aa7"
+            }
+            else -> {
+                INFOS!!["com.UCMobile"] = "wx020a535dccd46c11"
+                INFOS["com.tencent.mtt"] = "wx64f9cf5b17af074d"
+                INFOS["com.tencent.mobileqq"] = "wxf0a80d0ac2e82aa7"
+            }
         }
         var i = 0
         for ((key, value) in INFOS) {
@@ -81,7 +91,6 @@ object Config {
                     showInstallDialog(context)
                 }
             }
-
             i++
         }
     }
@@ -98,12 +107,10 @@ object Config {
         }
         builder.setPositiveButton("立即安装") { dialog, which ->
             var uri = ""
-            if (appIndex[0] == 0) {
-                uri = "http://wap.uc.cn/packinfo/chinese_999/ucbrowser/pf/145?uc_param_str=vepffrbiupladsdnni&r=main&from=wap-atp-mobile&plang="
-            } else if (appIndex[0] == 1) {
-                uri = "http://mdc.html5.qq.com/?channel_id=22579"
-            } else if (appIndex[0] == 2) {
-                uri = "http://im.qq.com/download/"
+            when {
+                appIndex[0] == 0 -> uri = "http://wap.uc.cn/packinfo/chinese_999/ucbrowser/pf/145?uc_param_str=vepffrbiupladsdnni&r=main&from=wap-atp-mobile&plang="
+                appIndex[0] == 1 -> uri = "http://mdc.html5.qq.com/?channel_id=22579"
+                appIndex[0] == 2 -> uri = "http://im.qq.com/download/"
             }
             context.startActivity(Intent("android.intent.action.VIEW", Uri.parse(uri)))
             dialog.dismiss()
@@ -114,4 +121,5 @@ object Config {
         builder.setCancelable(false)
         builder.show()
     }
+
 }

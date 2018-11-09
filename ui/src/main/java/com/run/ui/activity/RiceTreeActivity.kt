@@ -64,6 +64,7 @@ class RiceTreeActivity : BaseActivity<RiceTreeContract.RiceTreePresenter>(), Ric
         mPresenter!!.requestData()
     }
 
+
     override fun initPresenter(): RiceTreeContract.RiceTreePresenter {
         return RiceTreeContract.RiceTreePresenter(this)
     }
@@ -81,7 +82,6 @@ class RiceTreeActivity : BaseActivity<RiceTreeContract.RiceTreePresenter>(), Ric
                 singStatusView.visibility = View.GONE
                 mModelList = modle.pack_list
                 waterFlakeView.setModelList(mModelList, headerView)
-
             }
         }
         Observable.timer(60, TimeUnit.SECONDS).subscribe {
@@ -90,6 +90,7 @@ class RiceTreeActivity : BaseActivity<RiceTreeContract.RiceTreePresenter>(), Ric
             }
         }
     }
+
 
 
     override fun callBackResult(msg: String) {

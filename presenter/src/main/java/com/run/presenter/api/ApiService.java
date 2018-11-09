@@ -39,7 +39,6 @@ public interface ApiService {
 
     /**
      * 获取分类文章列表
-     *
      * @param content
      * @return
      */
@@ -49,7 +48,6 @@ public interface ApiService {
 
     /**
      * 获取排行榜
-     *
      * @param content
      * @return
      */
@@ -59,7 +57,6 @@ public interface ApiService {
 
     /**
      * 获取文章详情
-     *
      * @param content
      * @return
      */
@@ -79,7 +76,6 @@ public interface ApiService {
 
     /**
      * 收徒信息
-     *
      * @param content
      * @return
      */
@@ -121,10 +117,8 @@ public interface ApiService {
     @GET("web/user/seniority")
     Observable<SeniorityModle> seniority(@Header("xytoken") String token, @Query("content") String content);
 
-
     /**
      * 卡券中心
-     *
      * @param token
      * @param content
      * @return
@@ -229,6 +223,7 @@ public interface ApiService {
     @GET("web/user/receive_award")
     Observable<BaseModle> receive_award(@Header("xytoken") String token, @Query("content") String content);
 
+
     /**
      * 红包明细
      */
@@ -239,7 +234,6 @@ public interface ApiService {
 
     /**
      * 用户信息
-     *
      * @param content
      * @return
      */

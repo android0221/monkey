@@ -38,7 +38,10 @@ class ExplainActivity : BaseActivity<Nothing>() {
         xszdView.setOnClickListener { ProblemActivity.newInstance(this, 1) }
         apprenticeButton.setOnClickListener { InviteActivity.newInstance(this) }
 //        UWebView.initWebView(wb_content)
-        backView.setOnClickListener { finish() }
+        backView.setOnClickListener {
+            setResult(Activity.RESULT_OK)
+            finish()
+        }
         zfButton.setOnClickListener {
             setResult(Activity.RESULT_OK)
             finish()
@@ -76,8 +79,6 @@ class ExplainActivity : BaseActivity<Nothing>() {
 //
 //        val withdrawMsg = "第一次提现<font color ='#ff0000'>5元</font>起提现，第2次以后<font color ='#ff0000'>10元</font>起提现"
 //        withdrawView.text = Html.fromHtml(withdrawMsg)
-
-
         requestData()
     }
 
@@ -89,10 +90,7 @@ class ExplainActivity : BaseActivity<Nothing>() {
         LoginManager.problemContent(12).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(object : BaseObserver<DyContentModle>() {
-                    override fun onError(errorType: Int, msg: String?) {
-                        showErr(errorType, msg!!)
-                    }
-
+                    override fun onError(errorType: Int, msg: String?) { showErr(errorType, msg!!) }
                     override fun onSuccess(model: DyContentModle) {
                         titleView.text = model.data!!.title
                         val contentMsg = model.data!!.content!!.replace("949", "100%")
@@ -100,5 +98,4 @@ class ExplainActivity : BaseActivity<Nothing>() {
                     }
                 })
     }
-
 }

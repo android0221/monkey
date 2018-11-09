@@ -1,5 +1,6 @@
 package com.run.ui.fragment
 
+import android.annotation.SuppressLint
 import android.text.TextUtils
 import android.view.View
 import android.widget.ImageView
@@ -141,6 +142,7 @@ open class PersionFragment : BaseFragment<PersionContract.PersionPresenter>(), P
     private var total: String? = "0.0"
     private var signtype: Int = 0//是否签到
     private var userid: Int = 0
+    @SuppressLint("SetTextI18n")
     override fun callBackUserData(modle: UserJsonModle) {
         signtype = modle.signtype
         if (signtype == 1) {
@@ -214,7 +216,6 @@ open class PersionFragment : BaseFragment<PersionContract.PersionPresenter>(), P
         showMsg(key)
         signtype = 1
     }
-
     override fun callBackMegagame(invite_top_img: String, type: String) {
         try {
             activity_Type = type
@@ -228,14 +229,12 @@ open class PersionFragment : BaseFragment<PersionContract.PersionPresenter>(), P
         }
     }
 
-
     //活动公告
     override fun callBacInform(key: String) {
         UGlide.loadGif(activity, "https://img.zcool.cn/community/012d2059accd89a8012028a9d9bf43.gif", lbImageView)
         hintView.isSelected = true
         hintView.text = key
     }
-
     //==========================================优惠券对话框========================================
     private var isShowCard = false
 

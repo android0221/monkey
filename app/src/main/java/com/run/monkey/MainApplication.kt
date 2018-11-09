@@ -26,13 +26,11 @@ class MainApplication : BaseApplication() {
         }
     }
 
-
     /**
      * 初始化分享插件
      */
     private fun initShare() {
-        PlatformConfig.setWeixin("wx07f7a310c8bb9537",
-                "aa798e4fc45a0dfa878500492a7ef656")
+        PlatformConfig.setWeixin("wx07f7a310c8bb9537", "aa798e4fc45a0dfa878500492a7ef656")
         UMShareAPI.get(this)
         Config.DEBUG = false
     }

@@ -8,6 +8,7 @@ import com.run.presenter.modle.CardBean
 import com.run.ui.R
 
 
+@Suppress("DEPRECATED_IDENTITY_EQUALS")
 class SelectCardAdapter : BaseQuickAdapter<CardBean, BaseViewHolder>(R.layout.item_card_select_layout, null) {
 
     var cardid: Int = 0

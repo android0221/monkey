@@ -1,5 +1,5 @@
 //包名 APPID
-ext.applicationId = "com.run.lychee"
+ext.applicationId = "com.run.peach"
 
 //编译的版本号
 ext.compileSdkVersion = 28

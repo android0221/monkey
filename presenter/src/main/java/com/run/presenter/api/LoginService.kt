@@ -123,7 +123,6 @@ interface LoginService {
 
     /**
      * 首页弹窗
-     *
      * @param token
      * @param content
      * @return
@@ -158,13 +157,11 @@ interface LoginService {
     @GET("web/Article/share_record")
     fun shareRecord(@Header("xytoken") token: String, @Query("content") content: String): Observable<ShareModle>
 
-
     /**
      *复制分享的开关
      */
     @GET("web/Article/share_record_button")
     fun share_record_button(@Header("xytoken") token: String, @Query("content") content: String): Observable<ShareOpenModle>
-
 
     /**
      * 活动公告

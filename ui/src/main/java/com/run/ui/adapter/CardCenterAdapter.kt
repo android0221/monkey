@@ -14,6 +14,7 @@ import com.run.ui.R
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
+
 class CardCenterAdapter : BaseQuickAdapter<CardBean, BaseViewHolder>(R.layout.item_card_center_layout, null) {
 
     override fun convert(helper: BaseViewHolder, item: CardBean) {
@@ -30,8 +31,8 @@ class CardCenterAdapter : BaseQuickAdapter<CardBean, BaseViewHolder>(R.layout.it
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(object : BaseObserver<BaseModle>() {
                         override fun onError(errorType: Int, msg: String?) {
-                        }
 
+                        }
                         override fun onSuccess(o: BaseModle) {
                             button.text = "已领取"
                             button.isEnabled = false

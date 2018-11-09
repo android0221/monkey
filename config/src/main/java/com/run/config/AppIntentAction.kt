@@ -19,7 +19,7 @@ object AppIntentAction {
 
     fun jumpToShareDetailActivity(act: Context) {
         val intent = Intent()
-        intent.action = "com.action.lychee.ContentDetailActivity"
+        intent.action = "com.action.peach.ContentDetailActivity"
         intent.addCategory("com.action.category")
         intent.putExtra("TITLE", "计费规则说明")
         intent.putExtra("id", 5)

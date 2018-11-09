@@ -45,6 +45,7 @@ class FaceInviteActivity : BaseActivity<Nothing>(), View.OnLongClickListener {
     private lateinit var iv_card: ImageView
     override fun initViews() {
         UStatusBar.setStatusBarTranslucent(this)
+        UStatusBar.setLightMode(this)
         findViewById<View>(R.id.iv_back).setOnClickListener { finish() }
         iv_card = findViewById(R.id.iv_card)
         rl_root = findViewById(R.id.rl_root)
@@ -68,7 +69,6 @@ class FaceInviteActivity : BaseActivity<Nothing>(), View.OnLongClickListener {
         iv_card.setImageBitmap(mBitmap)
     }
 
-
     override fun onLongClick(v: View?): Boolean {
         showDialog()
         return true
@@ -80,22 +80,20 @@ class FaceInviteActivity : BaseActivity<Nothing>(), View.OnLongClickListener {
         dialog.setContentView(view)
         view.findViewById<View>(R.id.tv_cancle).setOnClickListener { dialog.cancel() }
         view.findViewById<View>(R.id.ll_save).setOnClickListener {
-            val bitmap = getScreenShot(this.rl_root!!)
+            val bitmap = getScreenShot(this.rl_root)
             saveImageToGallery(this@FaceInviteActivity, bitmap)
             dialog.cancel()
         }
         view.findViewById<View>(R.id.ll_share).setOnClickListener {
             //动态权限
             dialog.cancel()
-
             UShare.doShare(this@FaceInviteActivity, "wechat_friend", title!!, content!!, url!!, picture!!, 1)
         }
         dialog.show()
     }
 
     private fun getScreenShot(view: View): Bitmap {
-        var view = view
-        view = window.decorView
+        val view: View = window.decorView
         view.isDrawingCacheEnabled = true
         view.buildDrawingCache()
         return view.drawingCache
@@ -122,7 +120,6 @@ class FaceInviteActivity : BaseActivity<Nothing>(), View.OnLongClickListener {
         } catch (e: IOException) {
             e.printStackTrace()
         }
-
         // 其次把文件插入到系统图库
         try {
             MediaStore.Images.Media.insertImage(context.contentResolver,
@@ -140,10 +137,8 @@ class FaceInviteActivity : BaseActivity<Nothing>(), View.OnLongClickListener {
         showMsg("图片保存到本地成功")
     }
 
-
     override fun initPresenter(): Nothing? {
         return null
     }
-
 
 }

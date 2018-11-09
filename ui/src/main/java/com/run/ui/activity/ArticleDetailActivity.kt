@@ -188,7 +188,7 @@ class ArticleDetailActivity : BaseActivity<ArticleDetailContract.ArticlePresente
         Observable.timer(5, TimeUnit.SECONDS).observeOn(AndroidSchedulers.mainThread()).subscribe {
             if (!hasHint) {
                 hasHint = true
-                hintMsgView.text = "分享被阅读" + money + "元/位 \n越多好友阅读奖励也越多"
+                hintMsgView.text = "分享被阅读" + money + "元/位 \n阅读越多奖励越多"
                 hintView.visibility = View.VISIBLE
                 Observable.timer(5, TimeUnit.SECONDS).observeOn(AndroidSchedulers.mainThread()).subscribe {
                     hintView.visibility = View.GONE

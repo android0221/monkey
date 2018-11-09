@@ -1,6 +1,7 @@
 package com.run.version
 
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
@@ -53,7 +54,7 @@ class UpdataVersionHelper private constructor() {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(object : BaseObserver<VersionModle>() {
                     override fun onSuccess(versionJsonBean: VersionModle) {
-                        if (versionJsonBean == null || versionJsonBean.status == -100)
+                        if (versionJsonBean.status == -100)
                             return
                         if (versionJsonBean.status == 200) {
                             if (versionJsonBean.versions > UVersion.getLocalVersion(mContext!!)) {
@@ -189,6 +190,7 @@ class UpdataVersionHelper private constructor() {
      * @param status
      * @param type
      */
+    @SuppressLint("SetTextI18n")
     private fun showUpdataDownloadDialog(status: DownloadStatus?, type: Int) {
         if (status == null || mContext == null) return
         if (progressView == null) {
@@ -229,7 +231,7 @@ class UpdataVersionHelper private constructor() {
         intent.action = Intent.ACTION_VIEW
         val uri: Uri
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            uri = VersionFileProvider.getUriForFile(context!!, "com.yun.updata.lychee.versionProvider", file)
+            uri = VersionFileProvider.getUriForFile(context!!, "com.yun.updata.peach.versionProvider", file)
             intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
         } else {
             uri = Uri.fromFile(file)

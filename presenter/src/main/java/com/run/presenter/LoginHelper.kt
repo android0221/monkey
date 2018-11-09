@@ -74,7 +74,7 @@ class LoginHelper private constructor() {
         this.mContext = context
 
         val intent = Intent()
-        intent.action = "com.run.lychee.login.LoginActivity"
+        intent.action = "com.run.peach.login.LoginActivity"
         context.startActivity(intent)
     }
 

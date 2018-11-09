@@ -46,10 +46,6 @@ class HomeFragment : BaseFragment<HomeContract.HomePresenter>(), HomeContract.Ho
         }
     }
 
-
-    /**
-     * 页面可见的时候
-     */
     override fun visiable() {
         super.visiable()
         //设置状态栏字体颜色
@@ -65,6 +61,7 @@ class HomeFragment : BaseFragment<HomeContract.HomePresenter>(), HomeContract.Ho
     override fun initPresenter(): HomeContract.HomePresenter? {
         return HomeContract.HomePresenter(this)
     }
+
     override fun showData(lists: List<ArticleTypeModle.DataBean>?) {
         this.mList = lists
         if (mList == null || mList!!.isEmpty()) {
@@ -76,21 +73,26 @@ class HomeFragment : BaseFragment<HomeContract.HomePresenter>(), HomeContract.Ho
         tabLayout.setupWithViewPager(viewPager)
         UTabLayout.setTabLayoutLine(tabLayout)
     }
+
     /**
      * 显示错误信息
      */
     override fun showErr(errorType: Int, msg: String) {
         showData(null)
     }
+
     //========================================adapter ==============================================
     private var mList: List<ArticleTypeModle.DataBean>? = null
+
     private inner class HomePagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
         override fun getPageTitle(position: Int): CharSequence? {
             return mList!![position].name
         }
+
         override fun getItem(position: Int): Fragment {
             return ArticleFragment.newInstance(mList!![position].category_id)
         }
+
         override fun getCount(): Int {
             return mList!!.size
         }
