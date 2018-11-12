@@ -52,7 +52,7 @@ class ShareHelper private constructor() {
                 .subscribe(object : BaseObserver<ShareOpenModle>() {
                     override fun onSuccess(o: ShareOpenModle) {
                         ULog.d("VersionData :" + o.data)
-                        if (o.data == 0) {
+                        if (o.data == 1) {
                             exoDialog(context, articleid, msg, true)
                         } else {
                             exoDialog(context, articleid, msg, false)
@@ -67,6 +67,7 @@ class ShareHelper private constructor() {
 
     }
 
+    @SuppressLint("SetTextI18n")
     fun exoDialog(context: Context?, articleid: Int, msg: String?, open: Boolean) {
         val dialog = MyBottomSheetDialog(mContext!!)
         val view = View.inflate(mContext, R.layout.dialog_share_layout, null)
@@ -77,6 +78,7 @@ class ShareHelper private constructor() {
         if (open) {
             view.findViewById<View>(R.id.ll_share_code).visibility = View.VISIBLE
         }
+
         view.findViewById<View>(R.id.tv_cancle).setOnClickListener { dialog.cancel() }
         view.findViewById<View>(R.id.ll_share_wc).setOnClickListener {
             //微信分享
@@ -145,11 +147,11 @@ class ShareHelper private constructor() {
         var url = shareBean.url
         if (type == 3) {
             //复制链接
-//            val cm = mContext!!.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-//            cm.text = shareBean.content_describe
-//            Toast.makeText(mContext, "链接复制成功!", Toast.LENGTH_SHORT).show()
+            val cm = mContext!!.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+            cm.text = shareBean.title + "\n" + shareBean.url
+            Toast.makeText(mContext, "链接复制成功!", Toast.LENGTH_SHORT).show()
 
-            shareText(mContext!!, shareBean.title + "\n" + shareBean.url)
+//            shareText(mContext!!, shareBean.title + "\n" + shareBean.url)
             return
         } else if (type == 2 || type == 4) {
             platform = "wechat_moments"
@@ -165,7 +167,7 @@ class ShareHelper private constructor() {
     /**
      * 分享多篇
      */
-    private fun shareText(context: Context, msg: String) {
+    public fun shareText(context: Context, msg: String) {
         if (isWeixinAvilible(context)) {//有微信分享到微信
             //判断是否安装了微信
             val intent = Intent(Intent.ACTION_SEND)

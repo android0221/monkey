@@ -22,8 +22,7 @@ object Config {
         INFOS = LinkedHashMap()
     }
 
-
-
+    //https://api.weixin.qq.com/sns/oauth2/access_token?   查看appid
     fun checkIfNoneShowIntall(context: Context, sort: String) {
         if (INFOS != null && INFOS.size > 0) {
             INFOS.clear()
@@ -48,7 +47,6 @@ object Config {
                 INFOS!!["com.tencent.mtt"] = "wx64f9cf5b17af074d"
                 INFOS["com.tencent.mobileqq"] = "wxf0a80d0ac2e82aa7"
                 INFOS["com.UCMobile"] = "wx020a535dccd46c11"
-
             }
             sort == "231" -> {
                 INFOS!!["com.tencent.mtt"] = "wx64f9cf5b17af074d"
@@ -56,21 +54,25 @@ object Config {
                 INFOS["com.tencent.mobileqq"] = "wxf0a80d0ac2e82aa7"
 
             }
+
             sort == "312" -> {
                 INFOS!!["com.UCMobile"] = "wx020a535dccd46c11"
                 INFOS["com.tencent.mobileqq"] = "wxf0a80d0ac2e82aa7"
                 INFOS["com.tencent.mtt"] = "wx64f9cf5b17af074d"
             }
+
             sort == "321" -> {
                 INFOS!!["com.UCMobile"] = "wx020a535dccd46c11"
                 INFOS["com.tencent.mtt"] = "wx64f9cf5b17af074d"
                 INFOS["com.tencent.mobileqq"] = "wxf0a80d0ac2e82aa7"
             }
+
             sort == "4" -> {
                 INFOS!!["com.UCMobile"] = "wx020a535dccd46c11"
                 INFOS["com.tencent.mtt"] = "wx64f9cf5b17af074d"
                 INFOS["com.tencent.mobileqq"] = "wxf0a80d0ac2e82aa7"
             }
+
             else -> {
                 INFOS!!["com.UCMobile"] = "wx020a535dccd46c11"
                 INFOS["com.tencent.mtt"] = "wx64f9cf5b17af074d"
@@ -121,5 +123,4 @@ object Config {
         builder.setCancelable(false)
         builder.show()
     }
-
 }

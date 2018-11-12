@@ -10,14 +10,12 @@ import android.widget.Toast
 import java.io.File
 import java.util.ArrayList
 
-
 class ShareManager(private val mContext: Context) {
     private val files = ArrayList<File>()
 
     fun setShareImage(flag: Int, stringList: List<String>, Kdescription: String, type: Int) {
         if (!Tools.isWeixinAvilible(mContext)) {
             Toast.makeText(mContext, "您还没有安装微信", Toast.LENGTH_SHORT).show()
-
         } else {
             Thread(Runnable {
                 try {
@@ -29,7 +27,6 @@ class ShareManager(private val mContext: Context) {
                     }
                     val intent = Intent()
                     val comp: ComponentName
-
                     if (flag == 11) {
                         comp = ComponentName("com.tencent.mm", "com.tencent.mm.ui.tools.ShareImgUI")
                     } else {
@@ -51,14 +48,11 @@ class ShareManager(private val mContext: Context) {
                         }
                     }
                     intent.putParcelableArrayListExtra(Intent.EXTRA_STREAM, imageUris)
-
                     mContext.startActivity(intent)
                 } catch (e: Exception) {
                     e.printStackTrace()
                 }
             }).start()
         }
-
     }
-
 }

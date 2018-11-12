@@ -51,7 +51,7 @@ object QRCodeUtil {
                 hints[EncodeHintType.MARGIN] = margin // 空白边距设置
             }
             val bitMatrix = QRCodeWriter().encode(content, BarcodeFormat.QR_CODE, width, height, hints)
-            /** 3.创建像素数组,并根据BitMatrix(位矩阵)对象为数组元素赋颜色值  */
+            /** 3.创建像素数组,并根据BitMatrix(位矩阵)对象为数组元素赋颜色值*/
             val pixels = IntArray(width * height)
             for (y in 0 until height) {
                 for (x in 0 until width) {
@@ -69,7 +69,6 @@ object QRCodeUtil {
         } catch (e: WriterException) {
             e.printStackTrace()
         }
-
         return null
     }
 
@@ -81,9 +80,8 @@ object QRCodeUtil {
         val blankBitmap = Bitmap.createBitmap(qrBitmapWidth, qrBitmapHeight, Bitmap.Config.ARGB_8888)
         val canvas = Canvas(blankBitmap)
         canvas.drawBitmap(qrBitmap, 0f, 0f, null)
-        //        canvas.save(Canvas.ALL_SAVE_FLAG);
+        //canvas.save(Canvas.ALL_SAVE_FLAG);
         canvas.save()
-
         var scaleSize = 1.0f
         while (logoBitmapWidth / scaleSize > qrBitmapWidth / 3.5 || logoBitmapHeight / scaleSize > qrBitmapHeight / 3.5) {
             scaleSize *= 2f
@@ -95,12 +93,4 @@ object QRCodeUtil {
         return blankBitmap
     }
 }
-/**
- * 创建二维码位图
- *
- * @param content 字符串内容(支持中文)
- * @param width   位图宽度(单位:px)
- * @param height  位图高度(单位:px)
- * @return
- */
 

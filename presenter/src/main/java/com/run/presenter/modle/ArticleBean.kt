@@ -30,6 +30,10 @@ class ArticleBean : MultiItemEntity {
     var fake_view_begin: String? = null
 
 
+
+    //是否已经选择
+    var isSelect: Boolean = false
+
     //====================================文章类型分类===================================================
     companion object {
         val ARTICLE_TEXT = 1   //普通新闻

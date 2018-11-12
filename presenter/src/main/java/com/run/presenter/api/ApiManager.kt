@@ -3,6 +3,7 @@ package com.run.presenter.api
 
 import com.run.common.BaseApplication
 import com.run.common.utils.UEncrypt
+import com.run.common.utils.UNetwork
 import com.run.common.utils.URetrofit
 import com.run.config.AppConstants
 import com.run.config.modle.BaseModle
@@ -57,6 +58,18 @@ object ApiManager {
         }
 
         return instance.articlelist(LoginHelper.instance.getmToken(), UEncrypt.encrypt_AES(jsonObject.toString(), AppConstants.DES_KEY))
+    }
+
+
+    /**
+     * 获取分享列表
+     */
+    fun share_list(id_list: String): Observable<ShareListModle> {
+        val jsonObject = JSONObject()
+        jsonObject.put("id_list", id_list)
+        jsonObject.put("channel", AppConstants.CHANNEL_KEY)
+        return instance.share_list(LoginHelper.instance.getmToken(), UEncrypt.encrypt_AES(jsonObject.toString(), AppConstants.DES_KEY))
+
     }
 
     /**

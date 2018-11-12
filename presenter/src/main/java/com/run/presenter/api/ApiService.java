@@ -18,6 +18,7 @@ import com.run.presenter.modle.PacketModle;
 import com.run.presenter.modle.PacketResultModle;
 import com.run.presenter.modle.ProgressArtiveModle;
 import com.run.presenter.modle.SeniorityModle;
+import com.run.presenter.modle.ShareListModle;
 import com.run.presenter.modle.TransmitModle;
 import com.run.presenter.modle.UserJsonModle;
 import com.run.presenter.modle.WithDrawModle;
@@ -39,6 +40,7 @@ public interface ApiService {
 
     /**
      * 获取分类文章列表
+     *
      * @param content
      * @return
      */
@@ -47,7 +49,18 @@ public interface ApiService {
 
 
     /**
+     * 获取分享列表的内容
+     *
+     * @param token
+     * @param content
+     * @return
+     */
+    @GET("web/article/share_list")
+    Observable<ShareListModle> share_list(@Header("xytoken") String token, @Query("content") String content);
+
+    /**
      * 获取排行榜
+     *
      * @param content
      * @return
      */
@@ -57,6 +70,7 @@ public interface ApiService {
 
     /**
      * 获取文章详情
+     *
      * @param content
      * @return
      */
@@ -76,6 +90,7 @@ public interface ApiService {
 
     /**
      * 收徒信息
+     *
      * @param content
      * @return
      */
@@ -119,6 +134,7 @@ public interface ApiService {
 
     /**
      * 卡券中心
+     *
      * @param token
      * @param content
      * @return
@@ -234,6 +250,7 @@ public interface ApiService {
 
     /**
      * 用户信息
+     *
      * @param content
      * @return
      */

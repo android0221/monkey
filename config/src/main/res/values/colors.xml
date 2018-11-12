@@ -21,5 +21,7 @@
     <color name="colorActive">#ccE53836</color>
     <color name="colorRed">#FF0000</color>
 
+    <color name="colorGreend">#3DB948</color>
+
 
 </resources>

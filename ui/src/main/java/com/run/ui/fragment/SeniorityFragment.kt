@@ -36,9 +36,11 @@ class SeniorityFragment : BaseFragment<Nothing>() {
         tabLayout = view.findViewById(R.id.tabLayout)
         viewPager = view.findViewById(R.id.viewPager)
         view.findViewById<View>(R.id.iv_seach).setOnClickListener { SearchActivity.newInstance(context!!) }
-        redImage.setOnClickListener {   if (LoginHelper.instance.isLogin(activity!!)) {
-            ExplainActivity.newInstance(activity!!)
-        }}
+        redImage.setOnClickListener {
+            if (LoginHelper.instance.isLogin(activity!!)) {
+                ExplainActivity.newInstance(activity!!)
+            }
+        }
     }
 
     override fun initPresenter(): Nothing? {
@@ -58,12 +60,13 @@ class SeniorityFragment : BaseFragment<Nothing>() {
         /**
          * 设置状态栏字体颜色
          */
-        UStatusBar.setLightMode(this!!.activity!!)
+        UStatusBar.setLightMode(this.activity!!)
         /*
         * 开始抖动动画
         */
         UAnim.startShakeByPropertyAnim(redImage, 0.6f, 1.0f, 10f, 1000, 3)
     }
+
     //================================adapter===========================================================
     private inner class SeniorityPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
         var mTilte: Array<String> = resources.getStringArray(R.array.tab_seniorty_Title)

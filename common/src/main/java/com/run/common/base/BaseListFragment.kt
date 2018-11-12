@@ -145,7 +145,7 @@ abstract class BaseListFragment<T : BaseMvpPresenter, N> : BaseFragment<T>(), Sw
      * 数据请求
      */
     open fun requestData() {}
-    
+
     /**
      * 错误异常处理
      */

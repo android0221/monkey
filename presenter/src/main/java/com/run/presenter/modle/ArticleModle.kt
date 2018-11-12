@@ -34,6 +34,7 @@ class ArticleModle : BaseModle() {
 
 
     var share_msg: String? = null
+    var batch_share:Int = 0
 
 
 }

@@ -6,9 +6,13 @@ import com.run.common.utils.ULog
 import com.run.presenter.contract.ArticleContract
 import com.run.presenter.modle.ArticleBean
 import com.run.presenter.modle.ArticleModle
+import com.run.presenter.modle.ShareListModle
 import com.run.ui.adapter.ArticleAdapter
 
 class SearchFragment :BaseListFragment<ArticleContract.ArticlePresenter, ArticleBean>(),ArticleContract.ArticleView{
+    override fun callBackShareData(list: List<ShareListModle.ShareDataBean>) {
+
+    }
 
 
     companion object {
