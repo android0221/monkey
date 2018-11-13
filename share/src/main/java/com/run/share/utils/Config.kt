@@ -7,7 +7,10 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.text.TextUtils
+import com.run.common.utils.ULog
+import com.run.share.modle.WCShareBean
 import java.util.*
+import kotlin.collections.ArrayList
 
 /**
  * @author chenqiang
@@ -22,13 +25,19 @@ object Config {
         INFOS = LinkedHashMap()
     }
 
-    //https://api.weixin.qq.com/sns/oauth2/access_token?   查看appid
-    fun checkIfNoneShowIntall(context: Context, sort: String) {
+
+    fun checkIfNoneShowIntall(context: Context, sort: String?) {
+        if ("4321".equals(sort)) {
+            checkIfNoneShowIntall2(context)
+            return
+        }
+
         if (INFOS != null && INFOS.size > 0) {
             INFOS.clear()
         }
         when {
             TextUtils.isEmpty(sort) -> {
+                INFOS!!["com.baidu.BaiduMap"] = "wx9a08a4f59ce91bf6"
                 INFOS!!["com.UCMobile"] = "wx020a535dccd46c11"
                 INFOS["com.tencent.mtt"] = "wx64f9cf5b17af074d"
                 INFOS["com.tencent.mobileqq"] = "wxf0a80d0ac2e82aa7"
@@ -44,6 +53,7 @@ object Config {
                 INFOS["com.tencent.mtt"] = "wx64f9cf5b17af074d"
             }
             sort == "213" -> {
+
                 INFOS!!["com.tencent.mtt"] = "wx64f9cf5b17af074d"
                 INFOS["com.tencent.mobileqq"] = "wxf0a80d0ac2e82aa7"
                 INFOS["com.UCMobile"] = "wx020a535dccd46c11"
@@ -52,33 +62,48 @@ object Config {
                 INFOS!!["com.tencent.mtt"] = "wx64f9cf5b17af074d"
                 INFOS["com.UCMobile"] = "wx020a535dccd46c11"
                 INFOS["com.tencent.mobileqq"] = "wxf0a80d0ac2e82aa7"
-
             }
-
             sort == "312" -> {
                 INFOS!!["com.UCMobile"] = "wx020a535dccd46c11"
                 INFOS["com.tencent.mobileqq"] = "wxf0a80d0ac2e82aa7"
                 INFOS["com.tencent.mtt"] = "wx64f9cf5b17af074d"
             }
-
             sort == "321" -> {
                 INFOS!!["com.UCMobile"] = "wx020a535dccd46c11"
                 INFOS["com.tencent.mtt"] = "wx64f9cf5b17af074d"
                 INFOS["com.tencent.mobileqq"] = "wxf0a80d0ac2e82aa7"
             }
-
-            sort == "4" -> {
-                INFOS!!["com.UCMobile"] = "wx020a535dccd46c11"
-                INFOS["com.tencent.mtt"] = "wx64f9cf5b17af074d"
-                INFOS["com.tencent.mobileqq"] = "wxf0a80d0ac2e82aa7"
+            sort == "4321" -> {
+                INFOS!!["com.netease.cloudmusic"] = "wx8dd6ecd81906fd84"  //网易云音乐
+                INFOS["com.smile.gifmaker"] = "wxaadbab9d13edff20"  //快手
+                INFOS["com.sina.weibo"] = "wx299208e619de7026"  //微博
+                INFOS["com.tencent.ttpic"] = "wx6ed88e3698dd4318"  //天天p图
+                INFOS["com.ximalaya.ting.android"] = "wxb9371ecb5f0f05b1"  //喜马拉雅
+                INFOS["com.tencent.karaoke"] = "wx2ed190385c3bafeb"  //全民K歌
+                INFOS["com.snda.wifilocating"] = "wx13f22259f9bbd047"  //WIFI钥匙
+                INFOS["com.immomo.momo"] = "wx53440afb924e0ace"  //陌陌
+                INFOS["com.tencent.weishi"] = "wx5dfbe0a95623607b"  //微视
+                INFOS["com.tencent.news"] = "wx073f4a4daff0abe8"  //腾讯新闻
+                INFOS["com.moji.mjweather"] = "wx300c410f4257c6f3"  //墨迹天气
+                INFOS["com.baidu.searchbox"] = "wx27a43222a6bf2931"  //百度
+                INFOS["com.sankuai.meituan"] = "wxa552e31d6839de85"  //美团
+                INFOS["com.jingdong.app.mall"] = "wxe75a2e68877315fb"  //京东
+                INFOS["com.xunmeng.pinduoduo"] = "wx77d53b84434b9d9a"  //拼多多
+                INFOS["com.baidu.BaiduMap"] = "wx9a08a4f59ce91bf6"//百度地图
+                INFOS["com.UCMobile"] = "wx020a535dccd46c11"//UC浏览器
+                INFOS["com.tencent.mtt"] = "wx64f9cf5b17af074d"//qq浏览器
+                INFOS["com.tencent.mobileqq"] = "wxf0a80d0ac2e82aa7"//QQ
             }
 
             else -> {
-                INFOS!!["com.UCMobile"] = "wx020a535dccd46c11"
+                INFOS!!["com.xunmeng.pinduoduo"] = "wx77d53b84434b9d9a"  //拼多多
+                INFOS["com.UCMobile"] = "wx020a535dccd46c11"
                 INFOS["com.tencent.mtt"] = "wx64f9cf5b17af074d"
                 INFOS["com.tencent.mobileqq"] = "wxf0a80d0ac2e82aa7"
             }
         }
+
+
         var i = 0
         for ((key, value) in INFOS) {
             try {
@@ -95,6 +120,64 @@ object Config {
             }
             i++
         }
+    }
+
+
+    var allShareList: ArrayList<WCShareBean> = arrayListOf()
+    var wcShareList: ArrayList<WCShareBean> = arrayListOf()
+    fun checkIfNoneShowIntall2(context: Context) {
+        if (allShareList.size <= 0) {
+            allShareList.add(WCShareBean("com.netease.cloudmusic", "wx8dd6ecd81906fd84"))//网易云音乐
+            allShareList.add(WCShareBean("com.smile.gifmaker", "wxaadbab9d13edff20")) //快手
+            allShareList.add(WCShareBean("com.sina.weibo", "wx299208e619de7026")) //微博
+            allShareList.add(WCShareBean("com.tencent.ttpic", "wx6ed88e3698dd4318")) //天天p图
+            allShareList.add(WCShareBean("com.ximalaya.ting.android", "wxb9371ecb5f0f05b1")) //喜马拉雅
+            allShareList.add(WCShareBean("com.tencent.karaoke", "wx2ed190385c3bafeb")) //全民K歌
+            allShareList.add(WCShareBean("com.snda.wifilocating", "wx13f22259f9bbd047")) //WIFI钥匙
+            allShareList.add(WCShareBean("com.immomo.momo", "wx53440afb924e0ace")) //陌陌
+            allShareList.add(WCShareBean("com.tencent.weishi", "wx5dfbe0a95623607b")) //微视
+            allShareList.add(WCShareBean("com.tencent.news", "wx073f4a4daff0abe8")) //腾讯新闻
+            allShareList.add(WCShareBean("com.moji.mjweather", "wx300c410f4257c6f3")) //墨迹天气
+            allShareList.add(WCShareBean("com.baidu.searchbox", "wx27a43222a6bf2931")) //百度
+            allShareList.add(WCShareBean("com.sankuai.meituan", "wxa552e31d6839de85")) //美团
+            allShareList.add(WCShareBean("com.jingdong.app.mall", "wxe75a2e68877315fb")) //京东
+            allShareList.add(WCShareBean("com.xunmeng.pinduoduo", "wx77d53b84434b9d9a")) //拼多多
+            allShareList.add(WCShareBean("com.baidu.BaiduMap", "wx9a08a4f59ce91bf6")) //百度地图
+            allShareList.add(WCShareBean("com.UCMobile", "wx020a535dccd46c11")) //UC浏览器
+            allShareList.add(WCShareBean("com.tencent.mtt", "wx64f9cf5b17af074d")) //qq浏览器
+            allShareList.add(WCShareBean("com.tencent.mobileqq", "wxf0a80d0ac2e82aa7")) //QQ
+
+            for (bean in allShareList) {
+                if (isPageAvilible(context, bean.wc_key!!)) {
+                    wcShareList.add(bean)
+                }
+            }
+        }
+        if (wcShareList.size <= 0) {
+            sharePkg = ""
+            shareAppId = ""
+            showInstallDialog(context)
+        }
+        val index = Random().nextInt(wcShareList.size)
+        ULog.d("xiaoruan", "index = $index")
+        sharePkg = wcShareList[index].wc_key!!
+        shareAppId = wcShareList[index].wc_value!!
+
+    }
+
+
+    fun isPageAvilible(context: Context, packagename: String): Boolean {
+        val packageManager = context.packageManager// 获取packagemanager
+        val pinfo = packageManager.getInstalledPackages(0)// 获取所有已安装程序的包信息
+        if (pinfo != null) {
+            for (i in pinfo.indices) {
+                val pn = pinfo[i].packageName
+                if (pn == packagename) {
+                    return true
+                }
+            }
+        }
+        return false
     }
 
     private fun showInstallDialog(context: Context) {

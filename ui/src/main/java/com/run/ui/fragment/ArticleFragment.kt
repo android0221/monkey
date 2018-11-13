@@ -16,6 +16,7 @@ import com.run.presenter.modle.ShareListModle
 import com.run.share.ShareHelper
 import com.run.ui.ArticleHelper
 import com.run.ui.adapter.ArticleAdapter
+import java.util.*
 
 
 @Suppress("UNREACHABLE_CODE")
@@ -125,14 +126,11 @@ class ArticleFragment : BaseListFragment<ArticleContract.ArticlePresenter, Artic
         } else {
             openSelectView.visibility = View.GONE
         }
-
         ArticleHelper.instance.saveList(modle.data!!)
         ULog.d(TAG, "数据回调")
         adapter!!.setModleData(modle.money!!, modle.g_money!!, modle.g_title, modle.a_money!!,
                 modle.a_title, modle.share_msg, modle.a_type, modle.g_type)
         val list = modle.data
-
-
         for (bean: ArticleBean in modle.data!!) {
             when (bean.category_id) {
                 47 -> bean.itemType = ArticleBean.ARTICLE_VEDIO
@@ -142,15 +140,17 @@ class ArticleFragment : BaseListFragment<ArticleContract.ArticlePresenter, Artic
         setData(list)
     }
 
-
+    private val emojeList = arrayListOf("[玫瑰]", "[红包] ", "[礼物]", "[發]", "[耶]", "[机智]", "[胜利]", "[啤酒]", "[咖啡]", "[爱心]")
     /**
      * 获取分享的内容回调
      */
     override fun callBackShareData(list: List<ShareListModle.ShareDataBean>) {
         val shareMsg = StringBuffer()
         //微信红包要动态换
+        val index1 = Random().nextInt(emojeList.size)
+        val index2 = Random().nextInt(emojeList.size)
         for (data in list) {
-            shareMsg.append("[玫瑰]" + data.title + "[玫瑰]\r\n \n[红包]" + data.url + "\r\n \n")
+            shareMsg.append(emojeList[index1] + data.title + "\r\n" + emojeList[index2] + data.url + "\r\n")
         }
         ShareHelper.instance.shareText(activity!!, shareMsg.toString())
         adapter?.selectList?.clear()
