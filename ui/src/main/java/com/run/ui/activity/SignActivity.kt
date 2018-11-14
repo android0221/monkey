@@ -78,7 +78,6 @@ class SignActivity : BaseActivity<SignContract.SignPresenter>(), SignContract.Si
                         })
             } else {
                 var bean = mList[mPosition]
-
                 val contentView = View.inflate(this@SignActivity, R.layout.dialog_sign_layout, null)
                 val dialogTitleView: TextView = contentView.findViewById(R.id.dialogTitleView)
                 val articleImageView: ImageView = contentView.findViewById(R.id.articleImageView)
@@ -104,7 +103,6 @@ class SignActivity : BaseActivity<SignContract.SignPresenter>(), SignContract.Si
                         UGlide.loadImage(this, bean.cover_picture!!, articleImageView)
                     }
                 }
-
                 contentView.findViewById<View>(R.id.doShareView).setOnClickListener {
                     val money = if (bean.money_view_user!!.toDouble() <= 0.15) "0.15" else bean.money_view_user
                     ShareHelper.instance.doShare(this, bean.article_id, money)
@@ -112,7 +110,6 @@ class SignActivity : BaseActivity<SignContract.SignPresenter>(), SignContract.Si
                 }
                 DialogHelper.showDialog(this@SignActivity, contentView)
             }
-
 
         } else {
             mPresenter!!.sign()
