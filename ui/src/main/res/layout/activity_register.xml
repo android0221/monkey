@@ -62,8 +62,8 @@
                 android:padding="10dp">
 
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    android:layout_width="@dimen/dp_25"
+                    android:layout_height="@dimen/dp_25"
                     android:layout_marginLeft="11dp"
                     android:adjustViewBounds="true"
                     android:padding="4dp"
@@ -86,11 +86,12 @@
 
                 <ImageView
                     android:id="@+id/iv_delete_mobile"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    android:layout_width="@dimen/dp_25"
+                    android:layout_height="@dimen/dp_25"
                     android:layout_marginRight="10dp"
                     android:adjustViewBounds="true"
-                    android:padding="8dp"
+                    android:padding="@dimen/dp_5"
+                    android:layout_gravity="center"
                     android:src="@mipmap/b5"
                     android:visibility="gone" />
 

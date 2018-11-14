@@ -10,7 +10,7 @@ import com.run.presenter.modle.ShareListModle
 import com.run.ui.adapter.ArticleAdapter
 
 class SearchFragment :BaseListFragment<ArticleContract.ArticlePresenter, ArticleBean>(),ArticleContract.ArticleView{
-    override fun callBackShareData(list: List<ShareListModle.ShareDataBean>) {
+    override fun callBackShareData(list: List<ShareListModle.ShareDataBean>, share_type: Int) {
 
     }
 

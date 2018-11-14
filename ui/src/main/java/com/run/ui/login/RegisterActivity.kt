@@ -1,5 +1,6 @@
 package com.run.ui.login
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.os.CountDownTimer
@@ -213,6 +214,7 @@ class RegisterActivity : BaseActivity<RegisterContract.RegisterPresenter>(), Reg
     override fun callBackCode() {
         showMsg("获取验证码成功！")
         mTimer = object : CountDownTimer((60 * 1000).toLong(), 1000) {
+            @SuppressLint("SetTextI18n")
             override fun onTick(l: Long) {
                 tv_code.isEnabled = false
                 tv_code.text = "还剩" + l / 1000 + "s"

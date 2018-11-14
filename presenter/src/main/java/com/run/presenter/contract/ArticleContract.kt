@@ -19,7 +19,7 @@ interface ArticleContract {
     interface ArticleView : BaseMvpView {
         fun callBackData(modle: ArticleModle)
 
-        fun callBackShareData(list: List<ShareListModle.ShareDataBean>)
+        fun callBackShareData(list: List<ShareListModle.ShareDataBean>, share_type: Int)
     }
 
     class ArticlePresenter(private val v: ArticleContract.ArticleView) : BaseMvpPresenter(v) {
@@ -55,20 +55,14 @@ interface ArticleContract {
          * 获取分享列表
          */
         fun doShareList(shareidList: String) {
-            if (isViewAttached()) {
-                v.showLoading()
-            }
             addDisposable(ApiManager.share_list(shareidList), object : BaseObserver<ShareListModle>() {
                 override fun onSuccess(o: ShareListModle) {
                     if (isViewAttached()) {
-                        v.hideLoading()
-                        v.callBackShareData(o.share_data!!)
+                        v.callBackShareData(o.share_data!!, o.share_type)
                     }
                 }
-
                 override fun onError(errorType: Int, msg: String?) {
                     if (isViewAttached()) {
-                        v.hideLoading()
                         v.showMsg(msg)
                     }
                 }

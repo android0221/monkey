@@ -14,6 +14,7 @@ import com.umeng.socialize.UMShareAPI
 import com.umeng.socialize.UMShareListener
 import com.umeng.socialize.bean.SHARE_MEDIA
 import com.umeng.socialize.media.UMImage
+import com.umeng.socialize.media.UMVideo
 import com.umeng.socialize.media.UMWeb
 
 
@@ -115,19 +116,32 @@ class ShareActivity : Activity() {
         }
         Config.checkIfNoneShowIntall(this, sort!!)
         if (!TextUtils.isEmpty(Config.sharePkg) && !TextUtils.isEmpty(Config.shareAppId)) {
-
-            val web = UMWeb(this.url)
-            web.title = this.title
-            if (!TextUtils.isEmpty(imageUrl)) {
-                web.setThumb(UMImage(this, this.imageUrl!!))
+            if (type == 20) {
+                val web = UMWeb(this.url)
+                web.title = this.title
+                if (!TextUtils.isEmpty(imageUrl)) {
+                    web.setThumb(UMImage(this, this.imageUrl!!))
+                } else {
+                    web.setThumb(UMImage(this, R.mipmap.ic_logo))
+                }
+                web.description = this.text
+                ShareAction(this)
+                        .withText(text)
+                        .withMedia(web)
+                        .setPlatform(this.media).setCallback(this.umShareListener).share()
             } else {
-                web.setThumb(UMImage(this, R.mipmap.ic_logo))
+                val webVedio = UMVideo(this.url)
+                webVedio.title = this.title
+                if (!TextUtils.isEmpty(imageUrl)) {
+                    webVedio.setThumb(UMImage(this, this.imageUrl!!))
+                } else {
+                    webVedio.setThumb(UMImage(this, R.mipmap.ic_logo))
+                }
+                webVedio.description = this.text
+                ShareAction(this).withText(text).withMedia(webVedio).setPlatform(this.media).setCallback(this.umShareListener).share()
             }
-            web.description = this.text
-            ShareAction(this)
-                    .withText(text)
-                    .withMedia(web)
-                    .setPlatform(this.media).setCallback(this.umShareListener).share()
+
+
         }
     }
 

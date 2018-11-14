@@ -16,6 +16,7 @@ import com.run.login.api.LoginManager
 import com.run.presenter.LoginHelper
 import com.run.presenter.contract.SettingContract
 import com.run.ui.R
+import com.run.ui.login.RegisterActivity
 import com.run.version.UpdataVersionHelper
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -37,7 +38,7 @@ class SettingActivity : BaseActivity<SettingContract.SettingPresenter>(), Settin
         return R.layout.activity_setting
     }
 
-    
+
     private var tv_cache: TextView? = null
     private var tv_version: TextView? = null
     override fun initViews() {
@@ -47,6 +48,7 @@ class SettingActivity : BaseActivity<SettingContract.SettingPresenter>(), Settin
         findViewById<View>(R.id.ll_version).setOnClickListener(this)
         findViewById<View>(R.id.backView).setOnClickListener(this)
         findViewById<View>(R.id.tv_logout).setOnClickListener(this)
+        findViewById<View>(R.id.passwordLayout).setOnClickListener(this)
     }
 
     @SuppressLint("SetTextI18n")
@@ -72,8 +74,10 @@ class SettingActivity : BaseActivity<SettingContract.SettingPresenter>(), Settin
             R.id.ll_cache -> showClearCacheDialog()
             R.id.ll_version -> UpdataVersionHelper.getInstance().checkUpadata(this, 0)
             R.id.tv_logout -> mPresenter!!.logout()
+            R.id.passwordLayout -> RegisterActivity.newInstance(this, 2, 1)
         }
     }
+
 
     private fun showClearCacheDialog() {
         ClearCacherDialog.newInstance(this@SettingActivity).show(this@SettingActivity, callBack = object : DialogCallBack {

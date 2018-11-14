@@ -51,7 +51,8 @@
         android:background="@color/colorBackGround"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:visibility="gone">
+        android:visibility="gone"
+        >
 
         <CheckBox
             android:id="@+id/checkBoxView"
@@ -62,10 +63,7 @@
             android:textColor="@color/colorPrimary"
             android:visibility="gone" />
 
-        <View
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
+
 
         <Button
             android:id="@+id/articleCancleView"
@@ -76,15 +74,28 @@
             android:text="取消"
             android:textColor="@color/color_f4" />
 
+        <View
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
         <Button
             android:id="@+id/articleSendView"
             style="?android:textAppearanceMedium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/colorAccent"
-            android:text="发送"
+            android:text="复制链接"
             android:textColor="@color/white" />
 
+        <Button
+            android:id="@+id/articleWCView"
+            style="?android:textAppearanceMedium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/colorAccent"
+            android:text="发送群"
+            android:textColor="@color/white" />
 
     </LinearLayout>
 

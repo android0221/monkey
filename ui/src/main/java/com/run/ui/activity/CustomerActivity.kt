@@ -1,9 +1,7 @@
 package com.run.ui.activity
 
 import android.annotation.SuppressLint
-import android.content.ClipboardManager
-import android.content.Context
-import android.content.Intent
+import android.content.*
 import com.run.common.base.BaseActivity
 import com.run.config.AppIntentAction
 import com.run.presenter.contract.CustomerContract
@@ -34,6 +32,7 @@ class CustomerActivity : BaseActivity<CustomerContract.CustomerPresenter>(), Cus
             val cm = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
             cm.text = wcKey
             showMsg("客服微信复制成功！")
+            getWechatApi()
         }
 
     }
@@ -55,5 +54,18 @@ class CustomerActivity : BaseActivity<CustomerContract.CustomerPresenter>(), Cus
         wcView.text = wechat
     }
 
+
+    private fun getWechatApi() {
+        try {
+            val intent = Intent(Intent.ACTION_MAIN)
+            val cmp = ComponentName("com.tencent.mm", "com.tencent.mm.ui.LauncherUI")
+            intent.addCategory(Intent.CATEGORY_LAUNCHER)
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            intent.component = cmp
+            startActivity(intent)
+        } catch (e: ActivityNotFoundException) {
+            showMsg("检查到您手机没有安装微信，请安装后使用该功能")
+        }
+    }
 
 }

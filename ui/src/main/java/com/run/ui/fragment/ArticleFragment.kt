@@ -1,5 +1,7 @@
 package com.run.ui.fragment
 
+import android.content.ClipboardManager
+import android.content.Context
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.View
@@ -17,9 +19,12 @@ import com.run.share.ShareHelper
 import com.run.ui.ArticleHelper
 import com.run.ui.adapter.ArticleAdapter
 import java.util.*
+import android.content.ActivityNotFoundException
+import android.content.Intent
+import android.content.ComponentName
 
 
-@Suppress("UNREACHABLE_CODE")
+@Suppress("UNREACHABLE_CODE", "DEPRECATION")
 class ArticleFragment : BaseListFragment<ArticleContract.ArticlePresenter, ArticleBean>(),
         ArticleContract.ArticleView {
 
@@ -61,12 +66,14 @@ class ArticleFragment : BaseListFragment<ArticleContract.ArticlePresenter, Artic
 
     private lateinit var openSelectView: TextView
     private lateinit var articleCancleView: Button
+    private lateinit var articleWCView: Button
     private lateinit var articleSelectView: LinearLayout
 
     override fun initView(view: View) {
         super.initView(view)
         openSelectView = view.findViewById(R.id.openSelectView)
         articleCancleView = view.findViewById(R.id.articleCancleView)
+        articleWCView = view.findViewById(R.id.articleWCView)
         articleSelectView = view.findViewById(R.id.articleSelectView)
 
         openSelectView.setOnClickListener {
@@ -83,16 +90,42 @@ class ArticleFragment : BaseListFragment<ArticleContract.ArticlePresenter, Artic
             adapter?.notifyDataSetChanged()
         }
 
+
         view.findViewById<View>(R.id.articleSendView).setOnClickListener {
+            allShareType = 0
+
+            if( adapter?.selectList!!.size <=0){
+                showMsg("你还没有选取文章！请选择")
+               return@setOnClickListener
+            }
+
             val buffer = StringBuffer()
             for (id in adapter?.selectList!!) {
                 buffer.append(id.toString() + ",")
             }
-            val shareIDList = buffer.toString().substring(0, buffer.toString().length - 2)
+            val shareIDList = buffer.toString().substring(0, buffer.toString().length - 1)
+            ULog.d("xiaoruan", shareIDList)
+            mPresenter?.doShareList(shareIDList)
+        }
+
+        articleWCView.setOnClickListener {
+            if( adapter?.selectList!!.size <=0){
+                showMsg("你还没有选取文章！请选择")
+                return@setOnClickListener
+            }
+
+            allShareType = 1
+            val buffer = StringBuffer()
+            for (id in adapter?.selectList!!) {
+                buffer.append(id.toString() + ",")
+            }
+            val shareIDList = buffer.toString().substring(0, buffer.toString().length - 1)
             ULog.d("xiaoruan", shareIDList)
             mPresenter?.doShareList(shareIDList)
         }
     }
+
+    private var allShareType = 0
 
     //初始化数据
     override fun initData() {
@@ -140,24 +173,60 @@ class ArticleFragment : BaseListFragment<ArticleContract.ArticlePresenter, Artic
         setData(list)
     }
 
-    private val emojeList = arrayListOf("[玫瑰]", "[红包] ", "[礼物]", "[發]", "[耶]", "[机智]", "[胜利]", "[啤酒]", "[咖啡]", "[爱心]")
+    private val emojeList = arrayListOf("[玫瑰]", "[红包] ", "[礼物]", "[耶]", "[机智]", "[胜利]", "[爱心]")
+    private val titleMsg = arrayListOf("✿✿今日最新热点速递✿✿", "✿✿有趣、新鲜、热点抢先看✿✿", "✿✿您的好友最近都在看~✿✿", "[微信红包]恭喜发财,大吉大利！")
+
+
     /**
      * 获取分享的内容回调
      */
-    override fun callBackShareData(list: List<ShareListModle.ShareDataBean>) {
+    override fun callBackShareData(list: List<ShareListModle.ShareDataBean>, share_type: Int) {
+
         val shareMsg = StringBuffer()
         //微信红包要动态换
-        val index1 = Random().nextInt(emojeList.size)
         val index2 = Random().nextInt(emojeList.size)
+        shareMsg.append(titleMsg[Random().nextInt(titleMsg.size)] + "\n\r")
         for (data in list) {
-            shareMsg.append(emojeList[index1] + data.title + "\r\n" + emojeList[index2] + data.url + "\r\n")
+            shareMsg.append("\r\n" + data.title + " \r\n" + emojeList[index2] + data.url + "\n")
         }
-        ShareHelper.instance.shareText(activity!!, shareMsg.toString())
+
+        when (allShareType) {
+            0 -> {
+                val cm = activity?.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+                cm.text = shareMsg.toString()
+                showMsg("链接复制成功")
+            }
+            1 -> {
+                if (share_type == 0) {
+                    val cm = activity?.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+                    cm.text = shareMsg.toString()
+                    showMsg("链接复制成功")
+                    getWechatApi()
+                } else if (share_type == 1) {
+                    ShareHelper.instance.shareText(activity!!, shareMsg.toString())
+                }
+            }
+        }
+
         adapter?.selectList?.clear()
         openSelectView.visibility = View.VISIBLE
         articleSelectView.visibility = View.GONE
         adapter?.canSelect = false
         adapter?.notifyDataSetChanged()
 
+
+    }
+
+    private fun getWechatApi() {
+        try {
+            val intent = Intent(Intent.ACTION_MAIN)
+            val cmp = ComponentName("com.tencent.mm", "com.tencent.mm.ui.LauncherUI")
+            intent.addCategory(Intent.CATEGORY_LAUNCHER)
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            intent.component = cmp
+            startActivity(intent)
+        } catch (e: ActivityNotFoundException) {
+            showMsg("检查到您手机没有安装微信，请安装后使用该功能")
+        }
     }
 }

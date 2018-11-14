@@ -104,7 +104,7 @@ class SignActivity : BaseActivity<SignContract.SignPresenter>(), SignContract.Si
                     }
                 }
                 contentView.findViewById<View>(R.id.doShareView).setOnClickListener {
-                    val money = if (bean.money_view_user!!.toDouble() <= 0.15) "0.15" else bean.money_view_user
+                    val money = if (bean.money_view_user!!.toDouble() <= 0.2) "0.2" else bean.money_view_user
                     ShareHelper.instance.doShare(this, bean.article_id, money)
                     DialogHelper.closeDialog()
                 }

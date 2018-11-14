@@ -20,4 +20,7 @@ class ShareListModle:BaseModle() {
         var url: String? = null
         var title: String? = null
     }
+
+
+    var share_type:Int = 0
 }

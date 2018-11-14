@@ -31,8 +31,8 @@
         android:padding="10dp">
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_width="@dimen/dp_25"
+            android:layout_height="@dimen/dp_25"
             android:layout_marginLeft="11dp"
             android:adjustViewBounds="true"
             android:padding="4dp"
@@ -56,13 +56,15 @@
 
         <ImageView
             android:id="@+id/iv_delete_mobile"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_width="@dimen/dp_25"
+            android:layout_height="@dimen/dp_25"
             android:layout_marginRight="10dp"
             android:adjustViewBounds="true"
-            android:padding="8dp"
+            android:layout_gravity="center"
+            android:padding="@dimen/dp_5"
             android:src="@mipmap/b5"
-            android:visibility="gone" />
+            android:visibility="gone"
+             />
 
 
     </LinearLayout>
@@ -77,8 +79,8 @@
         android:padding="10dp">
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_width="@dimen/dp_25"
+            android:layout_height="@dimen/dp_25"
             android:layout_marginLeft="11dp"
             android:adjustViewBounds="true"
             android:padding="4dp"
@@ -102,11 +104,12 @@
 
         <ImageView
             android:id="@+id/iv_delete_password"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_width="@dimen/dp_25"
+            android:layout_height="@dimen/dp_25"
+            android:layout_gravity="center"
             android:layout_marginRight="10dp"
             android:adjustViewBounds="true"
-            android:padding="8dp"
+            android:padding="@dimen/dp_5"
             android:src="@mipmap/b5"
             android:visibility="gone" />
 
@@ -117,7 +120,7 @@
             android:background="@color/colorLine"
             android:gravity="center_vertical"
             android:textColor="@color/color_f6"
-            android:textSize="14sp" />
+            android:textSize="@dimen/sp_14" />
 
         <TextView
             android:id="@+id/tv_show_password"
@@ -127,7 +130,7 @@
             android:padding="3dp"
             android:text="显示密码"
             android:textColor="@color/color_f6"
-            android:textSize="14sp" />
+            android:textSize="@dimen/sp_14" />
 
     </LinearLayout>
 

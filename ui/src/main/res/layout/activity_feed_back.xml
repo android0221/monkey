@@ -76,9 +76,6 @@
     </LinearLayout>
 
 
-
-
-
     <LinearLayout
         android:id="@+id/wcLayout"
         android:layout_width="match_parent"
@@ -133,9 +130,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/dp_5"
-            android:text="加入QQ群"
+            android:text="QQ客服"
             android:textColor="@color/color_f6"
             android:textSize="@dimen/sp_16" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

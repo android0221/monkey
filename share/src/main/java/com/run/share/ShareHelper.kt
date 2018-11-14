@@ -43,6 +43,8 @@ class ShareHelper private constructor() {
         showDialog(context, articleid, msg)
     }
 
+
+    private var share_type = 0
     private fun showDialog(context: Context?, articleid: Int, msg: String?) {
         if (context == null) return
         mContext = context
@@ -51,6 +53,7 @@ class ShareHelper private constructor() {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(object : BaseObserver<ShareOpenModle>() {
                     override fun onSuccess(o: ShareOpenModle) {
+                        share_type = o.share_type
                         ULog.d("VersionData :" + o.data)
                         if (o.data == 1) {
                             exoDialog(context, articleid, msg, true)
@@ -151,6 +154,8 @@ class ShareHelper private constructor() {
             cm.text = shareBean.title + "\n" + shareBean.url
             Toast.makeText(mContext, "链接复制成功!", Toast.LENGTH_SHORT).show()
 
+
+
 //            shareText(mContext!!, shareBean.title + "\n" + shareBean.url)
             return
         } else if (type == 2 || type == 4) {
@@ -158,9 +163,9 @@ class ShareHelper private constructor() {
             url = shareBean.friend_url
         }
         if (type == 4) {
-            UShare.doShare(mContext!!, platform, shareBean.title, shareBean.content_describe, url!!, shareBean.share_picture, shareBean.sort, 0, 2)
+            UShare.doShare(mContext!!, platform, shareBean.title, shareBean.content_describe, url!!, shareBean.share_picture, shareBean.sort, share_type+20, 2)
         } else {
-            UShare.doShare(mContext!!, platform, shareBean.title, shareBean.content_describe, url!!, shareBean.share_picture, shareBean.sort, 0, shareBean.friend_type)
+            UShare.doShare(mContext!!, platform, shareBean.title, shareBean.content_describe, url!!, shareBean.share_picture, shareBean.sort, share_type+20, shareBean.friend_type)
         }
     }
 

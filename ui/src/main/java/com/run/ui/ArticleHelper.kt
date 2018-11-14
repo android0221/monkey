@@ -35,5 +35,6 @@ class ArticleHelper private constructor() {
         return mList
     }
 
-
+    var shareMoney: String? = ""
+   
 }
