@@ -24,7 +24,6 @@ import java.util.concurrent.TimeUnit.*
 class MyService : Service() {
 
     companion object {
-
         fun openMyService(context: Context) {
             val intent = Intent(context, MyService::class.java)
             context.startService(intent)

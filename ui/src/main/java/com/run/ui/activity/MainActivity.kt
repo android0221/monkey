@@ -107,7 +107,7 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.MainView {
     @SuppressLint("CheckResult")
     override fun initData() {
         //启动通知服务
-        MyService.openMyService(this)
+//        MyService.openMyService(this)
         fragmentList = arrayListOf(HomeFragment.newInstance(),
                 SeniorityFragment.newInstance(),
                 VedioFragment.newInstance(),
@@ -148,14 +148,12 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.MainView {
 
     //======================================= 退出应用 ==============================================
     private var mIsExit: Boolean = false
-
     override fun onKeyDown(keyCode: Int, event: KeyEvent): Boolean {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
             if (mIsExit) {
                 UActivityManager.exit()
             } else {
-                Toast.makeText(this, "再按一次退出" + getString(R.string.app_name),
-                        Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "再按一次退出" + getString(R.string.app_name), Toast.LENGTH_SHORT).show()
                 mIsExit = true
                 Handler().postDelayed({ mIsExit = false }, 2000)
             }

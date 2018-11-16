@@ -3,7 +3,7 @@
     android:id="@+id/rl_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@mipmap/iv_splash">
+    android:background="@mipmap/ic_hb">
 
     <ImageView
         android:id="@+id/iv_back"

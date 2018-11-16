@@ -27,7 +27,6 @@ class InviteActivity : BaseActivity<InviteContract.InvitePresenter>(), InviteCon
             context.startActivity(Intent(context, InviteActivity::class.java))
         }
     }
-
     override fun initContentView(): Int {
         return R.layout.activity_invite
     }

@@ -146,6 +146,8 @@ object Config {
             allShareList.add(WCShareBean("com.UCMobile", "wx020a535dccd46c11")) //UC浏览器
             allShareList.add(WCShareBean("com.tencent.mtt", "wx64f9cf5b17af074d")) //qq浏览器
             allShareList.add(WCShareBean("com.tencent.mobileqq", "wxf0a80d0ac2e82aa7")) //QQ
+            allShareList.add(WCShareBean("com.ss.android.article.news", "wx50d801314d9eb858")) //今日头条
+            allShareList.add(WCShareBean("com.tencent.android.qqdownloader", "wx3909f6add1206543")) //应用宝
 
             for (bean in allShareList) {
                 if (isPageAvilible(context, bean.wc_key!!)) {
